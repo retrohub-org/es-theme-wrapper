@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Logic.gd" type="Script" id=1]
+[ext_resource path="res://views/system/System.tscn" type="PackedScene" id=2]
+
+[node name="RetroHubTheme" type="Node"]
+script = ExtResource( 1 )
+path = "/home/ricardo/.emulationstation/themes/snes"
+
+[node name="System" parent="." instance=ExtResource( 2 )]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GameView" type="Control" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 2.0
+
+[node name="Tween" type="Tween" parent="."]

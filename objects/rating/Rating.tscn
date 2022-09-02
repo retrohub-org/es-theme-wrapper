@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://objects/rating/Rating.gd" type="Script" id=1]
+[ext_resource path="res://resources/theme.tres" type="Theme" id=2]
+[ext_resource path="res://assets/graphics/star_filled.svg" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/star_unfilled.svg" type="Texture" id=5]
+
+[node name="Rating" type="Control"]
+margin_right = 160.0
+margin_bottom = 32.0
+mouse_filter = 2
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Tex_Unfilled" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 2
+
+[node name="Tex_Filled" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 2

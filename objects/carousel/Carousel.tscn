@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://objects/carousel/Carousel.gd" type="Script" id=1]
+[ext_resource path="res://resources/theme_text.tres" type="Theme" id=2]
+
+[node name="Carousel" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+focus_mode = 2
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Children" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Pivot" type="Control" parent="."]
+margin_top = 231.123
+margin_right = 1024.0
+margin_bottom = 371.123
+
+[node name="ColorBar" type="ColorRect" parent="Pivot"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0.847059 )
+
+[node name="Children" type="Control" parent="Pivot"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Tween" type="Tween" parent="."]

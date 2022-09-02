@@ -1,0 +1,9 @@
+{
+	"name": "EmulationStation (DE) Theme Wrapper",
+	"description": "This theme reads theme files from EmulationStation/EmulationStation-DE and wraps them as a RetroHub theme.",
+	"icon": "icon.png",
+	"version": "1.0.0",
+	"url": "https://github.com/Ev1lbl0w/retrohub",
+	"screenshots": [],
+	"entry_scene": "Theme.tscn"
+}

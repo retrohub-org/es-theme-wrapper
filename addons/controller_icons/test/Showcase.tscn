@@ -1,0 +1,411 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://addons/controller_icons/objects/TextureRect.gd" type="Script" id=1]
+[ext_resource path="res://addons/controller_icons/assets/key/arrow_left.png" type="Texture" id=2]
+[ext_resource path="res://addons/controller_icons/assets/key/arrow_right.png" type="Texture" id=3]
+[ext_resource path="res://addons/controller_icons/assets/key/arrow_down.png" type="Texture" id=4]
+[ext_resource path="res://addons/controller_icons/assets/key/arrow_up.png" type="Texture" id=5]
+[ext_resource path="res://addons/controller_icons/assets/switch/b.png" type="Texture" id=6]
+[ext_resource path="res://addons/controller_icons/assets/key/e.png" type="Texture" id=7]
+[ext_resource path="res://addons/controller_icons/assets/xboxseries/a.png" type="Texture" id=8]
+[ext_resource path="res://addons/controller_icons/assets/ps5/cross.png" type="Texture" id=9]
+[ext_resource path="res://addons/controller_icons/assets/xbox360/start.png" type="Texture" id=10]
+[ext_resource path="res://addons/controller_icons/assets/stadia/menu.png" type="Texture" id=11]
+[ext_resource path="res://addons/controller_icons/assets/xboxone/menu.png" type="Texture" id=12]
+[ext_resource path="res://addons/controller_icons/assets/switch/plus.png" type="Texture" id=13]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 74.0
+margin_top = 334.0
+margin_right = 191.0
+margin_bottom = 506.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 117.0
+margin_bottom = 40.0
+
+[node name="ControllerTextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 2 )
+expand = true
+script = ExtResource( 1 )
+path = "ui_left"
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_left = 44.0
+margin_top = 13.0
+margin_right = 104.0
+margin_bottom = 27.0
+text = "Move left"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 44.0
+margin_right = 117.0
+margin_bottom = 84.0
+
+[node name="ControllerTextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer2"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 3 )
+expand = true
+script = ExtResource( 1 )
+path = "ui_right"
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 44.0
+margin_top = 13.0
+margin_right = 112.0
+margin_bottom = 27.0
+text = "Move right"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 88.0
+margin_right = 117.0
+margin_bottom = 128.0
+
+[node name="ControllerTextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer3"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 5 )
+expand = true
+script = ExtResource( 1 )
+path = "ui_up"
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
+margin_left = 44.0
+margin_top = 13.0
+margin_right = 99.0
+margin_bottom = 27.0
+text = "Move up"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 132.0
+margin_right = 117.0
+margin_bottom = 172.0
+
+[node name="ControllerTextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer4"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 4 )
+expand = true
+script = ExtResource( 1 )
+path = "ui_down"
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer4"]
+margin_left = 44.0
+margin_top = 4.0
+margin_right = 117.0
+margin_bottom = 35.0
+text = "Move down
+"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+margin_left = 513.0
+margin_top = 340.0
+margin_right = 651.0
+margin_bottom = 512.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2"]
+margin_right = 138.0
+margin_bottom = 40.0
+
+[node name="Label2" type="Label" parent="VBoxContainer2/HBoxContainer2"]
+margin_top = 13.0
+margin_right = 35.0
+margin_bottom = 27.0
+text = "Press"
+
+[node name="ControllerTextureRect" type="TextureRect" parent="VBoxContainer2/HBoxContainer2"]
+margin_left = 39.0
+margin_right = 79.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 7 )
+expand = true
+script = ExtResource( 1 )
+path = "attack"
+
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer2"]
+margin_left = 83.0
+margin_top = 13.0
+margin_right = 138.0
+margin_bottom = 27.0
+text = "to attack"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
+margin_top = 44.0
+margin_right = 138.0
+margin_bottom = 84.0
+
+[node name="Label2" type="Label" parent="VBoxContainer2/HBoxContainer"]
+margin_top = 13.0
+margin_right = 35.0
+margin_bottom = 27.0
+text = "Press"
+
+[node name="ControllerTextureRect" type="TextureRect" parent="VBoxContainer2/HBoxContainer"]
+margin_left = 39.0
+margin_right = 79.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 6 )
+expand = true
+script = ExtResource( 1 )
+path = "switch/b"
+
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer"]
+margin_left = 83.0
+margin_top = 13.0
+margin_right = 138.0
+margin_bottom = 27.0
+text = "to attack"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer2"]
+margin_top = 88.0
+margin_right = 138.0
+margin_bottom = 128.0
+
+[node name="Label2" type="Label" parent="VBoxContainer2/HBoxContainer3"]
+margin_top = 13.0
+margin_right = 35.0
+margin_bottom = 27.0
+text = "Press"
+
+[node name="ControllerTextureRect" type="TextureRect" parent="VBoxContainer2/HBoxContainer3"]
+margin_left = 39.0
+margin_right = 79.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 9 )
+expand = true
+script = ExtResource( 1 )
+path = "ps5/cross"
+
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer3"]
+margin_left = 83.0
+margin_top = 13.0
+margin_right = 138.0
+margin_bottom = 27.0
+text = "to attack"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer2"]
+margin_top = 132.0
+margin_right = 138.0
+margin_bottom = 172.0
+
+[node name="Label2" type="Label" parent="VBoxContainer2/HBoxContainer4"]
+margin_top = 13.0
+margin_right = 35.0
+margin_bottom = 27.0
+text = "Press"
+
+[node name="ControllerTextureRect" type="TextureRect" parent="VBoxContainer2/HBoxContainer4"]
+margin_left = 39.0
+margin_right = 79.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 8 )
+expand = true
+script = ExtResource( 1 )
+path = "xboxseries/a"
+
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer4"]
+margin_left = 83.0
+margin_top = 13.0
+margin_right = 138.0
+margin_bottom = 27.0
+text = "to attack"
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="."]
+margin_left = 861.0
+margin_top = 304.0
+margin_right = 999.0
+margin_bottom = 476.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer4"]
+margin_right = 138.0
+margin_bottom = 40.0
+
+[node name="Label2" type="Label" parent="VBoxContainer4/HBoxContainer2"]
+margin_top = 13.0
+margin_right = 35.0
+margin_bottom = 27.0
+text = "Press"
+
+[node name="ControllerTextureRect" type="TextureRect" parent="VBoxContainer4/HBoxContainer2"]
+margin_left = 39.0
+margin_right = 79.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 10 )
+expand = true
+script = ExtResource( 1 )
+path = "joypad/start"
+
+[node name="Label" type="Label" parent="VBoxContainer4/HBoxContainer2"]
+margin_left = 83.0
+margin_top = 13.0
+margin_right = 138.0
+margin_bottom = 27.0
+text = "to pause"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer4"]
+margin_top = 44.0
+margin_right = 138.0
+margin_bottom = 84.0
+
+[node name="Label2" type="Label" parent="VBoxContainer4/HBoxContainer3"]
+margin_top = 13.0
+margin_right = 35.0
+margin_bottom = 27.0
+text = "Press"
+
+[node name="ControllerTextureRect" type="TextureRect" parent="VBoxContainer4/HBoxContainer3"]
+margin_left = 39.0
+margin_right = 79.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 12 )
+expand = true
+script = ExtResource( 1 )
+path = "xboxone/menu"
+
+[node name="Label" type="Label" parent="VBoxContainer4/HBoxContainer3"]
+margin_left = 83.0
+margin_top = 13.0
+margin_right = 138.0
+margin_bottom = 27.0
+text = "to pause"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer4"]
+margin_top = 88.0
+margin_right = 138.0
+margin_bottom = 128.0
+
+[node name="Label2" type="Label" parent="VBoxContainer4/HBoxContainer4"]
+margin_top = 13.0
+margin_right = 35.0
+margin_bottom = 27.0
+text = "Press"
+
+[node name="ControllerTextureRect" type="TextureRect" parent="VBoxContainer4/HBoxContainer4"]
+margin_left = 39.0
+margin_right = 79.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 13 )
+expand = true
+script = ExtResource( 1 )
+path = "switch/plus"
+
+[node name="Label" type="Label" parent="VBoxContainer4/HBoxContainer4"]
+margin_left = 83.0
+margin_top = 13.0
+margin_right = 138.0
+margin_bottom = 27.0
+text = "to pause"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer4"]
+margin_top = 132.0
+margin_right = 138.0
+margin_bottom = 172.0
+
+[node name="Label2" type="Label" parent="VBoxContainer4/HBoxContainer5"]
+margin_top = 13.0
+margin_right = 35.0
+margin_bottom = 27.0
+text = "Press"
+
+[node name="ControllerTextureRect" type="TextureRect" parent="VBoxContainer4/HBoxContainer5"]
+margin_left = 39.0
+margin_right = 79.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 11 )
+expand = true
+script = ExtResource( 1 )
+path = "stadia/menu"
+
+[node name="Label" type="Label" parent="VBoxContainer4/HBoxContainer5"]
+margin_left = 83.0
+margin_top = 13.0
+margin_right = 138.0
+margin_bottom = 27.0
+text = "to pause"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="."]
+margin_left = 359.0
+margin_top = 347.0
+margin_right = 497.0
+margin_bottom = 496.0
+custom_constants/separation = 30
+
+[node name="Label" type="Label" parent="VBoxContainer3"]
+margin_right = 138.0
+margin_bottom = 14.0
+text = "Keyboard"
+align = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer3"]
+margin_top = 44.0
+margin_right = 138.0
+margin_bottom = 58.0
+text = "Nintendo Switch"
+align = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer3"]
+margin_top = 88.0
+margin_right = 138.0
+margin_bottom = 102.0
+text = "PlayStation 5"
+align = 2
+
+[node name="Label4" type="Label" parent="VBoxContainer3"]
+margin_top = 132.0
+margin_right = 138.0
+margin_bottom = 146.0
+text = "Xbox Series"
+align = 2
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="."]
+margin_left = 709.0
+margin_top = 310.0
+margin_right = 847.0
+margin_bottom = 459.0
+custom_constants/separation = 30
+
+[node name="Label" type="Label" parent="VBoxContainer5"]
+margin_right = 138.0
+margin_bottom = 14.0
+text = "Xbox 360"
+align = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer5"]
+margin_top = 44.0
+margin_right = 138.0
+margin_bottom = 58.0
+text = "Xbox One"
+align = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer5"]
+margin_top = 88.0
+margin_right = 138.0
+margin_bottom = 102.0
+text = "Nintendo Switch"
+align = 2
+
+[node name="Label4" type="Label" parent="VBoxContainer5"]
+margin_top = 132.0
+margin_right = 138.0
+margin_bottom = 146.0
+text = "Google Stadia"
+align = 2
