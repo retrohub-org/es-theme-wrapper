@@ -1,0 +1,3 @@
+[submodule "addons/retrohub_theme_helper"]
+	path = addons/retrohub_theme_helper
+	url = git@github.com:retrohub-org/retrohub-theme-helper.git

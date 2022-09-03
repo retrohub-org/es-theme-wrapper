@@ -1,7 +1,5 @@
 extends Node
 
-class_name XML2JSON
-
 # Author: @ev1lbl0w (https://github.com/ev1lbl0w)
 #
 # Converts an XML file into a JSON/Dictionary:

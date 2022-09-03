@@ -58,11 +58,6 @@ _global_script_classes=[ {
 "class": "RetroHubSystemData",
 "language": "GDScript",
 "path": "res://addons/retrohub_theme_helper/classes/SystemData.gd"
-}, {
-"base": "Node",
-"class": "XML2JSON",
-"language": "GDScript",
-"path": "res://XML2JSON.gd"
 } ]
 _global_script_class_icons={
 "ConfigData": "",
@@ -74,8 +69,7 @@ _global_script_class_icons={
 "ControllerTextureRect": "",
 "RetroHubGameData": "",
 "RetroHubGameMediaData": "",
-"RetroHubSystemData": "",
-"XML2JSON": ""
+"RetroHubSystemData": ""
 }
 
 [application]
@@ -86,11 +80,12 @@ config/icon="res://icon.png"
 
 [autoload]
 
-RetroHub="*res://addons/retrohub_theme_helper/RetroHub.gd"
-RetroHubConfig="*res://addons/retrohub_theme_helper/Config.gd"
-FileUtils="*res://addons/retrohub_theme_helper/utils/FileUtils.gd"
-JSONUtils="*res://addons/retrohub_theme_helper/utils/JSONUtils.gd"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
+JSONUtils="*res://addons/retrohub_theme_helper/utils/JSONUtils.gd"
+FileUtils="*res://addons/retrohub_theme_helper/utils/FileUtils.gd"
+RetroHubConfig="*res://addons/retrohub_theme_helper/Config.gd"
+RetroHubUI="*res://addons/retrohub_theme_helper/UI.gd"
+RetroHub="*res://addons/retrohub_theme_helper/RetroHub.gd"
 
 [display]
 
