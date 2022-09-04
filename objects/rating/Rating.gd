@@ -50,9 +50,9 @@ func apply_theme():
 
 	rect_position = position
 	if size.y > 0:
-		rect_size = Vector2(size.y * 5, size.y)
+		rect_size = Vector2(floor(size.y) * 5, floor(size.y))
 	elif size.x > 0:
-		rect_size = Vector2(size.x * 5, size.x)
+		rect_size = Vector2(floor(size.x) * 5, floor(size.x))
 	pos_origin.x *= rect_size.x
 	pos_origin.y *= rect_size.y
 	rect_position -= pos_origin
