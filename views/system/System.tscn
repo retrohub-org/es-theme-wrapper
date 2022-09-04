@@ -5,11 +5,11 @@
 [ext_resource path="res://objects/helpsystem/HelpSystem.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/carousel/Carousel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/text/Text.tscn" type="PackedScene" id=5]
-[ext_resource path="res://addons/controller_icons/assets/xboxone/dpad.png" type="Texture" id=6]
+[ext_resource path="res://addons/controller_icons/assets/xbox360/back.png" type="Texture" id=6]
 [ext_resource path="res://addons/controller_icons/objects/TextureRect.gd" type="Script" id=7]
 [ext_resource path="res://addons/controller_icons/assets/key/enter_alt.png" type="Texture" id=8]
-[ext_resource path="res://addons/controller_icons/assets/xboxone/view.png" type="Texture" id=9]
-[ext_resource path="res://addons/controller_icons/assets/xboxone/menu.png" type="Texture" id=10]
+[ext_resource path="res://addons/controller_icons/assets/xbox360/dpad.png" type="Texture" id=9]
+[ext_resource path="res://addons/controller_icons/assets/xbox360/start.png" type="Texture" id=10]
 
 [node name="System" type="Control"]
 anchor_right = 1.0
@@ -34,7 +34,7 @@ margin_bottom = 10.9
 margin_right = 40.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 9 )
+texture = ExtResource( 6 )
 expand = true
 script = ExtResource( 7 )
 path = "joypad/select"
@@ -97,7 +97,7 @@ margin_left = 361.0
 margin_right = 401.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 6 )
+texture = ExtResource( 9 )
 expand = true
 script = ExtResource( 7 )
 path = "joypad/dpad"

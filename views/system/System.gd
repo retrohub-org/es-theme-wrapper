@@ -66,8 +66,11 @@ func parse_theme_xml_image(Wrapper, datas: Array, path: String, root: Dictionary
 		for name in Wrapper.get_attributes(data):
 			if name == "logo" or Wrapper.is_extra(data):
 				if not root.has(name):
-					root[name] = preload("res://objects/image/Image.tscn").instance()
-					root[name].name = name
+					var image = preload("res://objects/image/Image.tscn").instance()
+					image.name = name
+					image.max_size_set = true
+					image.pos_origin = Vector2(0.5, 0.5)
+					root[name] = image
 				root[name].parse_theme_xml(Wrapper, data, path)
 
 func parse_theme_xml_text(Wrapper, datas: Array, path: String, root: Dictionary):

@@ -8,6 +8,7 @@ var parsed := false
 var position := Vector2(0, 0)
 export var size_set := false
 export var size := Vector2 (0, 0)
+var max_size_set := false
 export var pos_origin := Vector2(0, 0)
 var rotation := 0
 var rot_pivot := Vector2(0, 0)
@@ -55,6 +56,7 @@ func parse_theme_xml(Wrapper, data: Dictionary, root_path: String):
 				position = PropertyWrapper.parse_normalized_pair(Wrapper, data[key])
 			"size", "maxSize":
 				size = PropertyWrapper.parse_normalized_pair(Wrapper, data[key])
+				max_size_set = max_size_set || key == "maxSize"
 			"origin":
 				pos_origin = PropertyWrapper.parse_normalized_pair(Wrapper, data[key], false)
 			"rotation":
@@ -66,7 +68,7 @@ func parse_theme_xml(Wrapper, data: Dictionary, root_path: String):
 				var img = Image.new()
 				if not img.load(tex_path):
 					tex = ImageTexture.new()
-					tex.create_from_image(img, 3)
+					tex.create_from_image(img, 9)
 			"tile":
 				tile = PropertyWrapper.parse_bool(Wrapper, data[key])
 			"color":
@@ -94,6 +96,13 @@ func apply_theme():
 			size.x = tex_size.x * size.y / tex_size.y
 		elif size.y == 0:
 			size.y = tex_size.y * size.x / tex_size.x
+	if max_size_set:
+		# FIXME: This is a hack to support origins of 0 or 0.5.
+		# If themes use more than this, needs to be properly supported
+		if is_equal_approx(pos_origin.x, 0.5) and is_equal_approx(pos_origin.y, 0.5):
+			stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		else:
+			stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
 	rect_size = size
 	pos_origin.x *= size.x
 	pos_origin.y *= size.y
