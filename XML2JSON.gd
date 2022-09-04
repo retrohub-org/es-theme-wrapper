@@ -159,6 +159,8 @@ static func _parse_xml(xml_raw: XMLParser, skip: bool = false) -> Dictionary:
 				if element_begin:
 					element_begin = false
 					_add_child_to_dict(ret, element_name, _parse_xml(xml_raw, true))
+					if not element_attr.empty():
+						_get_child_from_dict(ret, element_name)["#attributes"] = element_attr
 				else:
 					_add_child_to_dict(ret, "#comment", xml_raw.get_node_name())
 					#print("\tComment: " + xml_raw.get_node_name())
