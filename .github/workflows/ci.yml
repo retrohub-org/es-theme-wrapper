@@ -1,0 +1,33 @@
+name: Package Theme
+on: [push, pull_request]
+
+env:
+  GODOT_VERSION: 3.5
+  EXPORT_NAME: es-theme-wrapper
+
+jobs:
+  export-pck:
+    name: Export PCK
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+      - name: Download Godot
+        run: |
+          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_linux_headless.64.zip \
+          && mkdir ~/.cache \
+          && mkdir -p ~/.config/godot \
+          && mkdir -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable \
+          && unzip Godot_v${GODOT_VERSION}-stable_linux_headless.64.zip \
+          && mv Godot_v${GODOT_VERSION}-stable_linux_headless.64 /usr/local/bin/godot
+      - name: Export PCK
+        run: |
+          mkdir -v -p export/linux
+          godot -v --export-pack "Linux/X11" export/linux/$EXPORT_NAME.pck
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.EXPORT_NAME }}
+          path: export/linux/${{ env.EXPORT_NAME }}.pck
