@@ -265,7 +265,7 @@ func _on_game_entry_selected(_game_data: RetroHubGameData):
 				n_md_players.text = game_data.num_players
 		
 		if not game_media_cache.has(game_data):
-			var media_data = RetroHub.request_game_media(game_data)
+			var media_data := RetroHubMedia.retrieve_media_data(game_data)
 			game_media_cache[game_data] = media_data
 
 		var media_data = game_media_cache[game_data]

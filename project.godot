@@ -85,6 +85,7 @@ JSONUtils="*res://addons/retrohub_theme_helper/utils/JSONUtils.gd"
 FileUtils="*res://addons/retrohub_theme_helper/utils/FileUtils.gd"
 RetroHubConfig="*res://addons/retrohub_theme_helper/Config.gd"
 RetroHubUI="*res://addons/retrohub_theme_helper/UI.gd"
+RetroHubMedia="*res://addons/retrohub_theme_helper/Media.gd"
 RetroHub="*res://addons/retrohub_theme_helper/RetroHub.gd"
 
 [display]
