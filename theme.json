@@ -8,5 +8,7 @@
 
 	],
 	"entry_scene": "res://Theme.tscn",
-	"authors": "Ev1lbl0w"
+	"authors": "Ev1lbl0w",
+	"id": "es-theme-wrapper",
+	"config_scene": "res://theme/config/ThemeConfig.tscn"
 }

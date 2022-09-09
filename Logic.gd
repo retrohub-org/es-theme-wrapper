@@ -41,9 +41,11 @@ func _ready():
 	
 	# Config related signals
 	RetroHubConfig.connect("config_updated", self, "_on_config_updated")
+	RetroHubConfig.connect("theme_config_ready", self, "_on_theme_config_ready")
+	RetroHubConfig.connect("theme_config_updated", self, "_on_theme_config_updated")
 
-	# Load theme XML info
-	Wrapper.load_es_theme_file(path + "/theme.xml")
+	if not RetroHub.is_main_app():
+		Wrapper.load_es_theme_file(path + "/theme.xml")
 
 func set_node_enabled(node: Node, enabled: bool):
 	node.set_process(enabled)
@@ -147,13 +149,14 @@ func _on_system_receive_start():
 ## System information always arrives before game information.
 func _on_system_received(data: RetroHubSystemData):
 	# Load XML for given system
-	var system_path = path + "/" + Wrapper.convert_system_name(data.name) + "/theme.xml"
-	Wrapper.load_es_theme_file(system_path)
-	Wrapper.set_system_variables(data)
-	$System.parse_theme_xml(Wrapper, system_path, data.name)
-	$System.apply_theme()
-	$System.add_system_data(data)
-	systems[data.name] = data
+	if path:
+		var system_path = path + "/" + Wrapper.convert_system_name(data.name) + "/theme.xml"
+		Wrapper.load_es_theme_file(system_path)
+		Wrapper.set_system_variables(data)
+		$System.parse_theme_xml(Wrapper, system_path, data.name)
+		$System.apply_theme()
+		$System.add_system_data(data)
+		systems[data.name] = data
 
 ## Called when RetroHub has finished sending all system data.
 ## Game data will follow immediately after that.
@@ -171,37 +174,54 @@ func _on_game_receive_start():
 ##
 ## Game information always arrives after system information.
 func _on_game_received(data: RetroHubGameData):
-	if games.has(data.system_name):
-		games[data.system_name].push_back(data)
-		if data.has_metadata:
+	if path:
+		if games.has(data.system_name):
+			games[data.system_name].push_back(data)
+			if data.has_metadata:
+				games_metadata[data.system_name] = data.has_metadata
+		else:
+			games[data.system_name] = [data]
 			games_metadata[data.system_name] = data.has_metadata
-	else:
-		games[data.system_name] = [data]
-		games_metadata[data.system_name] = data.has_metadata
 
 ## Called when RetroHub has finished sending all game data.
 func _on_game_receive_end():
-	for system_name in games:
-		var game_view
-		if games_metadata[system_name]:
-			game_view = load("res://views/detailed/Detailed.tscn").instance()
-		else:
-			game_view = load("res://views/basic/Basic.tscn").instance()
-		$GameView.add_child(game_view)
+	if path:
+		for system_name in games:
+			var game_view
+			if games_metadata[system_name]:
+				game_view = load("res://views/detailed/Detailed.tscn").instance()
+			else:
+				game_view = load("res://views/basic/Basic.tscn").instance()
+			$GameView.add_child(game_view)
 
-		var system_data : RetroHubSystemData = systems[system_name]
-		Wrapper.set_system_variables(system_data)
-		var root_path = path + "/" + Wrapper.convert_system_name(system_name) + "/theme.xml"
-		game_view.parse_theme_xml(Wrapper, root_path)
-		game_view.apply_theme()
-		game_view.set_system(system_data)
-		game_view.set_games(games[system_name])
-		set_node_enabled(game_view, false)
-		game_view.visible = false
-		gameview_map[system_data] = game_view
+			var system_data : RetroHubSystemData = systems[system_name]
+			Wrapper.set_system_variables(system_data)
+			var root_path = path + "/" + Wrapper.convert_system_name(system_name) + "/theme.xml"
+			game_view.parse_theme_xml(Wrapper, root_path)
+			game_view.apply_theme()
+			game_view.set_system(system_data)
+			game_view.set_games(games[system_name])
+			set_node_enabled(game_view, false)
+			game_view.visible = false
+			gameview_map[system_data] = game_view
 
 ## Called when any config key has been changed
 func _on_config_updated(key: String, old_value, new_value):
 	if key == ConfigData.KEY_GAMES_DIR:
 		print("Game folder changed, request reload")
+		RetroHub.request_theme_reload()
+
+func _on_theme_config_ready():
+	# Load theme XML info
+	path = RetroHubConfig.get_theme_config("path", "")
+	print("Here, path: ", path)
+	if not path.empty():
+		Wrapper.load_es_theme_file(path + "/theme.xml")
+	else:
+		print("No path selected")
+
+func _on_theme_config_updated(key, old_value, new_value):
+	print(key)
+	if key == "path":
+		print("old: %s, new: %s, changing..." % [old_value, new_value])
 		RetroHub.request_theme_reload()
