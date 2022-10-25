@@ -175,13 +175,13 @@ func _on_game_receive_start():
 ## Game information always arrives after system information.
 func _on_game_received(data: RetroHubGameData):
 	if path:
-		if games.has(data.system_name):
-			games[data.system_name].push_back(data)
+		if games.has(data.system.name):
+			games[data.system.name].push_back(data)
 			if data.has_metadata:
-				games_metadata[data.system_name] = data.has_metadata
+				games_metadata[data.system.name] = data.has_metadata
 		else:
-			games[data.system_name] = [data]
-			games_metadata[data.system_name] = data.has_metadata
+			games[data.system.name] = [data]
+			games_metadata[data.system.name] = data.has_metadata
 
 ## Called when RetroHub has finished sending all game data.
 func _on_game_receive_end():
