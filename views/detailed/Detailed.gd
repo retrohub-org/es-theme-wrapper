@@ -254,8 +254,8 @@ func _on_game_entry_selected(_game_data: RetroHubGameData):
 		n_md_playcount.text = str(game_data.play_count)
 		n_md_description.text = game_data.description
 		n_md_rating.rating = game_data.rating
-		n_md_releasedate.date = game_data.release_date
-		n_md_lastplayed.date = game_data.last_played
+		n_md_releasedate.date = RegionUtils.localize_date(game_data.release_date)
+		n_md_lastplayed.date = RegionUtils.localize_date(game_data.last_played)
 		
 		if game_data.num_players:
 			var splits = game_data.num_players.split("-")
