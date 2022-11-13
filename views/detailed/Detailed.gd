@@ -62,6 +62,9 @@ onready var n_md_default_objects := [
 	n_md_description
 ]
 
+var media_types : int = RetroHubMedia.Type.SCREENSHOT | RetroHubMedia.Type.LOGO | \
+	RetroHubMedia.Type.BOX_RENDER | RetroHubMedia.Type.SUPPORT_RENDER
+
 func _ready():
 	for child in $Children.get_children():
 		cached_z_indexes[child.name] = child
@@ -265,7 +268,7 @@ func _on_game_entry_selected(_game_data: RetroHubGameData):
 				n_md_players.text = game_data.num_players
 		
 		if not game_media_cache.has(game_data):
-			var media_data := RetroHubMedia.retrieve_media_data(game_data)
+			var media_data := RetroHubMedia.retrieve_media_data(game_data, media_types)
 			game_media_cache[game_data] = media_data
 
 		var media_data = game_media_cache[game_data]
