@@ -194,16 +194,17 @@ func _on_game_receive_end():
 				game_view = load("res://views/basic/Basic.tscn").instance()
 			$GameView.add_child(game_view)
 
-			var system_data : RetroHubSystemData = systems[system_name]
-			Wrapper.set_system_variables(system_data)
-			var root_path = path + "/" + Wrapper.convert_system_name(system_name) + "/theme.xml"
-			game_view.parse_theme_xml(Wrapper, root_path)
-			game_view.apply_theme()
-			game_view.set_system(system_data)
-			game_view.set_games(games[system_name])
-			set_node_enabled(game_view, false)
-			game_view.visible = false
-			gameview_map[system_data] = game_view
+			if systems.has(system_name):
+				var system_data : RetroHubSystemData = systems[system_name]
+				Wrapper.set_system_variables(system_data)
+				var root_path = path + "/" + Wrapper.convert_system_name(system_name) + "/theme.xml"
+				game_view.parse_theme_xml(Wrapper, root_path)
+				game_view.apply_theme()
+				game_view.set_system(system_data)
+				game_view.set_games(games[system_name])
+				set_node_enabled(game_view, false)
+				game_view.visible = false
+				gameview_map[system_data] = game_view
 
 ## Called when any config key has been changed
 func _on_config_updated(key: String, old_value, new_value):

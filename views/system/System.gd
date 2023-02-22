@@ -15,20 +15,21 @@ func grab_focus():
 	n_carousel.grab_focus()
 
 func _ready():
-	RetroHub.connect("system_received", self, "add_system")
+	#RetroHub.connect("system_received", self, "add_system")
 	RetroHub.connect("system_receive_end", self, "pack")
 
 func parse_theme_xml(Wrapper, path: String, system_name: String) -> void:
 	path = Wrapper.ensure_path(path)
-	var data = Wrapper.xml_filemap[path]
-	if data.has("include"):
-		var includes : Array = Wrapper.expand_include(data["include"], path.get_base_dir())
-		for include in includes:
-			parse_theme_xml(Wrapper, include, system_name)
-	if Wrapper.has(data, "view"):
-		var views = Wrapper.find_view(data, "system")
-		for view in views:
-			parse_theme_xml_view(Wrapper, view, path, system_name)
+	if Wrapper.xml_filemap.has(path):
+		var data = Wrapper.xml_filemap[path]
+		if data.has("include"):
+			var includes : Array = Wrapper.expand_include(data["include"], path.get_base_dir())
+			for include in includes:
+				parse_theme_xml(Wrapper, include, system_name)
+		if Wrapper.has(data, "view"):
+			var views = Wrapper.find_view(data, "system")
+			for view in views:
+				parse_theme_xml_view(Wrapper, view, path, system_name)
 
 func apply_theme():
 	handle_default_objects()

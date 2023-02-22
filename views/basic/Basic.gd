@@ -23,15 +23,16 @@ func _ready():
 
 func parse_theme_xml(Wrapper, path: String) -> void:
 	path = Wrapper.ensure_path(path)
-	var data = Wrapper.xml_filemap[path]
-	if data.has("include"):
-		var includes : Array = Wrapper.expand_include(data["include"], path.get_base_dir())
-		for include in includes:
-			parse_theme_xml(Wrapper, include)
-	if Wrapper.has(data, "view"):
-		var views = Wrapper.find_view(data, "basic")
-		for view in views:
-			parse_theme_xml_view(Wrapper, view, path)
+	if Wrapper.xml_filemap.has(path):
+		var data = Wrapper.xml_filemap[path]
+		if data.has("include"):
+			var includes : Array = Wrapper.expand_include(data["include"], path.get_base_dir())
+			for include in includes:
+				parse_theme_xml(Wrapper, include)
+		if Wrapper.has(data, "view"):
+			var views = Wrapper.find_view(data, "basic")
+			for view in views:
+				parse_theme_xml_view(Wrapper, view, path)
 
 func apply_theme():
 	handle_default_objects()

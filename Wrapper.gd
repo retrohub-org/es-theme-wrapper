@@ -129,4 +129,6 @@ func parse_name_string(keys: String, key: String):
 func ensure_path(path: String):
 	if xml_filemap.has(path):
 		return path
-	return xml_filemap.keys()[0]
+	if xml_filemap.keys().size():
+		return xml_filemap.keys()[0]
+	return ""
