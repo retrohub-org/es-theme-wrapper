@@ -1,6 +1,7 @@
 extends Node
 
 var xml2json = load("res://XML2JSON.gd").new()
+var PropertyWrapper = preload("res://PropertyWrapper.gd").new()
 
 # Holds mapping between files and content; this is because themes cross-reference files
 var xml_filemap := {}
@@ -46,6 +47,7 @@ func map_xml_content(dict: Dictionary, root_path: String):
 					map_xml_content(val, root_path)
 
 func expand_file_path(path: String, root_path: String):
+	path = PropertyWrapper.parse_string(self, path)
 	if path[0] == '.':
 		path = root_path + path.substr(1)
 	elif path[0] == '~':
