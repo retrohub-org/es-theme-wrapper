@@ -148,9 +148,10 @@ func reset() -> void:
 
 func on_show():
 	n_gamelist.get_focus()
+	get_tree().call_group("on_gamelist_show", "on_gamelist_show")
 
 func on_hide():
-	pass
+	get_tree().call_group("on_gamelist_hide", "on_gamelist_hide")
 
 func clear_game_media_cache():
 	pass

@@ -70,64 +70,64 @@ margin_left = 10.0
 margin_top = 377.0
 margin_right = -961.0
 margin_bottom = -196.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Rating: "
+txt = "Rating: "
+color = Color( 0, 0, 0, 1 )
 
 [node name="md_lbl_releasedate" parent="Children/40" instance=ExtResource( 15 )]
 margin_left = 10.0
 margin_top = 414.0
 margin_right = -961.0
 margin_bottom = -159.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Released: "
+txt = "Released: "
+color = Color( 0, 0, 0, 1 )
 
 [node name="md_lbl_developer" parent="Children/40" instance=ExtResource( 15 )]
 margin_left = 10.0
 margin_top = 451.0
 margin_right = -923.0
 margin_bottom = -122.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Developer: "
+txt = "Developer: "
+color = Color( 0, 0, 0, 1 )
 
 [node name="md_lbl_publisher" parent="Children/40" instance=ExtResource( 15 )]
 margin_left = 10.0
 margin_top = 488.0
 margin_right = -923.0
 margin_bottom = -85.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Publisher: "
+txt = "Publisher: "
+color = Color( 0, 0, 0, 1 )
 
 [node name="md_lbl_genre" parent="Children/40" instance=ExtResource( 15 )]
 margin_left = 256.0
 margin_top = 381.0
 margin_right = -677.0
 margin_bottom = -192.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Genre: "
+txt = "Genre: "
+color = Color( 0, 0, 0, 1 )
 
 [node name="md_lbl_players" parent="Children/40" instance=ExtResource( 15 )]
 margin_left = 256.0
 margin_top = 416.0
 margin_right = -677.0
 margin_bottom = -157.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Players: "
+txt = "Players: "
+color = Color( 0, 0, 0, 1 )
 
 [node name="md_lbl_lastplayed" parent="Children/40" instance=ExtResource( 15 )]
 margin_left = 256.0
 margin_top = 451.0
 margin_right = -671.0
 margin_bottom = -122.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Last played: "
+txt = "Last played: "
+color = Color( 0, 0, 0, 1 )
 
 [node name="md_lbl_playcount" parent="Children/40" instance=ExtResource( 15 )]
 margin_left = 256.0
 margin_top = 488.0
 margin_right = -658.0
 margin_bottom = -85.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Times played: "
+txt = "Times played: "
+color = Color( 0, 0, 0, 1 )
 
 [node name="md_image" parent="Children/40" instance=ExtResource( 14 )]
 anchor_right = 0.0
@@ -154,32 +154,32 @@ margin_left = 96.0
 margin_top = 451.0
 margin_right = -837.0
 margin_bottom = -122.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "unknown"
+txt = "unknown"
+color = Color( 0, 0, 0, 1 )
 
 [node name="md_publisher" parent="Children/40" instance=ExtResource( 15 )]
 margin_left = 92.0
 margin_top = 488.0
 margin_right = -841.0
 margin_bottom = -85.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "unknown"
+txt = "unknown"
+color = Color( 0, 0, 0, 1 )
 
 [node name="md_genre" parent="Children/40" instance=ExtResource( 15 )]
 margin_left = 311.0
 margin_top = 381.0
 margin_right = -622.0
 margin_bottom = -192.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "unknown"
+txt = "unknown"
+color = Color( 0, 0, 0, 1 )
 
 [node name="md_players" parent="Children/40" instance=ExtResource( 15 )]
 margin_left = 321.0
 margin_top = 416.0
 margin_right = -612.0
 margin_bottom = -157.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "unknown"
+txt = "unknown"
+color = Color( 0, 0, 0, 1 )
 
 [node name="md_lastplayed" parent="Children/40" instance=ExtResource( 16 )]
 margin_left = 352.0
@@ -193,18 +193,16 @@ margin_left = 366.0
 margin_top = 488.0
 margin_right = -567.0
 margin_bottom = -85.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "0"
+txt = "0"
+color = Color( 0, 0, 0, 1 )
 
 [node name="md_description" parent="Children/40" instance=ExtResource( 15 )]
 margin_left = 10.0
 margin_top = 528.0
 margin_right = -623.0
 margin_bottom = 15.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Long description Long description Long description Long description Long description Long description"
-valign = 0
-autowrap = true
+txt = "Long description Long description Long description Long description Long description Long description"
+color = Color( 0, 0, 0, 1 )
 
 [node name="50" type="Control" parent="Children"]
 anchor_right = 1.0
@@ -213,11 +211,10 @@ mouse_filter = 2
 
 [node name="logoText" parent="Children/50" instance=ExtResource( 15 )]
 anchor_bottom = 0.067
-margin_right = 0.0
 margin_bottom = -0.200001
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "System Name"
-align = 1
+txt = "System Name"
+color = Color( 0, 0, 0, 1 )
+alignment = "center"
 
 [node name="logo" parent="Children/50" instance=ExtResource( 14 )]
 anchor_bottom = 0.147
@@ -242,16 +239,14 @@ path = "joypad/select"
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 44.0
-margin_top = 6.0
-margin_right = 112.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0.466667, 0.466667, 0.466667, 1 )
-text = "options"
-uppercase = true
+margin_right = 44.0
+margin_bottom = 40.0
+txt = "OPTIONS"
+color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
 [node name="MenuIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 116.0
-margin_right = 156.0
+margin_left = 48.0
+margin_right = 88.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 11 )
@@ -262,17 +257,15 @@ path = "joypad/start"
 [node name="Menu" parent="HelpSystem" instance=ExtResource( 15 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 160.0
-margin_top = 6.0
-margin_right = 207.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0.466667, 0.466667, 0.466667, 1 )
-text = "menu"
-uppercase = true
+margin_left = 92.0
+margin_right = 92.0
+margin_bottom = 40.0
+txt = "MENU"
+color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
 [node name="FavoritesIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 211.0
-margin_right = 251.0
+margin_left = 96.0
+margin_right = 136.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 6 )
@@ -283,17 +276,15 @@ path = "joypad/y"
 [node name="Favorites" parent="HelpSystem" instance=ExtResource( 15 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 255.0
-margin_top = 6.0
-margin_right = 339.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0.466667, 0.466667, 0.466667, 1 )
-text = "favorites"
-uppercase = true
+margin_left = 140.0
+margin_right = 140.0
+margin_bottom = 40.0
+txt = "FAVORITES"
+color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
 [node name="MediaIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 343.0
-margin_right = 383.0
+margin_left = 144.0
+margin_right = 184.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 10 )
@@ -304,17 +295,15 @@ path = "joypad/x"
 [node name="Media" parent="HelpSystem" instance=ExtResource( 15 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 387.0
-margin_top = 6.0
-margin_right = 482.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0.466667, 0.466667, 0.466667, 1 )
-text = "view media"
-uppercase = true
+margin_left = 188.0
+margin_right = 188.0
+margin_bottom = 40.0
+txt = "VIEW MEDIA"
+color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
 [node name="BackIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 486.0
-margin_right = 526.0
+margin_left = 192.0
+margin_right = 232.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 13 )
@@ -325,17 +314,15 @@ path = "joypad/b"
 [node name="Back" parent="HelpSystem" instance=ExtResource( 15 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 530.0
-margin_top = 6.0
-margin_right = 571.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0.466667, 0.466667, 0.466667, 1 )
-text = "back"
-uppercase = true
+margin_left = 236.0
+margin_right = 236.0
+margin_bottom = 40.0
+txt = "BACK"
+color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
 [node name="LaunchIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 575.0
-margin_right = 615.0
+margin_left = 240.0
+margin_right = 280.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 5 )
@@ -346,17 +333,15 @@ path = "joypad/a"
 [node name="Launch" parent="HelpSystem" instance=ExtResource( 15 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 619.0
-margin_top = 6.0
-margin_right = 682.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0.466667, 0.466667, 0.466667, 1 )
-text = "launch"
-uppercase = true
+margin_left = 284.0
+margin_right = 284.0
+margin_bottom = 40.0
+txt = "LAUNCH"
+color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
 [node name="SystemIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 686.0
-margin_right = 726.0
+margin_left = 288.0
+margin_right = 328.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 12 )
@@ -367,10 +352,8 @@ path = "joypad/dpad"
 [node name="System" parent="HelpSystem" instance=ExtResource( 15 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 730.0
-margin_top = 6.0
-margin_right = 792.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0.466667, 0.466667, 0.466667, 1 )
-text = "system"
-uppercase = true
+margin_left = 332.0
+margin_right = 332.0
+margin_bottom = 40.0
+txt = "SYSTEM"
+color = Color( 0.470588, 0.470588, 0.470588, 1 )

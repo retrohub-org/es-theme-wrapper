@@ -39,7 +39,7 @@ mouse_filter = 2
 [node name="background" parent="Children/0" instance=ExtResource( 4 )]
 stretch_mode = 2
 size_set = true
-size = Vector2( 1024, 600 )
+size = Vector2( 1024, 576 )
 z_index = 0
 
 [node name="20" type="Control" parent="Children"]
@@ -61,13 +61,9 @@ mouse_filter = 2
 [node name="logoText" parent="Children/50" instance=ExtResource( 5 )]
 anchor_left = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.0
 margin_left = -512.0
 margin_right = 512.0
 margin_bottom = 40.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "System Name"
-align = 1
 
 [node name="logo" parent="Children/50" instance=ExtResource( 4 )]
 anchor_bottom = 0.147
@@ -92,16 +88,13 @@ path = "joypad/select"
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 44.0
-margin_top = 6.0
-margin_right = 112.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0.466667, 0.466667, 0.466667, 1 )
-text = "options"
-uppercase = true
+margin_right = 44.0
+margin_bottom = 40.0
+txt = "OPTIONS"
 
 [node name="MenuIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 116.0
-margin_right = 156.0
+margin_left = 48.0
+margin_right = 88.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 8 )
@@ -112,17 +105,14 @@ path = "joypad/start"
 [node name="Menu" parent="HelpSystem" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 160.0
-margin_top = 6.0
-margin_right = 207.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0.466667, 0.466667, 0.466667, 1 )
-text = "menu"
-uppercase = true
+margin_left = 92.0
+margin_right = 92.0
+margin_bottom = 40.0
+txt = "MENU"
 
 [node name="FavoritesIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 211.0
-margin_right = 251.0
+margin_left = 96.0
+margin_right = 136.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 14 )
@@ -133,17 +123,14 @@ path = "joypad/y"
 [node name="Favorites" parent="HelpSystem" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 255.0
-margin_top = 6.0
-margin_right = 339.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0.466667, 0.466667, 0.466667, 1 )
-text = "favorites"
-uppercase = true
+margin_left = 140.0
+margin_right = 140.0
+margin_bottom = 40.0
+txt = "FAVORITES"
 
 [node name="MediaIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 343.0
-margin_right = 383.0
+margin_left = 144.0
+margin_right = 184.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 11 )
@@ -154,17 +141,14 @@ path = "joypad/x"
 [node name="Media" parent="HelpSystem" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 387.0
-margin_top = 6.0
-margin_right = 482.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0.466667, 0.466667, 0.466667, 1 )
-text = "view media"
-uppercase = true
+margin_left = 188.0
+margin_right = 188.0
+margin_bottom = 40.0
+txt = "VIEW MEDIA"
 
 [node name="BackIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 486.0
-margin_right = 526.0
+margin_left = 192.0
+margin_right = 232.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 12 )
@@ -175,17 +159,14 @@ path = "joypad/b"
 [node name="Back" parent="HelpSystem" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 530.0
-margin_top = 6.0
-margin_right = 571.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0.466667, 0.466667, 0.466667, 1 )
-text = "back"
-uppercase = true
+margin_left = 236.0
+margin_right = 236.0
+margin_bottom = 40.0
+txt = "BACK"
 
 [node name="LaunchIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 575.0
-margin_right = 615.0
+margin_left = 240.0
+margin_right = 280.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 13 )
@@ -196,17 +177,14 @@ path = "joypad/a"
 [node name="Launch" parent="HelpSystem" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 619.0
-margin_top = 6.0
-margin_right = 682.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0.466667, 0.466667, 0.466667, 1 )
-text = "launch"
-uppercase = true
+margin_left = 284.0
+margin_right = 284.0
+margin_bottom = 40.0
+txt = "LAUNCH"
 
 [node name="SystemIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 686.0
-margin_right = 726.0
+margin_left = 288.0
+margin_right = 328.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 10 )
@@ -217,10 +195,7 @@ path = "joypad/dpad"
 [node name="System" parent="HelpSystem" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 730.0
-margin_top = 6.0
-margin_right = 792.0
-margin_bottom = 33.0
-custom_colors/font_color = Color( 0.466667, 0.466667, 0.466667, 1 )
-text = "system"
-uppercase = true
+margin_left = 332.0
+margin_right = 332.0
+margin_bottom = 40.0
+txt = "SYSTEM"

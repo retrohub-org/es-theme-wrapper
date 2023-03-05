@@ -1,4 +1,4 @@
-extends Label
+extends ScrollContainer
 
 var PropertyWrapper = preload("res://PropertyWrapper.gd").new()
 
@@ -9,16 +9,100 @@ export var size := Vector2 (0, 0)
 export var pos_origin := Vector2(0, 0)
 var rotation := 0
 var rot_pivot := Vector2(0, 0)
-var txt := ""
-var color := Color(1, 1, 1, 1)
+export var txt := ""
+export var color := Color(1, 1, 1, 1)
 var background_color := Color(0, 0, 0, 0)
 var font_path := ""
 var font_size := 27
-var alignment := "left"
+export var alignment := "left"
 var force_uppercase := false
 var line_spacing := 1.5
 var is_visible := true
 export var z_index := 10
+
+var text : String setget set_text, get_text
+
+var clip_pre_delay : float
+var clip_speed : float = 0.0
+var clip_post_delay : float
+
+var _clip_pre_delay_timer : Timer = null
+var _clip_post_delay_timer : Timer = null
+var _clip_val : float
+var _is_clipping : bool
+var _clip_is_scrolling : bool
+var _gamelist_visible : bool
+
+func set_text(_text: String):
+	$Label.text = _text
+	set_is_clipping()
+
+func get_text() -> String:
+	return $Label.text
+
+func set_is_clipping():
+	_is_clipping = $Label.rect_size.x > rect_size.x or $Label.rect_size.y > rect_size.y
+	if _is_clipping and clip_speed > 0:
+		if not _clip_pre_delay_timer:
+			_clip_pre_delay_timer = Timer.new()
+			_clip_post_delay_timer = Timer.new()
+			_clip_pre_delay_timer.one_shot = true
+			_clip_pre_delay_timer.autostart = false
+			_clip_pre_delay_timer.wait_time = clip_pre_delay
+			#warning-ignore:return_value_discarded
+			_clip_pre_delay_timer.connect("timeout", self, "_on_clip_pre_delay_Timeout")
+
+			_clip_post_delay_timer.one_shot = true
+			_clip_post_delay_timer.autostart = false
+			_clip_post_delay_timer.wait_time = clip_post_delay
+			#warning-ignore:return_value_discarded
+			_clip_post_delay_timer.connect("timeout", self, "_on_clip_post_delay_Timeout")
+			
+			add_child(_clip_pre_delay_timer)
+			add_child(_clip_post_delay_timer)
+		if _gamelist_visible:
+			on_gamelist_hide()
+			on_gamelist_show()
+
+func _on_clip_pre_delay_Timeout():
+	_clip_val = 0.0
+	_clip_is_scrolling = true
+
+func _on_clip_post_delay_Timeout():
+	_clip_is_scrolling = false
+	scroll_vertical = 0
+	scroll_horizontal = 0
+	_clip_val = 0.0
+	_clip_pre_delay_timer.start()
+
+func on_gamelist_show():
+	_gamelist_visible = true
+	if _is_clipping and clip_speed > 0 and _clip_pre_delay_timer:
+		_clip_pre_delay_timer.start()
+
+func on_gamelist_hide():
+	_gamelist_visible = false
+	if _is_clipping and clip_speed > 0 and _clip_pre_delay_timer:
+		_clip_is_scrolling = false
+		_clip_pre_delay_timer.stop()
+		_clip_post_delay_timer.stop()
+		scroll_horizontal = 0
+		scroll_vertical = 0
+
+func _process(delta):
+	if _is_clipping:
+		if _clip_is_scrolling and _clip_post_delay_timer.is_stopped():
+			_clip_val += delta * clip_speed
+			if get_v_scrollbar().is_visible_in_tree():
+				var max_val = $Label.rect_size.y - rect_size.y
+				scroll_vertical = int(_clip_val)
+				if scroll_vertical >= int(max_val):
+					_clip_post_delay_timer.start()
+			elif get_h_scrollbar().is_visible_in_tree():
+				var max_val = $Label.rect_size.x - rect_size.x
+				scroll_horizontal = int(_clip_val)
+				if scroll_horizontal >= int(max_val):
+					_clip_post_delay_timer.start()
 
 func parse_theme_xml(Wrapper, data: Dictionary, root_path: String):
 	parsed = true
@@ -70,31 +154,31 @@ func apply_theme():
 		dynamic_font.extra_spacing_bottom = spacing / 2
 		dynamic_font.size = font_size
 		#set("custom_fonts/font", dynamic_font)
-		add_font_override("font", dynamic_font)
+		$Label.add_font_override("font", dynamic_font)
 		# We have to wait a frame, I suppose font_data sets something in the meantime
 		# If we don't wait, it requests stupidly large sizes
 	if txt.length():
-		text = txt
+		set_text(txt)
 	match alignment:
 		"left":
-			align = Label.ALIGN_LEFT
+			$Label.align = Label.ALIGN_LEFT
 		"center":
-			align = Label.ALIGN_CENTER
-			valign = Label.VALIGN_CENTER
+			$Label.align = Label.ALIGN_CENTER
+			$Label.valign = Label.VALIGN_CENTER
 		"right":
-			align = Label.ALIGN_RIGHT
-	uppercase = force_uppercase
-	$Background.color = background_color
+			$Label.align = Label.ALIGN_RIGHT
+	$Label.uppercase = force_uppercase
+	$Label/Background.color = background_color
+	var text_size : Vector2 = $Label.get_minimum_size()
 	if size.x == 0 and size.y == 0:
-		autowrap = false
-		rect_size = size
+		$Label.autowrap = false
+		rect_min_size = text_size
 	else:
-		autowrap = true
+		$Label.autowrap = true
 		if size.y == 0:
 			rect_size.x = size.x
-			rect_size.y = 0
+			rect_size.y = text_size.y
 		else:
-			clip_text = true
 			rect_size = size
 			if size.y < font_size:
 				rect_size.y = font_size
@@ -105,5 +189,6 @@ func apply_theme():
 	rot_pivot.y *= rect_size.y
 	rect_pivot_offset = rot_pivot
 	rect_rotation = rotation
-	add_color_override("font_color", color)
+	$Label.add_color_override("font_color", color)
 	visible = is_visible
+

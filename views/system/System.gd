@@ -16,6 +16,7 @@ func grab_focus():
 
 func _ready():
 	#RetroHub.connect("system_received", self, "add_system")
+	#warning-ignore:return_value_discarded
 	RetroHub.connect("system_receive_end", self, "pack")
 
 func parse_theme_xml(Wrapper, path: String, system_name: String) -> void:
@@ -56,7 +57,7 @@ func parse_theme_xml_view(Wrapper, data: Dictionary, path: String, system_name: 
 			_:
 				pass
 
-func parse_theme_xml_helpsystem(Wrapper, datas: Array, path: String, root: Dictionary):
+func parse_theme_xml_helpsystem(Wrapper, datas: Array, path: String, _root: Dictionary):
 	for data in datas:
 		for name in Wrapper.get_attributes(data):
 			if name == "help":
@@ -69,8 +70,6 @@ func parse_theme_xml_image(Wrapper, datas: Array, path: String, root: Dictionary
 				if not root.has(name):
 					var image = preload("res://objects/image/Image.tscn").instance()
 					image.name = name
-					image.max_size_set = true
-					image.pos_origin = Vector2(0.5, 0.5)
 					root[name] = image
 				root[name].parse_theme_xml(Wrapper, data, path)
 
@@ -84,7 +83,7 @@ func parse_theme_xml_text(Wrapper, datas: Array, path: String, root: Dictionary)
 				root[name].parse_theme_xml(Wrapper, data, path)
 
 
-func parse_theme_xml_carousel(Wrapper, datas: Array, path: String, root: Dictionary):
+func parse_theme_xml_carousel(Wrapper, datas: Array, path: String, _root: Dictionary):
 	for data in datas:
 		for name in Wrapper.get_attributes(data):
 			if name == "systemcarousel":

@@ -14,6 +14,9 @@ func convert_system_name(system_name: String):
 
 func load_es_theme_file(path: String):
 	# Load generic theme.xml, used when no themes are found
+	# Ensure file exists
+	if not Directory.new().file_exists(path):
+		return
 	var dict : Dictionary = xml2json.parse(path)
 	var root_path = path.get_base_dir()
 	if not dict.empty():

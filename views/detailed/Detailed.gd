@@ -68,8 +68,15 @@ var media_types : int = RetroHubMedia.Type.SCREENSHOT | RetroHubMedia.Type.LOGO 
 func _ready():
 	for child in $Children.get_children():
 		cached_z_indexes[child.name] = child
+	#warning-ignore:return_value_discarded
 	n_gamelist.connect("game_entry_selected", self, "_on_game_entry_selected")
+	#warning-ignore:return_value_discarded
 	RetroHubConfig.connect("game_data_updated", self, "_on_game_data_updated")
+
+	# Set clipping for description
+	n_md_description.clip_pre_delay = 4.5
+	n_md_description.clip_post_delay = 6.0
+	n_md_description.clip_speed = 15
 
 func parse_theme_xml(Wrapper, path: String) -> void:
 	path = Wrapper.ensure_path(path)
@@ -242,9 +249,10 @@ func reset() -> void:
 
 func on_show():
 	n_gamelist.get_focus()
+	get_tree().call_group("on_gamelist_show", "on_gamelist_show")
 
 func on_hide():
-	pass
+	get_tree().call_group("on_gamelist_hide", "on_gamelist_hide")
 
 func clear_game_media_cache():
 	game_media_cache.clear()
@@ -281,6 +289,7 @@ func _on_game_entry_selected(_game_data: RetroHubGameData):
 			var del_media_data = game_media_cache.keys()[idx]
 			if media_data == del_media_data:
 				del_media_data = game_media_cache.keys()[idx+1]
+			#warning-ignore:return_value_discarded
 			game_media_cache.erase(del_media_data)
 	else:
 		n_md_developer.text = ""

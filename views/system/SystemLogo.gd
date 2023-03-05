@@ -26,14 +26,14 @@ func set_rot(rotation: float) -> void:
 
 func set_selected(_selected: bool) -> void:
 	selected = _selected
-	modulate.a = 1 if selected else 0.5
+	modulate.a = 1.0 if selected else 0.5
 	rect_scale = Vector2(selected_scale, selected_scale) if selected else Vector2(1, 1)
 
-func move(delta_pos: Vector2, delta_rot: float, selected: bool):
+func move(delta_pos: Vector2, delta_rot: float, _selected: bool):
 	target_pos += delta_pos
 	target_rot += delta_rot
 	tween.stop_all()
-	self.selected = selected
+	selected = _selected
 	tween.interpolate_property(
 		self, "rect_position",
 		null, target_pos, 0.5,
@@ -46,7 +46,7 @@ func move(delta_pos: Vector2, delta_rot: float, selected: bool):
 	)
 	tween.interpolate_property(
 		self, "modulate:a",
-		null, 1 if selected else 0.5, 0.5,
+		null, 1.0 if selected else 0.5, 0.5,
 		Tween.TRANS_QUART, Tween.EASE_OUT
 	)
 	tween.interpolate_property(

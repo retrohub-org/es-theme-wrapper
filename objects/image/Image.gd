@@ -8,7 +8,7 @@ var parsed := false
 var position := Vector2(0, 0)
 export var size_set := false
 export var size := Vector2 (0, 0)
-var max_size_set := false
+export var max_size := Vector2.ZERO
 export var pos_origin := Vector2(0, 0)
 var rotation := 0
 var rot_pivot := Vector2(0, 0)
@@ -46,6 +46,7 @@ func set_media(data: RetroHubGameMediaData):
 		texture = null
 		if n_mix_image:
 			n_mix_image.parse_media_data(null)
+	handle_max_size()
 
 
 func parse_theme_xml(Wrapper, data: Dictionary, root_path: String):
@@ -54,9 +55,10 @@ func parse_theme_xml(Wrapper, data: Dictionary, root_path: String):
 		match key:
 			"pos":
 				position = PropertyWrapper.parse_normalized_pair(Wrapper, data[key])
-			"size", "maxSize":
+			"size":
 				size = PropertyWrapper.parse_normalized_pair(Wrapper, data[key])
-				max_size_set = max_size_set || key == "maxSize"
+			"maxSize":
+				max_size = PropertyWrapper.parse_normalized_pair(Wrapper, data[key])
 			"origin":
 				pos_origin = PropertyWrapper.parse_normalized_pair(Wrapper, data[key], false)
 			"rotation":
@@ -65,6 +67,8 @@ func parse_theme_xml(Wrapper, data: Dictionary, root_path: String):
 				rot_pivot = PropertyWrapper.parse_normalized_pair(Wrapper, data[key], false)
 			"path", "default":
 				tex_path = PropertyWrapper.parse_path(Wrapper, data[key], root_path)
+				if not Directory.new().file_exists(tex_path):
+					return
 				var img = Image.new()
 				if not img.load(tex_path):
 					tex = ImageTexture.new()
@@ -77,7 +81,34 @@ func parse_theme_xml(Wrapper, data: Dictionary, root_path: String):
 				is_visible = PropertyWrapper.parse_bool(Wrapper, data[key])
 			"zIndex":
 				z_index = int(round(PropertyWrapper.parse_float(Wrapper, data[key])))
-				pass
+
+func handle_max_size():
+	if max_size != Vector2.ZERO:
+		var tex_size : Vector2
+		if get_child_count() > 0: # Miximage
+			tex_size = max_size
+		else:
+			tex_size = texture.get_size()
+			if tex_size == Vector2.ZERO:
+				tex_size = max_size
+			else:
+				# X > Y
+				if tex_size.x > tex_size.y:
+					tex_size.y = tex_size.y * max_size.x / tex_size.x
+					tex_size.x = max_size.x
+				# Y > X
+				else:
+					tex_size.x = tex_size.x * max_size.y / tex_size.y
+					tex_size.y = max_size.y
+		rect_position = position
+		rect_size = tex_size
+		var pos_origin_abs = pos_origin
+		pos_origin_abs.x *= tex_size.x
+		pos_origin_abs.y *= tex_size.y
+		rect_position -= pos_origin_abs
+		rot_pivot.x *= tex_size.x
+		rot_pivot.y *= tex_size.y
+		rect_pivot_offset = rot_pivot
 
 func apply_theme():
 	if not parsed:
@@ -88,28 +119,24 @@ func apply_theme():
 		texture = tex
 	if texture:
 		var tex_size = texture.get_size()
-		if size == null:
-			size = tex_size
-		elif size.x == 0 and size.y == 0:
-			size = Vector2(0.001, 0.001)
-		elif size.x == 0:
-			size.x = tex_size.x * size.y / tex_size.y
-		elif size.y == 0:
-			size.y = tex_size.y * size.x / tex_size.x
-	if max_size_set:
-		# FIXME: This is a hack to support origins of 0 or 0.5.
-		# If themes use more than this, needs to be properly supported
-		if is_equal_approx(pos_origin.x, 0.5) and is_equal_approx(pos_origin.y, 0.5):
-			stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		else:
-			stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
-	rect_size = size
-	pos_origin.x *= size.x
-	pos_origin.y *= size.y
-	rect_position -= pos_origin
-	rot_pivot.x *= size.x
-	rot_pivot.y *= size.y
-	rect_pivot_offset = rot_pivot
+		handle_max_size()
+		if max_size == Vector2.ZERO:
+			if size.x == 0 and size.y == 0:
+				size = Vector2(0.001, 0.001)
+			elif size.x == 0:
+				size.x = tex_size.x * size.y / tex_size.y
+			elif size.y == 0:
+				size.y = tex_size.y * size.x / tex_size.x
+	stretch_mode = TextureRect.STRETCH_SCALE
+	if max_size == Vector2.ZERO: # Handled by handle_max_size already
+		rect_size = size
+		var pos_origin_abs = pos_origin
+		pos_origin_abs.x *= size.x
+		pos_origin_abs.y *= size.y
+		rect_position -= pos_origin_abs
+		rot_pivot.x *= size.x
+		rot_pivot.y *= size.y
+		rect_pivot_offset = rot_pivot
 	rect_rotation = rotation
 	if tile:
 		stretch_mode = TextureRect.STRETCH_TILE

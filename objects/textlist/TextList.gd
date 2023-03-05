@@ -50,6 +50,7 @@ func add_game(data: RetroHubGameData):
 	child.font_color = primary_color
 	child.font_color_selected = selected_color
 	child.game_data = data
+	#warning-ignore:return_value_discarded
 	child.connect("selected", self, "_on_game_entry_selected")
 
 func _on_game_entry_selected(game_data: RetroHubGameData):
@@ -140,11 +141,14 @@ func apply_theme():
 	create_game_entry_style()
 
 func create_game_entry_style():
-	var img = Image.new()
-	img.load(selector_image_path)
-	var tex = ImageTexture.new()
-	tex.create_from_image(img, 3)
-	style_focused.texture = tex
+	if selector_image_path.begins_with("res://"):
+		style_focused.texture = load(selector_image_path)
+	else:
+		var img = Image.new()
+		img.load(selector_image_path)
+		var tex = ImageTexture.new()
+		tex.create_from_image(img, 3)
+		style_focused.texture = tex
 	if selector_image_tile:
 		style_focused.axis_stretch_horizontal = StyleBoxTexture.AXIS_STRETCH_MODE_TILE
 		style_focused.axis_stretch_vertical = StyleBoxTexture.AXIS_STRETCH_MODE_TILE
@@ -155,10 +159,10 @@ func create_game_entry_style():
 		font = DynamicFont.new()
 		font.font_data = load(font_path)
 		# TODO: Figure out line spacing as there's no 1:1 translation for Godot
-		var spacing = (line_spacing-1.6) * font_size / 2
+		var _spacing = (line_spacing-1.6) * font_size / 2
 		#font.extra_spacing_top = spacing / 2
 		#font.extra_spacing_bottom = spacing / 2
-		font.size = font_size
+		font.size = int(font_size)
 		# We have to wait a frame, I suppose font_data sets something in the meantime
 		# If we don't wait, it requests stupidly large sizes
 		#yield(get_tree(), "idle_frame")
