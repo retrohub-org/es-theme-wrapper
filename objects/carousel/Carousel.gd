@@ -14,21 +14,21 @@ var systems := []
 var PropertyWrapper = preload("res://PropertyWrapper.gd").new()
 
 var parsed := false
-var position := Vector2(0, 0.38375 * 600)
+var position := Vector2(0, 0.38375 * PropertyWrapper.screen_height)
 export var size_set := false
-export var size := Vector2 (1 * 1024, 0.2325 * 600)
-export var pos_origin := Vector2(0, 0)
+export(Vector2) var size := Vector2(1 * 1024, 0.2325 * PropertyWrapper.screen_height)
+export(Vector2) var pos_origin := Vector2(0, 0)
 var type := "horizontal"
 var color := Color("d8ffffff")
-var logo_size := Vector2(0.25 * 1024, 0.155 * 600)
+var logo_size := Vector2(0.25 * 1024, 0.155 * PropertyWrapper.screen_height)
 var logo_scale := 1.2
 var logo_rotation := 7.5
-var logo_rot_pivot := Vector2(-5 * 1024, 0.5 * 600)
+var logo_rot_pivot := Vector2(-5 * 1024, 0.5 * PropertyWrapper.screen_height)
 var logo_align := "center"
 var max_logo_count := 3
 export var z_index := 10
 
-func parse_theme_xml(Wrapper, data: Dictionary, root_path: String):
+func parse_theme_xml(Wrapper, data: Dictionary, _root_path: String):
 	parsed = true
 	for key in data:
 		match key:
@@ -144,6 +144,7 @@ func add_systems(cached_objects: Dictionary, cached_system_data: Dictionary):
 			logo.size = logo_size
 			if type.find("wheel") != -1:
 				logo.rot_pivot = logo_rot_pivot
+			#warning-ignore:return_value_discarded
 			nodes.erase("logoText")
 		else:
 			var text = preload("res://objects/text/Text.tscn").instance()
@@ -152,7 +153,10 @@ func add_systems(cached_objects: Dictionary, cached_system_data: Dictionary):
 			text.color = Color(0, 0, 0, 1)
 			text.font_path = "res://assets/fonts/Akrobat-SemiBold.ttf"
 			text.font_size = 48
+			text.alignment = "center"
+			text.size = logo_size
 			nodes["logoText"] = text
+			#warning-ignore:return_value_discarded
 			nodes.erase("logo")
 		var extra_child = create_extra_child()
 		var logo_child = create_logo_child(system_data)

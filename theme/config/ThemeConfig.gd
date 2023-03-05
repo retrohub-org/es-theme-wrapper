@@ -7,7 +7,6 @@ onready var n_load_path := $"%LoadPath"
 func _ready():
 	RetroHubConfig.connect("theme_config_ready", self, "_on_theme_config_ready")
 	var res = RetroHubUI.load_app_icon(RetroHubUI.Icons.LOAD)
-	print(res)
 	n_load_path.icon = res
 
 func grab_focus():

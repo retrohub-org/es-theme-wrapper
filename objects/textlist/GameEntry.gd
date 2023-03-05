@@ -34,6 +34,7 @@ func set_font_color_selected(_font_color_selected: Color) -> void:
 	add_color_override("font_color_focus", font_color_selected)
 
 func _ready():
+	#warning-ignore:return_value_discarded
 	RetroHubConfig.connect("game_data_updated", self, "_on_game_data_updated")
 
 func _on_game_data_updated(_game_data: RetroHubGameData):

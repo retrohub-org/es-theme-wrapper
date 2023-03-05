@@ -11,7 +11,7 @@ func _ready():
 	for child in $Children.get_children():
 		cached_z_indexes[child.name] = child
 
-func add_child(node: Node, legible_unique_name: bool = false) -> void:
+func add_child(node: Node, _legible_unique_name: bool = false) -> void:
 	var z_index = node.get("z_index")
 	if z_index == null:
 		z_index = 10
@@ -41,19 +41,19 @@ func get_idx_for_z_index(z_index: int) -> int:
 		idx += 1
 	return idx
 
-func _on_Tween_tween_completed(object, key):
+func _on_Tween_tween_completed(_object, _key):
 	if should_hide:
 		visible = false
 
-func _on_Tween_tween_started(object, key):
+func _on_Tween_tween_started(_object, _key):
 	visible = true
 
 func set_pos(position: Vector2) -> void:
 	rect_position = position
 	target_pos = position
 
-func move(delta: Vector2, should_hide: bool):
-	self.should_hide = should_hide 
+func move(delta: Vector2, _should_hide: bool):
+	should_hide = _should_hide 
 	target_pos += delta
 	#tween.stop_all()
 	tween.interpolate_property(

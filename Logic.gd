@@ -1,6 +1,7 @@
+tool
 extends Node
 
-export(String) var path
+export(String, DIR, GLOBAL) var path
 
 var Wrapper = load("res://Wrapper.gd").new()
 
@@ -23,25 +24,42 @@ onready var target_position_game_view : Vector2 = $GameView.rect_position
 
 # _ready function, called everytime the theme is loaded
 func _ready():
+	if Engine.is_editor_hint():
+		return
 	# App related signals
+	#warning-ignore:return_value_discarded
 	RetroHub.connect("app_initializing", self, "_on_app_initializing")
+	#warning-ignore:return_value_discarded
 	RetroHub.connect("app_closing", self, "_on_app_closing")
+	#warning-ignore:return_value_discarded
 	RetroHub.connect("app_received_focus", self, "_on_app_received_focus")
+	#warning-ignore:return_value_discarded
 	RetroHub.connect("app_lost_focus", self, "_on_app_lost_focus")
+	#warning-ignore:return_value_discarded
 	RetroHub.connect("app_returning", self, "_on_app_returning")
 
 	# Content related signals
+	#warning-ignore:return_value_discarded
 	RetroHub.connect("system_receive_start", self, "_on_system_receive_start")
+	#warning-ignore:return_value_discarded
 	RetroHub.connect("system_received", self, "_on_system_received")
+	#warning-ignore:return_value_discarded
 	RetroHub.connect("system_receive_end", self, "_on_system_receive_end")
 
+
+	#warning-ignore:return_value_discarded
 	RetroHub.connect("game_receive_start", self, "_on_game_receive_start")
+	#warning-ignore:return_value_discarded
 	RetroHub.connect("game_received", self, "_on_game_received")
+	#warning-ignore:return_value_discarded
 	RetroHub.connect("game_receive_end", self, "_on_game_receive_end")
-	
+
 	# Config related signals
+	#warning-ignore:return_value_discarded
 	RetroHubConfig.connect("config_updated", self, "_on_config_updated")
+	#warning-ignore:return_value_discarded
 	RetroHubConfig.connect("theme_config_ready", self, "_on_theme_config_ready")
+	#warning-ignore:return_value_discarded
 	RetroHubConfig.connect("theme_config_updated", self, "_on_theme_config_updated")
 
 	if not RetroHub.is_main_app():
@@ -72,7 +90,7 @@ func _unhandled_input(event):
 		RetroHub.set_curr_game_data(null)
 
 func move_ui(dir: int, game_view: Node = null):
-	var delta = Vector2(0, -dir * 600)
+	var delta = Vector2(0, -dir * Wrapper.PropertyWrapper.screen_height)
 	target_position_game_view += delta
 	target_position_system += delta
 	if dir == -1:
@@ -102,7 +120,7 @@ func move_ui(dir: int, game_view: Node = null):
 ## Called when RetroHub is initializing your theme.
 ## This can either happen when RetroHub is launching, or
 ## the theme was changed to this one.
-func _on_app_initializing(cold_boot : bool):
+func _on_app_initializing(_cold_boot : bool):
 	pass
 
 ## Called when RetroHub is unitializing your theme.
@@ -207,7 +225,7 @@ func _on_game_receive_end():
 				gameview_map[system_data] = game_view
 
 ## Called when any config key has been changed
-func _on_config_updated(key: String, old_value, new_value):
+func _on_config_updated(key: String, _old, _new):
 	if key == ConfigData.KEY_GAMES_DIR:
 		print("Game folder changed, request reload")
 		RetroHub.request_theme_reload()
@@ -215,14 +233,12 @@ func _on_config_updated(key: String, old_value, new_value):
 func _on_theme_config_ready():
 	# Load theme XML info
 	path = RetroHubConfig.get_theme_config("path", "")
-	print("Here, path: ", path)
 	if not path.empty():
 		Wrapper.load_es_theme_file(path + "/theme.xml")
 	else:
 		print("No path selected")
 
 func _on_theme_config_updated(key, old_value, new_value):
-	print(key)
 	if key == "path":
 		print("old: %s, new: %s, changing..." % [old_value, new_value])
 		RetroHub.request_theme_reload()

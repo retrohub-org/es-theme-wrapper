@@ -68,7 +68,7 @@ func apply_theme():
 			tex.create_from_image(img, 3)
 			tex.set_size_override(Vector2(rect_size.y, rect_size.y))
 			data[1].texture = tex
-		tex_mult = rect_size.x
+		tex_mult = int(rect_size.x)
 	self_modulate = color
 	visible = is_visible
 

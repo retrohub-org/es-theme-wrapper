@@ -1,7 +1,7 @@
 extends Object
 
 var screen_width = 1024
-var screen_height = 600
+var screen_height = 576
 
 func parse_normalized_pair(Wrapper, data: String, to_absolute: bool = true) -> Vector2:
 	data = parse_string(Wrapper, data)
