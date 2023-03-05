@@ -1,14 +1,14 @@
 {
-	"name": "EmulationStation (DE) Theme Wrapper",
-	"description": "This theme reads theme files from EmulationStation/EmulationStation-DE and wraps them as a RetroHub theme.",
+	"name": "EmulationStation Theme Wrapper",
+	"description": "This theme reads theme files from EmulationStation/EmulationStation-DE (before v2.0.0) and wraps them as a RetroHub theme.",
 	"icon": "res://icon.png",
-	"version": "1.0.0",
-	"url": "https://github.com/Ev1lbl0w/retrohub",
+	"version": "0.0.4-alpha",
+	"url": "https://github.com/retrohub-org/es-theme-wrapper",
 	"screenshots": [
 
 	],
 	"entry_scene": "res://Theme.tscn",
-	"authors": "Ev1lbl0w",
+	"authors": "RetroHub",
 	"id": "es-theme-wrapper",
 	"config_scene": "res://theme/config/ThemeConfig.tscn"
 }
