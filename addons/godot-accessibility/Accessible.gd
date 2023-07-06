@@ -14,17 +14,17 @@ func get_siblings():
 	return null
 
 
-func click(item := node, button_index = BUTTON_LEFT):
+func click(item := node, button_index = MOUSE_BUTTON_LEFT):
 	print_debug("Click")
 	var click = InputEventMouseButton.new()
 	click.button_index = button_index
-	click.pressed = true
+	click.button_pressed = true
 	if item is Node:
-		click.position = item.rect_global_position
+		click.position = item.global_position
 	else:
 		click.position = node.get_tree().root.get_mouse_position()
 	node.get_tree().input_event(click)
-	click.pressed = false
+	click.button_pressed = false
 	node.get_tree().input_event(click)
 
 
@@ -33,7 +33,7 @@ func _guess_label():
 		return
 	if not node is LineEdit and not node is TextEdit and node.get("text"):
 		return
-	var tokens = PoolStringArray([])
+	var tokens = PackedStringArray([])
 	var to_check = node
 	while to_check:
 		if to_check.is_class("AcceptDialog"):
@@ -45,7 +45,7 @@ func _guess_label():
 			and to_check.get_tooltip_text()
 		):
 			tokens.append(to_check.get_tooltip_text())
-		var label = tokens.join(": ")
+		var label = ": ".join(tokens)
 		if label:
 			return label
 		for child in to_check.get_children():
@@ -71,8 +71,8 @@ func _accept_dialog_speak():
 func _accept_dialog_focused():
 	_accept_dialog_speak()
 	if node.get_parent() and node.get_parent().is_class("ProjectSettingsEditor"):
-		yield(node.get_tree().create_timer(5), "timeout")
-		node.get_ok().emit_signal("pressed")
+		await node.get_tree().create_timer(5).timeout
+		node.get_ok_button().emit_signal("pressed")
 
 
 func _accept_dialog_about_to_show():
@@ -91,7 +91,7 @@ func _basebutton_button_down():
 func checkbox_focused():
 	if not RetroHubConfig.config.accessibility_screen_reader_enabled:
 		return
-	var tokens = PoolStringArray([])
+	var tokens = PackedStringArray([])
 	if node.text:
 		tokens.append(node.text)
 	if node.pressed:
@@ -99,7 +99,7 @@ func checkbox_focused():
 	else:
 		tokens.append("unchecked")
 	tokens.append(" checkbox")
-	TTS.speak(tokens.join(" "))
+	TTS." ".join(speak(tokens))
 
 
 func _checkbox_or_checkbutton_toggled(checked):
@@ -115,7 +115,7 @@ func _checkbox_or_checkbutton_toggled(checked):
 func _checkbutton_focused():
 	if not RetroHubConfig.config.accessibility_screen_reader_enabled:
 		return
-	var tokens = PoolStringArray([])
+	var tokens = PackedStringArray([])
 	if node.text:
 		tokens.append(node.text)
 	if node.pressed:
@@ -123,7 +123,7 @@ func _checkbutton_focused():
 	else:
 		tokens.append("unchecked")
 	tokens.append(" check button")
-	TTS.speak(tokens.join(" "))
+	TTS." ".join(speak(tokens))
 
 
 var spoke_hint_tooltip
@@ -132,18 +132,18 @@ var spoke_hint_tooltip
 func _button_focused():
 	if not RetroHubConfig.config.accessibility_screen_reader_enabled:
 		return
-	var tokens = PoolStringArray([])
+	var tokens = PackedStringArray([])
 	if node.text:
 		tokens.append(node.text)
-	elif node.hint_tooltip:
+	elif node.tooltip_text:
 		spoke_hint_tooltip = true
-		tokens.append(node.hint_tooltip)
+		tokens.append(node.tooltip_text)
 	else:
 		tokens.append(_get_graphical_button_text(node.icon))
 	tokens.append("button")
 	if node.disabled:
 		tokens.append("disabled")
-	TTS.speak(tokens.join(": "))
+	TTS.": ".join(speak(tokens))
 
 
 func try_to_get_text_in_theme(theme, texture):
@@ -174,16 +174,16 @@ func _get_graphical_button_text(texture):
 func _texturebutton_focused():
 	if not RetroHubConfig.config.accessibility_screen_reader_enabled:
 		return
-	var tokens = PoolStringArray([])
+	var tokens = PackedStringArray([])
 	tokens.append(_get_graphical_button_text(node.texture_normal))
 	tokens.append("button")
-	TTS.speak(tokens.join(": "))
+	TTS.": ".join(speak(tokens))
 
 
 func item_list_item_focused(idx):
 	if not RetroHubConfig.config.accessibility_screen_reader_enabled:
 		return
-	var tokens = PoolStringArray([])
+	var tokens = PackedStringArray([])
 	var text = node.get_item_text(idx)
 	if text:
 		tokens.append(text)
@@ -191,7 +191,7 @@ func item_list_item_focused(idx):
 	if text:
 		tokens.append(text)
 	tokens.append("%s of %s" % [idx + 1, node.get_item_count()])
-	TTS.speak(tokens.join(": "))
+	TTS.": ".join(speak(tokens))
 
 
 func item_list_focused():
@@ -256,21 +256,21 @@ func item_list_input(event):
 	if old_pos != position_in_children:
 		if position_in_children >= node.get_item_count():
 			position_in_children = 0
-		node.unselect_all()
+		node.deselect_all()
 		node.select(position_in_children)
 		node.emit_signal("item_list_item_selected", position_in_children)
 		item_list_item_focused(position_in_children)
 
 
 func _label_focused():
-	var tokens = PoolStringArray([])
-	if node.get_parent() is WindowDialog:
+	var tokens = PackedStringArray([])
+	if node.get_parent() is Window:
 		tokens.append("Dialog")
 	var text = node.text
 	if text == "":
 		text = "blank"
 	tokens.append(text)
-	TTS.speak(tokens.join(": "))
+	TTS.": ".join(speak(tokens))
 
 
 func line_edit_focused():
@@ -310,7 +310,7 @@ func line_edit_text_changed(text):
 
 
 func line_edit_input(event):
-	var pos = node.caret_position
+	var pos = node.caret_column
 	if old_pos != null and old_pos != pos:
 		var text = node.text
 		if old_text == text:
@@ -325,14 +325,14 @@ func line_edit_input(event):
 
 
 func menu_button_focused():
-	var tokens = PoolStringArray([])
+	var tokens = PackedStringArray([])
 	if node.text:
 		tokens.append(node.text)
-	if node.hint_tooltip:
-		tokens.append(node.hint_tooltip)
+	if node.tooltip_text:
+		tokens.append(node.tooltip_text)
 		spoke_hint_tooltip = true
 	tokens.append("menu")
-	TTS.speak(tokens.join(": "))
+	TTS.": ".join(speak(tokens))
 
 
 func popup_menu_focused():
@@ -343,7 +343,7 @@ func popup_menu_item_id_focused(index):
 	if not RetroHubConfig.config.accessibility_screen_reader_enabled:
 		return
 	print_debug("item id focus %s" % index)
-	var tokens = PoolStringArray([])
+	var tokens = PackedStringArray([])
 	var shortcut = node.get_item_shortcut(index)
 	var name
 	if shortcut:
@@ -372,7 +372,7 @@ func popup_menu_item_id_focused(index):
 	if disabled:
 		tokens.append("disabled")
 	tokens.append(str(index + 1) + " of " + str(node.get_item_count()))
-	TTS.speak(tokens.join(": "), true)
+	TTS.": ".join(speak(tokens), true)
 
 
 func popup_menu_item_id_pressed(index):
@@ -386,7 +386,7 @@ func popup_menu_item_id_pressed(index):
 
 
 func range_focused():
-	var tokens = PoolStringArray([])
+	var tokens = PackedStringArray([])
 	tokens.append(str(node.value))
 	if node is HSlider:
 		tokens.append("horizontal slider")
@@ -400,7 +400,7 @@ func range_focused():
 	tokens.append("maximum %s" % node.max_value)
 	if OS.has_touchscreen_ui_hint():
 		tokens.append("Swipe up and down to change.")
-	TTS.speak(tokens.join(": "))
+	TTS.": ".join(speak(tokens))
 
 
 func range_value_changed(value):
@@ -411,7 +411,7 @@ func range_value_changed(value):
 
 
 func text_edit_focus():
-	var tokens = PoolStringArray([])
+	var tokens = PackedStringArray([])
 	if node.text:
 		tokens.append(node.text)
 	else:
@@ -420,7 +420,7 @@ func text_edit_focus():
 		tokens.append("read-only edit text")
 	else:
 		tokens.append("edit text")
-	TTS.speak(tokens.join(": "))
+	TTS.": ".join(speak(tokens))
 
 
 func text_edit_input(event):
@@ -436,7 +436,7 @@ func _tree_item_render():
 	if not node.has_focus():
 		return
 	var cell = node.get_selected()
-	var tokens = PoolStringArray([])
+	var tokens = PackedStringArray([])
 	for i in range(node.columns):
 		if node.select_mode == Tree.SELECT_MULTI or cell.is_selected(i):
 			var title = node.get_column_title(i)
@@ -477,7 +477,7 @@ func _tree_item_render():
 						tokens.append("Use Home and End to switch focus.")
 	tokens.append("tree item")
 	if tokens != _last_tree_item_tokens:
-		TTS.speak(tokens.join(": "), true)
+		TTS.": ".join(speak(tokens), true)
 	_last_tree_item_tokens = tokens
 
 
@@ -517,8 +517,8 @@ func _tree_input(event):
 		else:
 			area = node.get_item_area_rect(item)
 		var position = Vector2(
-			node.rect_global_position.x + area.position.x + area.size.x / 2,
-			node.rect_global_position.y + area.position.y + area.size.y / 2
+			node.global_position.x + area.position.x + area.size.x / 2,
+			node.global_position.y + area.position.y + area.size.y / 2
 		)
 		node.get_tree().root.warp_mouse(position)
 	if item and column != null and item.get_button_count(column):
@@ -538,12 +538,12 @@ func _tree_input(event):
 				new_button_index = item.get_button_count(column) - 1
 		if new_button_index != button_index and item.has_method("get_button_tooltip"):
 			button_index = new_button_index
-			var tokens = PoolStringArray([])
+			var tokens = PackedStringArray([])
 			var tooltip = item.get_button_tooltip(column, button_index)
 			if tooltip:
 				tokens.append(tooltip)
 			tokens.append("button")
-			TTS.speak(tokens.join(": "), true)
+			TTS.": ".join(speak(tokens), true)
 
 
 func tree_focused():
@@ -592,10 +592,10 @@ func progress_bar_value_changed(value):
 	percentage = int(percentage)
 	if (
 		percentage != last_percentage_spoken
-		and OS.get_ticks_msec() - last_percentage_spoken_at >= 10000
+		and Time.get_ticks_msec() - last_percentage_spoken_at >= 10000
 	):
 		TTS.speak("%s percent" % percentage)
-		last_percentage_spoken_at = OS.get_ticks_msec()
+		last_percentage_spoken_at = Time.get_ticks_msec()
 		last_percentage_spoken = percentage
 
 
@@ -645,7 +645,7 @@ func focused():
 	while n:
 		if n.has_method("tts_text"):
 			var text : String = n.tts_text(node)
-			if not text.empty():
+			if not text.is_empty():
 				TTS.speak(text)
 				return
 		n = n.get_parent()
@@ -686,8 +686,8 @@ func focused():
 	else:
 		#TTS.speak(node.get_class(), true)
 		print_debug("No handler")
-	if node.hint_tooltip and not spoke_hint_tooltip:
-		TTS.speak(node.hint_tooltip)
+	if node.tooltip_text and not spoke_hint_tooltip:
+		TTS.speak(node.tooltip_text)
 	spoke_hint_tooltip = false
 
 
@@ -717,9 +717,9 @@ func gui_input(event):
 	):
 		TTS.speak("click")
 		click()
-	elif event is InputEventKey and event.pressed and not event.echo and event.scancode == KEY_MENU:
-		node.get_tree().root.warp_mouse(node.rect_global_position)
-		return click(null, BUTTON_RIGHT)
+	elif event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_MENU:
+		node.get_tree().root.warp_mouse(node.global_position)
+		return click(null, MOUSE_BUTTON_RIGHT)
 	if node is TabContainer:
 		return tab_container_input(event)
 	elif node is ItemList:
@@ -771,14 +771,14 @@ func _is_focusable(node):
 
 func editor_inspector_section_focused():
 	var child = node.get_children()[0]
-	var tokens = PoolStringArray(["editor inspector section"])
-	if child is CanvasItem or child is Spatial:
+	var tokens = PackedStringArray(["editor inspector section"])
+	if child is CanvasItem or child is Node3D:
 		var expanded = child.is_visible_in_tree()
 		if expanded:
 			tokens.append("expanded")
 		else:
 			tokens.append("collapsed")
-	TTS.speak(tokens.join(": "))
+	TTS.": ".join(speak(tokens))
 
 
 func editor_inspector_section_input(event):
@@ -802,37 +802,37 @@ func _init(node):
 	self.node = node
 	#if _is_focusable(node):
 	#	node.set_focus_mode(Control.FOCUS_ALL)
-	node.connect("focus_entered", self, "focused")
-	node.connect("mouse_entered", self, "click_focused")
-	node.connect("focus_exited", self, "unfocused")
-	node.connect("mouse_exited", self, "unfocused")
-	node.connect("gui_input", self, "gui_input")
+	node.connect("focus_entered", Callable(self, "focused"))
+	node.connect("mouse_entered", Callable(self, "click_focused"))
+	node.connect("focus_exited", Callable(self, "unfocused"))
+	node.connect("mouse_exited", Callable(self, "unfocused"))
+	node.connect("gui_input", Callable(self, "gui_input"))
 	if node is BaseButton:
-		node.connect("button_down", self, "_basebutton_button_down")
+		node.connect("button_down", Callable(self, "_basebutton_button_down"))
 	if node is AcceptDialog:
-		node.connect("about_to_show", self, "_accept_dialog_about_to_show")
+		node.connect("about_to_popup", Callable(self, "_accept_dialog_about_to_show"))
 	elif node is CheckBox or node is CheckButton:
-		node.connect("toggled", self, "_checkbox_or_checkbutton_toggled")
+		node.connect("toggled", Callable(self, "_checkbox_or_checkbutton_toggled"))
 	elif node is ItemList:
-		node.connect("item_selected", self, "item_list_item_selected")
-		node.connect("multi_selected", self, "item_list_multi_selected")
-		node.connect("nothing_selected", self, "item_list_nothing_selected")
+		node.connect("item_selected", Callable(self, "item_list_item_selected"))
+		node.connect("multi_selected", Callable(self, "item_list_multi_selected"))
+		node.connect("nothing_selected", Callable(self, "item_list_nothing_selected"))
 	elif node is LineEdit:
-		node.connect("text_changed", self, "line_edit_text_changed")
+		node.connect("text_changed", Callable(self, "line_edit_text_changed"))
 	elif node is PopupMenu:
-		node.connect("id_focused", self, "popup_menu_item_id_focused")
-		node.connect("id_pressed", self, "popup_menu_item_id_pressed")
+		node.connect("id_focused", Callable(self, "popup_menu_item_id_focused"))
+		node.connect("id_pressed", Callable(self, "popup_menu_item_id_pressed"))
 	elif node is ProgressBar:
-		node.connect("value_changed", self, "progress_bar_value_changed")
+		node.connect("value_changed", Callable(self, "progress_bar_value_changed"))
 	elif node is Range:
-		node.connect("value_changed", self, "range_value_changed")
+		node.connect("value_changed", Callable(self, "range_value_changed"))
 	elif node is TabContainer:
-		node.connect("tab_changed", self, "tab_container_tab_changed")
+		node.connect("tab_changed", Callable(self, "tab_container_tab_changed"))
 	elif node is Tree:
-		node.connect("item_collapsed", self, "_tree_item_collapsed")
-		node.connect("multi_selected", self, "tree_item_multi_selected")
+		node.connect("item_collapsed", Callable(self, "_tree_item_collapsed"))
+		node.connect("multi_selected", Callable(self, "tree_item_multi_selected"))
 		if node.select_mode == Tree.SELECT_MULTI:
-			node.connect("cell_selected", self, "_tree_item_or_cell_selected")
+			node.connect("cell_selected", Callable(self, "_tree_item_or_cell_selected"))
 		else:
-			node.connect("item_selected", self, "_tree_item_or_cell_selected")
-	node.connect("tree_exiting", self, "queue_free", [], Object.CONNECT_DEFERRED)
+			node.connect("item_selected", Callable(self, "_tree_item_or_cell_selected"))
+	node.connect("tree_exiting", Callable(self, "queue_free").bind(), Object.CONNECT_DEFERRED)

@@ -1,359 +1,349 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=17 format=3 uid="uid://uvyfp7tar3hn"]
 
-[ext_resource path="res://objects/textlist/TextList.tscn" type="PackedScene" id=1]
-[ext_resource path="res://objects/textlist/GameEntry.tscn" type="PackedScene" id=2]
-[ext_resource path="res://views/detailed/Detailed.gd" type="Script" id=3]
-[ext_resource path="res://objects/helpsystem/HelpSystem.tscn" type="PackedScene" id=4]
-[ext_resource path="res://addons/controller_icons/assets/xbox360/a.png" type="Texture" id=5]
-[ext_resource path="res://addons/controller_icons/assets/xbox360/y.png" type="Texture" id=6]
-[ext_resource path="res://addons/controller_icons/objects/TextureRect.gd" type="Script" id=7]
-[ext_resource path="res://objects/rating/Rating.tscn" type="PackedScene" id=8]
-[ext_resource path="res://addons/controller_icons/assets/xbox360/back.png" type="Texture" id=9]
-[ext_resource path="res://addons/controller_icons/assets/xbox360/x.png" type="Texture" id=10]
-[ext_resource path="res://addons/controller_icons/assets/xbox360/start.png" type="Texture" id=11]
-[ext_resource path="res://addons/controller_icons/assets/xbox360/dpad.png" type="Texture" id=12]
-[ext_resource path="res://addons/controller_icons/assets/xbox360/b.png" type="Texture" id=13]
-[ext_resource path="res://objects/image/Image.tscn" type="PackedScene" id=14]
-[ext_resource path="res://objects/text/Text.tscn" type="PackedScene" id=15]
-[ext_resource path="res://objects/datetime/DateTime.tscn" type="PackedScene" id=16]
+[ext_resource type="PackedScene" uid="uid://ouft5mtkt2hx" path="res://objects/textlist/TextList.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://objects/textlist/GameEntry.tscn" id="2"]
+[ext_resource type="Script" path="res://views/detailed/Detailed.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://go2skq8yfgeh" path="res://objects/helpsystem/HelpSystem.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://d284wkmo0vqfk" path="res://addons/controller_icons/assets/xbox360/a.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://bva4iswwvta5d" path="res://addons/controller_icons/assets/xbox360/y.png" id="6"]
+[ext_resource type="Script" path="res://addons/controller_icons/objects/TextureRect.gd" id="7"]
+[ext_resource type="PackedScene" path="res://objects/rating/Rating.tscn" id="8"]
+[ext_resource type="Texture2D" uid="uid://cdjnpcxgnxrxb" path="res://addons/controller_icons/assets/xbox360/back.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://jcc3t88rfxh0" path="res://addons/controller_icons/assets/xbox360/x.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://coxp4sapp4g8n" path="res://addons/controller_icons/assets/xbox360/start.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://cuds8v7pvi4tj" path="res://addons/controller_icons/assets/xbox360/dpad.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://bufx8lu1tny4o" path="res://addons/controller_icons/assets/xbox360/b.png" id="13"]
+[ext_resource type="PackedScene" uid="uid://bq5bp2h5mos8e" path="res://objects/image/Image.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://objects/text/Text.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://objects/datetime/DateTime.tscn" id="16"]
 
 [node name="Detailed" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 3 )
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3")
 
 [node name="ClearColor" type="ColorRect" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+color = Color(0, 0, 0, 1)
 
 [node name="Children" type="Control" parent="."]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="0" type="Control" parent="Children"]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="background" parent="Children/0" instance=ExtResource( 14 )]
+[node name="background" parent="Children/0" instance=ExtResource("14")]
+layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+expand_mode = 1
 
 [node name="20" type="Control" parent="Children"]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="gamelist" parent="Children/20" instance=ExtResource( 1 )]
-margin_left = 525.0
-margin_top = 115.0
-margin_right = -3.0
-game_entry_scene = ExtResource( 2 )
+[node name="gamelist" parent="Children/20" instance=ExtResource("1")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 525.0
+offset_top = 115.0
+offset_right = -3.0
+game_entry_scene = ExtResource("2")
 
 [node name="30" type="Control" parent="Children"]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="35" type="Control" parent="Children"]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="40" type="Control" parent="Children"]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="md_lbl_rating" parent="Children/40" instance=ExtResource( 15 )]
-margin_left = 10.0
-margin_top = 377.0
-margin_right = -961.0
-margin_bottom = -196.0
-txt = "Rating: "
-color = Color( 0, 0, 0, 1 )
-
-[node name="md_lbl_releasedate" parent="Children/40" instance=ExtResource( 15 )]
-margin_left = 10.0
-margin_top = 414.0
-margin_right = -961.0
-margin_bottom = -159.0
-txt = "Released: "
-color = Color( 0, 0, 0, 1 )
-
-[node name="md_lbl_developer" parent="Children/40" instance=ExtResource( 15 )]
-margin_left = 10.0
-margin_top = 451.0
-margin_right = -923.0
-margin_bottom = -122.0
-txt = "Developer: "
-color = Color( 0, 0, 0, 1 )
-
-[node name="md_lbl_publisher" parent="Children/40" instance=ExtResource( 15 )]
-margin_left = 10.0
-margin_top = 488.0
-margin_right = -923.0
-margin_bottom = -85.0
-txt = "Publisher: "
-color = Color( 0, 0, 0, 1 )
-
-[node name="md_lbl_genre" parent="Children/40" instance=ExtResource( 15 )]
-margin_left = 256.0
-margin_top = 381.0
-margin_right = -677.0
-margin_bottom = -192.0
-txt = "Genre: "
-color = Color( 0, 0, 0, 1 )
-
-[node name="md_lbl_players" parent="Children/40" instance=ExtResource( 15 )]
-margin_left = 256.0
-margin_top = 416.0
-margin_right = -677.0
-margin_bottom = -157.0
-txt = "Players: "
-color = Color( 0, 0, 0, 1 )
-
-[node name="md_lbl_lastplayed" parent="Children/40" instance=ExtResource( 15 )]
-margin_left = 256.0
-margin_top = 451.0
-margin_right = -671.0
-margin_bottom = -122.0
-txt = "Last played: "
-color = Color( 0, 0, 0, 1 )
-
-[node name="md_lbl_playcount" parent="Children/40" instance=ExtResource( 15 )]
-margin_left = 256.0
-margin_top = 488.0
-margin_right = -658.0
-margin_bottom = -85.0
-txt = "Times played: "
-color = Color( 0, 0, 0, 1 )
-
-[node name="md_image" parent="Children/40" instance=ExtResource( 14 )]
+[node name="md_lbl_rating" parent="Children/40" instance=ExtResource("15")]
+layout_mode = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 104.0
-margin_top = 117.0
-margin_right = 506.0
-margin_bottom = 345.0
+offset_left = 10.0
+offset_top = 377.0
+offset_right = -961.0
+offset_bottom = -196.0
 
-[node name="md_rating" parent="Children/40" instance=ExtResource( 8 )]
-margin_left = 67.0
-margin_top = 375.0
-margin_right = 227.0
-margin_bottom = 407.0
+[node name="md_lbl_releasedate" parent="Children/40" instance=ExtResource("15")]
+layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 10.0
+offset_top = 414.0
+offset_right = -961.0
+offset_bottom = -159.0
 
-[node name="md_releasedate" parent="Children/40" instance=ExtResource( 16 )]
-margin_left = 88.0
-margin_top = 414.0
-margin_right = 160.0
-margin_bottom = 441.0
+[node name="md_lbl_developer" parent="Children/40" instance=ExtResource("15")]
+layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 10.0
+offset_top = 451.0
+offset_right = -923.0
+offset_bottom = -122.0
 
-[node name="md_developer" parent="Children/40" instance=ExtResource( 15 )]
-margin_left = 96.0
-margin_top = 451.0
-margin_right = -837.0
-margin_bottom = -122.0
-txt = "unknown"
-color = Color( 0, 0, 0, 1 )
+[node name="md_lbl_publisher" parent="Children/40" instance=ExtResource("15")]
+layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 10.0
+offset_top = 488.0
+offset_right = -923.0
+offset_bottom = -85.0
 
-[node name="md_publisher" parent="Children/40" instance=ExtResource( 15 )]
-margin_left = 92.0
-margin_top = 488.0
-margin_right = -841.0
-margin_bottom = -85.0
-txt = "unknown"
-color = Color( 0, 0, 0, 1 )
+[node name="md_lbl_genre" parent="Children/40" instance=ExtResource("15")]
+layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 256.0
+offset_top = 381.0
+offset_right = -677.0
+offset_bottom = -192.0
 
-[node name="md_genre" parent="Children/40" instance=ExtResource( 15 )]
-margin_left = 311.0
-margin_top = 381.0
-margin_right = -622.0
-margin_bottom = -192.0
-txt = "unknown"
-color = Color( 0, 0, 0, 1 )
+[node name="md_lbl_players" parent="Children/40" instance=ExtResource("15")]
+layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 256.0
+offset_top = 416.0
+offset_right = -677.0
+offset_bottom = -157.0
 
-[node name="md_players" parent="Children/40" instance=ExtResource( 15 )]
-margin_left = 321.0
-margin_top = 416.0
-margin_right = -612.0
-margin_bottom = -157.0
-txt = "unknown"
-color = Color( 0, 0, 0, 1 )
+[node name="md_lbl_lastplayed" parent="Children/40" instance=ExtResource("15")]
+layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 256.0
+offset_top = 451.0
+offset_right = -671.0
+offset_bottom = -122.0
 
-[node name="md_lastplayed" parent="Children/40" instance=ExtResource( 16 )]
-margin_left = 352.0
-margin_top = 451.0
-margin_right = 424.0
-margin_bottom = 478.0
+[node name="md_lbl_playcount" parent="Children/40" instance=ExtResource("15")]
+layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 256.0
+offset_top = 488.0
+offset_right = -658.0
+offset_bottom = -85.0
+
+[node name="md_image" parent="Children/40" instance=ExtResource("14")]
+layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 104.0
+offset_top = 117.0
+offset_right = 506.0
+offset_bottom = 345.0
+expand_mode = 1
+
+[node name="md_rating" parent="Children/40" instance=ExtResource("8")]
+anchors_preset = 0
+offset_left = 67.0
+offset_top = 375.0
+offset_right = 227.0
+offset_bottom = 407.0
+
+[node name="md_releasedate" parent="Children/40" instance=ExtResource("16")]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 414.0
+offset_right = 160.0
+offset_bottom = 441.0
+
+[node name="md_developer" parent="Children/40" instance=ExtResource("15")]
+layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 96.0
+offset_top = 451.0
+offset_right = -837.0
+offset_bottom = -122.0
+
+[node name="md_publisher" parent="Children/40" instance=ExtResource("15")]
+layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 92.0
+offset_top = 488.0
+offset_right = -841.0
+offset_bottom = -85.0
+
+[node name="md_genre" parent="Children/40" instance=ExtResource("15")]
+layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 311.0
+offset_top = 381.0
+offset_right = -622.0
+offset_bottom = -192.0
+
+[node name="md_players" parent="Children/40" instance=ExtResource("15")]
+layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 321.0
+offset_top = 416.0
+offset_right = -612.0
+offset_bottom = -157.0
+
+[node name="md_lastplayed" parent="Children/40" instance=ExtResource("16")]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 451.0
+offset_right = 424.0
+offset_bottom = 478.0
 text = "never"
 
-[node name="md_playcount" parent="Children/40" instance=ExtResource( 15 )]
-margin_left = 366.0
-margin_top = 488.0
-margin_right = -567.0
-margin_bottom = -85.0
-txt = "0"
-color = Color( 0, 0, 0, 1 )
+[node name="md_playcount" parent="Children/40" instance=ExtResource("15")]
+layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 366.0
+offset_top = 488.0
+offset_right = -567.0
+offset_bottom = -85.0
 
-[node name="md_description" parent="Children/40" instance=ExtResource( 15 )]
-margin_left = 10.0
-margin_top = 528.0
-margin_right = -623.0
-margin_bottom = 15.0
-txt = "Long description Long description Long description Long description Long description Long description"
-color = Color( 0, 0, 0, 1 )
+[node name="md_description" parent="Children/40" instance=ExtResource("15")]
+layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 10.0
+offset_top = 528.0
+offset_right = -623.0
+offset_bottom = 15.0
 
 [node name="50" type="Control" parent="Children"]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="logoText" parent="Children/50" instance=ExtResource( 15 )]
+[node name="logoText" parent="Children/50" instance=ExtResource("15")]
+layout_mode = 0
+anchor_right = 0.0
 anchor_bottom = 0.067
-margin_bottom = -0.200001
-txt = "System Name"
-color = Color( 0, 0, 0, 1 )
-alignment = "center"
+offset_bottom = -0.200001
 
-[node name="logo" parent="Children/50" instance=ExtResource( 14 )]
+[node name="logo" parent="Children/50" instance=ExtResource("14")]
+layout_mode = 0
+anchor_right = 0.0
 anchor_bottom = 0.147
-margin_bottom = -0.199997
+offset_bottom = -0.199997
+expand_mode = 1
 
-[node name="HelpSystem" parent="." instance=ExtResource( 4 )]
-margin_left = 12.288
-margin_top = 570.9
-margin_right = 12.288
-margin_bottom = 10.9
+[node name="HelpSystem" parent="." instance=ExtResource("4")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 12.288
+offset_top = 570.9
+offset_right = 12.288
+offset_bottom = 10.9
 
 [node name="OptionsIcon" type="TextureRect" parent="HelpSystem"]
-margin_right = 40.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 9 )
-expand = true
-script = ExtResource( 7 )
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("9")
+expand_mode = 1
+script = ExtResource("7")
 path = "joypad/select"
 
-[node name="Options" parent="HelpSystem" instance=ExtResource( 15 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 44.0
-margin_right = 44.0
-margin_bottom = 40.0
-txt = "OPTIONS"
-color = Color( 0.470588, 0.470588, 0.470588, 1 )
+[node name="Options" parent="HelpSystem" instance=ExtResource("15")]
+layout_mode = 2
 
 [node name="MenuIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 48.0
-margin_right = 88.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 11 )
-expand = true
-script = ExtResource( 7 )
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("11")
+expand_mode = 1
+script = ExtResource("7")
 path = "joypad/start"
 
-[node name="Menu" parent="HelpSystem" instance=ExtResource( 15 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 92.0
-margin_right = 92.0
-margin_bottom = 40.0
-txt = "MENU"
-color = Color( 0.470588, 0.470588, 0.470588, 1 )
+[node name="Menu" parent="HelpSystem" instance=ExtResource("15")]
+layout_mode = 2
 
 [node name="FavoritesIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 96.0
-margin_right = 136.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 6 )
-expand = true
-script = ExtResource( 7 )
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("6")
+expand_mode = 1
+script = ExtResource("7")
 path = "joypad/y"
 
-[node name="Favorites" parent="HelpSystem" instance=ExtResource( 15 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 140.0
-margin_right = 140.0
-margin_bottom = 40.0
-txt = "FAVORITES"
-color = Color( 0.470588, 0.470588, 0.470588, 1 )
+[node name="Favorites" parent="HelpSystem" instance=ExtResource("15")]
+layout_mode = 2
 
 [node name="MediaIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 144.0
-margin_right = 184.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 10 )
-expand = true
-script = ExtResource( 7 )
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("10")
+expand_mode = 1
+script = ExtResource("7")
 path = "joypad/x"
 
-[node name="Media" parent="HelpSystem" instance=ExtResource( 15 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 188.0
-margin_right = 188.0
-margin_bottom = 40.0
-txt = "VIEW MEDIA"
-color = Color( 0.470588, 0.470588, 0.470588, 1 )
+[node name="Media" parent="HelpSystem" instance=ExtResource("15")]
+layout_mode = 2
 
 [node name="BackIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 192.0
-margin_right = 232.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 13 )
-expand = true
-script = ExtResource( 7 )
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("13")
+expand_mode = 1
+script = ExtResource("7")
 path = "joypad/b"
 
-[node name="Back" parent="HelpSystem" instance=ExtResource( 15 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 236.0
-margin_right = 236.0
-margin_bottom = 40.0
-txt = "BACK"
-color = Color( 0.470588, 0.470588, 0.470588, 1 )
+[node name="Back" parent="HelpSystem" instance=ExtResource("15")]
+layout_mode = 2
 
 [node name="LaunchIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 240.0
-margin_right = 280.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 5 )
-expand = true
-script = ExtResource( 7 )
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("5")
+expand_mode = 1
+script = ExtResource("7")
 path = "joypad/a"
 
-[node name="Launch" parent="HelpSystem" instance=ExtResource( 15 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 284.0
-margin_right = 284.0
-margin_bottom = 40.0
-txt = "LAUNCH"
-color = Color( 0.470588, 0.470588, 0.470588, 1 )
+[node name="Launch" parent="HelpSystem" instance=ExtResource("15")]
+layout_mode = 2
 
 [node name="SystemIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 288.0
-margin_right = 328.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 12 )
-expand = true
-script = ExtResource( 7 )
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("12")
+expand_mode = 1
+script = ExtResource("7")
 path = "joypad/dpad"
 
-[node name="System" parent="HelpSystem" instance=ExtResource( 15 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 332.0
-margin_right = 332.0
-margin_bottom = 40.0
-txt = "SYSTEM"
-color = Color( 0.470588, 0.470588, 0.470588, 1 )
+[node name="System" parent="HelpSystem" instance=ExtResource("15")]
+layout_mode = 2

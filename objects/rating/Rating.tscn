@@ -2,12 +2,12 @@
 
 [ext_resource path="res://objects/rating/Rating.gd" type="Script" id=1]
 [ext_resource path="res://resources/theme.tres" type="Theme" id=2]
-[ext_resource path="res://assets/graphics/star_filled.svg" type="Texture" id=4]
-[ext_resource path="res://assets/graphics/star_unfilled.svg" type="Texture" id=5]
+[ext_resource path="res://assets/graphics/star_filled.svg" type="Texture2D" id=4]
+[ext_resource path="res://assets/graphics/star_unfilled.svg" type="Texture2D" id=5]
 
 [node name="Rating" type="Control"]
-margin_right = 160.0
-margin_bottom = 32.0
+offset_right = 160.0
+offset_bottom = 32.0
 mouse_filter = 2
 theme = ExtResource( 2 )
 script = ExtResource( 1 )

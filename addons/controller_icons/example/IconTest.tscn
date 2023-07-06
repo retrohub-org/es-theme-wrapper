@@ -51,5 +51,5 @@ expand_mode = 1
 script = ExtResource("1")
 path = "ui_down"
 
-[node name="Camera" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.79406)

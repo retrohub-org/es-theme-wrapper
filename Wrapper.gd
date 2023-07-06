@@ -15,18 +15,18 @@ func convert_system_name(system_name: String):
 func load_es_theme_file(path: String):
 	# Load generic theme.xml, used when no themes are found
 	# Ensure file exists
-	if not Directory.new().file_exists(path):
+	if not FileAccess.file_exists(path):
 		return
 	var dict : Dictionary = xml2json.parse(path)
 	var root_path = path.get_base_dir()
-	if not dict.empty():
+	if not dict.is_empty():
 		xml_filemap[path] = dict["theme"]
 		map_xml_content(xml_filemap[path], root_path)
 		"""var file := File.new()
-		var dir := Directory.new()
+		var dir := DirAccess.new()
 		dir.make_dir_recursive("/tmp/rh/" + system_name)
 		var err = file.open("/tmp/rh/" + system_name + "/" + path.get_basename().get_file() + ".json", File.WRITE)
-		file.store_string(JSON.print(dict, "  "))
+		file.store_string(JSON.stringify(dict, "  "))
 		file.close()"""
 
 func map_xml_content(dict: Dictionary, root_path: String):
@@ -57,7 +57,7 @@ func expand_file_path(path: String, root_path: String):
 		path = FileUtils.get_home_dir() + path.substr(1)
 	var back_idx = path.find("..")
 	while back_idx != -1:
-		var slash = path.substr(0, back_idx-1).find_last("/")
+		var slash = path.substr(0, back_idx-1).rfind("/")
 		assert(slash != -1)
 		path = path.substr(0, slash) + path.substr(back_idx+2)
 		back_idx = path.find("..")

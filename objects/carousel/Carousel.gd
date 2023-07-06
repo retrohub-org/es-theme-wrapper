@@ -1,8 +1,8 @@
 extends Control
 
-onready var n_logo_bar := $Pivot/ColorBar
-onready var n_logo_children := $Pivot/Children
-onready var n_extra_children := $Children
+@onready var n_logo_bar := $Pivot/ColorBar
+@onready var n_logo_children := $Pivot/Children
+@onready var n_extra_children := $Children
 var system_count : int
 var _head_idx
 var _curr_idx
@@ -14,68 +14,68 @@ var systems := []
 var PropertyWrapper = preload("res://PropertyWrapper.gd").new()
 
 var parsed := false
-var position := Vector2(0, 0.38375 * PropertyWrapper.screen_height)
-export var size_set := false
-export(Vector2) var size := Vector2(1 * 1024, 0.2325 * PropertyWrapper.screen_height)
-export(Vector2) var pos_origin := Vector2(0, 0)
-var type := "horizontal"
-var color := Color("d8ffffff")
-var logo_size := Vector2(0.25 * 1024, 0.155 * PropertyWrapper.screen_height)
-var logo_scale := 1.2
-var logo_rotation := 7.5
-var logo_rot_pivot := Vector2(-5 * 1024, 0.5 * PropertyWrapper.screen_height)
-var logo_align := "center"
-var max_logo_count := 3
-export var z_index := 10
+var es_position := Vector2(0, 0.38375 * PropertyWrapper.screen_height)
+@export var size_set := false
+@export var es_size := Vector2(1 * 1024, 0.2325 * PropertyWrapper.screen_height)
+@export var es_pos_origin := Vector2(0, 0)
+var es_type := "horizontal"
+var es_color := Color("d8ffffff")
+var es_logo_size := Vector2(0.25 * 1024, 0.155 * PropertyWrapper.screen_height)
+var es_logo_scale := 1.2
+var es_logo_rotation := 7.5
+var es_logo_rot_pivot := Vector2(-5 * 1024, 0.5 * PropertyWrapper.screen_height)
+var es_logo_align := "center"
+var es_max_logo_count := 3
+@export var es_z_index := 10
 
 func parse_theme_xml(Wrapper, data: Dictionary, _root_path: String):
 	parsed = true
 	for key in data:
 		match key:
 			"pos":
-				position = PropertyWrapper.parse_normalized_pair(Wrapper, data[key])
+				es_position = PropertyWrapper.parse_normalized_pair(Wrapper, data[key])
 			"size":
-				size = PropertyWrapper.parse_normalized_pair(Wrapper, data[key])
+				es_size = PropertyWrapper.parse_normalized_pair(Wrapper, data[key])
 			"origin":
-				pos_origin = PropertyWrapper.parse_normalized_pair(Wrapper, data[key], false)
+				es_pos_origin = PropertyWrapper.parse_normalized_pair(Wrapper, data[key], false)
 			"type":
-				type = PropertyWrapper.parse_string(Wrapper, data[key])
+				es_type = PropertyWrapper.parse_string(Wrapper, data[key])
 			"color":
-				color = PropertyWrapper.parse_color(Wrapper, data[key])
+				es_color = PropertyWrapper.parse_color(Wrapper, data[key])
 			"logoSize":
-				logo_size = PropertyWrapper.parse_normalized_pair(Wrapper, data[key])
+				es_logo_size = PropertyWrapper.parse_normalized_pair(Wrapper, data[key])
 			"logoScale":
-				logo_scale = PropertyWrapper.parse_float(Wrapper, data[key])
+				es_logo_scale = PropertyWrapper.parse_float(Wrapper, data[key])
 			"logoRotation":
-				logo_rotation = PropertyWrapper.parse_float(Wrapper, data[key])
+				es_logo_rotation = PropertyWrapper.parse_float(Wrapper, data[key])
 			"logoRotationOrigin":
-				logo_rot_pivot = PropertyWrapper.parse_normalized_pair(Wrapper, data[key], false)
+				es_logo_rot_pivot = PropertyWrapper.parse_normalized_pair(Wrapper, data[key], false)
 			"logoAlignment":
-				logo_align = PropertyWrapper.parse_string(Wrapper, data[key])
+				es_logo_align = PropertyWrapper.parse_string(Wrapper, data[key])
 			"maxLogoCount":
-				max_logo_count = int(ceil(PropertyWrapper.parse_float(Wrapper, data[key])))
+				es_max_logo_count = int(ceil(PropertyWrapper.parse_float(Wrapper, data[key])))
 			"zIndex":
-				z_index = int(round(PropertyWrapper.parse_float(Wrapper, data[key])))
+				es_z_index = int(round(PropertyWrapper.parse_float(Wrapper, data[key])))
 				pass
 
 func apply_theme():
 	if not parsed:
 		return
 
-	$Pivot.rect_position = position
-	$Pivot.rect_size = size
-	pos_origin.x *= rect_size.x
-	pos_origin.y *= rect_size.y
-	$Pivot.rect_position -= pos_origin
-	n_logo_bar.color = color
+	$Pivot.position = es_position
+	$Pivot.size = es_size
+	es_pos_origin.x *= es_size.x
+	es_pos_origin.y *= es_size.y
+	$Pivot.position -= es_pos_origin
+	n_logo_bar.color = es_color
 
 func _gui_input(ev):
 	if system_count > 1:
 		if ev.is_action_pressed("ui_right", true):
-			get_tree().set_input_as_handled()
+			get_viewport().set_input_as_handled()
 			move_ui(1)
 		if ev.is_action_pressed("ui_left", true):
-			get_tree().set_input_as_handled()
+			get_viewport().set_input_as_handled()
 			move_ui(-1)
 
 func pack():
@@ -111,12 +111,12 @@ func get_extra_for_idx(idx: int) -> Node:
 	return n_extra_children.get_child(get_abs_idx(idx) % systems.size())
 
 func position_children():
-	var bar_width = $Pivot/ColorBar.rect_size.x / 1024
-	move_stride = Vector2(((1024 - (logo_size.x * max_logo_count)) / (max_logo_count)) + logo_size.x, 0);
+	var bar_width = $Pivot/ColorBar.size.x / 1024
+	move_stride = Vector2(((1024 - (es_logo_size.x * es_max_logo_count)) / (es_max_logo_count)) + es_logo_size.x, 0);
 	move_stride.x *= bar_width
 	for rel_idx in range(-2, system_count - 2):
 		var idx = get_abs_idx(rel_idx)
-		var pos = Vector2((1024 * bar_width / 2) + move_stride.x * (rel_idx), $Pivot/ColorBar.rect_size.y / 2)
+		var pos = Vector2((1024 * bar_width / 2) + move_stride.x * (rel_idx), $Pivot/ColorBar.size.y / 2)
 		var node = n_logo_children.get_child(idx)
 		node.set_pos(pos)
 		node.center_nodes()
@@ -135,26 +135,26 @@ func add_systems(cached_objects: Dictionary, cached_system_data: Dictionary):
 		var system_data : RetroHubSystemData = cached_system_data[key]
 		if nodes.has("systemInfo"):
 			var system_info = nodes["systemInfo"]
-			system_info.txt = "%d games (%d favorites)" % [system_data.num_games, 0]
+			system_info.es_txt = "%d games (%d favorites)" % [system_data.num_games, 0]
 			# Seems like "systemInfo"'s position is relative to center
-			system_info.size.x = 1024
-			system_info.alignment = "center"
-		if nodes.has("logo") and nodes["logo"].tex != null:
+			system_info.es_size.x = 1024
+			system_info.es_alignment = "center"
+		if nodes.has("logo") and nodes["logo"].es_tex != null:
 			var logo = nodes["logo"]
-			logo.size = logo_size
-			if type.find("wheel") != -1:
-				logo.rot_pivot = logo_rot_pivot
+			logo.es_size = es_logo_size
+			if es_type.find("wheel") != -1:
+				logo.es_rot_pivot = es_logo_rot_pivot
 			#warning-ignore:return_value_discarded
 			nodes.erase("logoText")
 		else:
-			var text = preload("res://objects/text/Text.tscn").instance()
+			var text = preload("res://objects/text/Text.tscn").instantiate()
 			text.parsed = true
-			text.txt = system_data.name
-			text.color = Color(0, 0, 0, 1)
-			text.font_path = "res://assets/fonts/Akrobat-SemiBold.ttf"
-			text.font_size = 48
-			text.alignment = "center"
-			text.size = logo_size
+			text.es_txt = system_data.name
+			text.es_color = Color(0, 0, 0, 1)
+			text.es_font_path = "res://assets/fonts/Akrobat-SemiBold.ttf"
+			text.es_font_size = 48
+			text.es_alignment = "center"
+			text.es_size = es_logo_size
 			nodes["logoText"] = text
 			#warning-ignore:return_value_discarded
 			nodes.erase("logo")
@@ -170,17 +170,17 @@ func add_systems(cached_objects: Dictionary, cached_system_data: Dictionary):
 	pack()
 
 func create_extra_child():
-	var child := preload("res://views/system/SystemExtra.tscn").instance()
+	var child := preload("res://views/system/SystemExtra.tscn").instantiate()
 	child.should_hide = true
 	child.visible = false
 	n_extra_children.add_child(child)
 	return child
 
 func create_logo_child(system_data: RetroHubSystemData):
-	var child = preload("res://views/system/SystemLogo.tscn").instance()
+	var child = preload("res://views/system/SystemLogo.tscn").instantiate()
 	child.system_data = system_data
-	child.alignment = logo_align
-	child.selected_scale = logo_scale
+	child.alignment = es_logo_align
+	child.selected_scale = es_logo_scale
 	child.set_selected(false)
 	n_logo_children.add_child(child)
 	return child
@@ -219,7 +219,7 @@ func move_ui(steps: int):
 	
 	# Handle extra children as well
 	var move_extra_delta = Vector2(1024, 0)
-	if not next_extra.visible or abs(next_extra.rect_position.x) > move_extra_delta.x:
+	if not next_extra.visible or abs(next_extra.position.x) > move_extra_delta.x:
 		next_extra.set_pos(move_extra_delta * steps)
 	curr_extra.move(-steps * move_extra_delta, true)
 	next_extra.move(-steps * move_extra_delta, false)

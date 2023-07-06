@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorPlugin
 
 var ScreenReader := preload("ScreenReader.gd")

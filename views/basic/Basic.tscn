@@ -6,14 +6,14 @@
 [ext_resource path="res://objects/image/Image.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/text/Text.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/helpsystem/HelpSystem.tscn" type="PackedScene" id=6]
-[ext_resource path="res://addons/controller_icons/assets/xbox360/back.png" type="Texture" id=7]
-[ext_resource path="res://addons/controller_icons/assets/xbox360/start.png" type="Texture" id=8]
+[ext_resource path="res://addons/controller_icons/assets/xbox360/back.png" type="Texture2D" id=7]
+[ext_resource path="res://addons/controller_icons/assets/xbox360/start.png" type="Texture2D" id=8]
 [ext_resource path="res://addons/controller_icons/objects/TextureRect.gd" type="Script" id=9]
-[ext_resource path="res://addons/controller_icons/assets/xbox360/dpad.png" type="Texture" id=10]
-[ext_resource path="res://addons/controller_icons/assets/xbox360/x.png" type="Texture" id=11]
-[ext_resource path="res://addons/controller_icons/assets/xbox360/b.png" type="Texture" id=12]
-[ext_resource path="res://addons/controller_icons/assets/xbox360/a.png" type="Texture" id=13]
-[ext_resource path="res://addons/controller_icons/assets/xbox360/y.png" type="Texture" id=14]
+[ext_resource path="res://addons/controller_icons/assets/xbox360/dpad.png" type="Texture2D" id=10]
+[ext_resource path="res://addons/controller_icons/assets/xbox360/x.png" type="Texture2D" id=11]
+[ext_resource path="res://addons/controller_icons/assets/xbox360/b.png" type="Texture2D" id=12]
+[ext_resource path="res://addons/controller_icons/assets/xbox360/a.png" type="Texture2D" id=13]
+[ext_resource path="res://addons/controller_icons/assets/xbox360/y.png" type="Texture2D" id=14]
 
 [node name="Basic" type="Control"]
 anchor_right = 1.0
@@ -48,9 +48,9 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="gamelist" parent="Children/20" instance=ExtResource( 1 )]
-margin_left = 215.0
-margin_top = 149.0
-margin_right = -205.0
+offset_left = 215.0
+offset_top = 149.0
+offset_right = -205.0
 game_entry_scene = ExtResource( 2 )
 
 [node name="50" type="Control" parent="Children"]
@@ -61,24 +61,24 @@ mouse_filter = 2
 [node name="logoText" parent="Children/50" instance=ExtResource( 5 )]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -512.0
-margin_right = 512.0
-margin_bottom = 40.0
+offset_left = -512.0
+offset_right = 512.0
+offset_bottom = 40.0
 
 [node name="logo" parent="Children/50" instance=ExtResource( 4 )]
 anchor_bottom = 0.147
-margin_bottom = -0.199997
+offset_bottom = -0.199997
 
 [node name="HelpSystem" parent="." instance=ExtResource( 6 )]
-margin_left = 12.288
-margin_top = 570.9
-margin_right = 12.288
-margin_bottom = 10.9
+offset_left = 12.288
+offset_top = 570.9
+offset_right = 12.288
+offset_bottom = 10.9
 
 [node name="OptionsIcon" type="TextureRect" parent="HelpSystem"]
-margin_right = 40.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
+offset_right = 40.0
+offset_bottom = 40.0
+custom_minimum_size = Vector2( 40, 40 )
 texture = ExtResource( 7 )
 expand = true
 script = ExtResource( 9 )
@@ -87,16 +87,16 @@ path = "joypad/select"
 [node name="Options" parent="HelpSystem" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 44.0
-margin_right = 44.0
-margin_bottom = 40.0
+offset_left = 44.0
+offset_right = 44.0
+offset_bottom = 40.0
 txt = "OPTIONS"
 
 [node name="MenuIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 48.0
-margin_right = 88.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
+offset_left = 48.0
+offset_right = 88.0
+offset_bottom = 40.0
+custom_minimum_size = Vector2( 40, 40 )
 texture = ExtResource( 8 )
 expand = true
 script = ExtResource( 9 )
@@ -105,16 +105,16 @@ path = "joypad/start"
 [node name="Menu" parent="HelpSystem" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 92.0
-margin_right = 92.0
-margin_bottom = 40.0
+offset_left = 92.0
+offset_right = 92.0
+offset_bottom = 40.0
 txt = "MENU"
 
 [node name="FavoritesIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 96.0
-margin_right = 136.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
+offset_left = 96.0
+offset_right = 136.0
+offset_bottom = 40.0
+custom_minimum_size = Vector2( 40, 40 )
 texture = ExtResource( 14 )
 expand = true
 script = ExtResource( 9 )
@@ -123,16 +123,16 @@ path = "joypad/y"
 [node name="Favorites" parent="HelpSystem" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 140.0
-margin_right = 140.0
-margin_bottom = 40.0
+offset_left = 140.0
+offset_right = 140.0
+offset_bottom = 40.0
 txt = "FAVORITES"
 
 [node name="MediaIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 144.0
-margin_right = 184.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
+offset_left = 144.0
+offset_right = 184.0
+offset_bottom = 40.0
+custom_minimum_size = Vector2( 40, 40 )
 texture = ExtResource( 11 )
 expand = true
 script = ExtResource( 9 )
@@ -141,16 +141,16 @@ path = "joypad/x"
 [node name="Media" parent="HelpSystem" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 188.0
-margin_right = 188.0
-margin_bottom = 40.0
+offset_left = 188.0
+offset_right = 188.0
+offset_bottom = 40.0
 txt = "VIEW MEDIA"
 
 [node name="BackIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 192.0
-margin_right = 232.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
+offset_left = 192.0
+offset_right = 232.0
+offset_bottom = 40.0
+custom_minimum_size = Vector2( 40, 40 )
 texture = ExtResource( 12 )
 expand = true
 script = ExtResource( 9 )
@@ -159,16 +159,16 @@ path = "joypad/b"
 [node name="Back" parent="HelpSystem" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 236.0
-margin_right = 236.0
-margin_bottom = 40.0
+offset_left = 236.0
+offset_right = 236.0
+offset_bottom = 40.0
 txt = "BACK"
 
 [node name="LaunchIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 240.0
-margin_right = 280.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
+offset_left = 240.0
+offset_right = 280.0
+offset_bottom = 40.0
+custom_minimum_size = Vector2( 40, 40 )
 texture = ExtResource( 13 )
 expand = true
 script = ExtResource( 9 )
@@ -177,16 +177,16 @@ path = "joypad/a"
 [node name="Launch" parent="HelpSystem" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 284.0
-margin_right = 284.0
-margin_bottom = 40.0
+offset_left = 284.0
+offset_right = 284.0
+offset_bottom = 40.0
 txt = "LAUNCH"
 
 [node name="SystemIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 288.0
-margin_right = 328.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
+offset_left = 288.0
+offset_right = 328.0
+offset_bottom = 40.0
+custom_minimum_size = Vector2( 40, 40 )
 texture = ExtResource( 10 )
 expand = true
 script = ExtResource( 9 )
@@ -195,7 +195,7 @@ path = "joypad/dpad"
 [node name="System" parent="HelpSystem" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 332.0
-margin_right = 332.0
-margin_bottom = 40.0
+offset_left = 332.0
+offset_right = 332.0
+offset_bottom = 40.0
 txt = "SYSTEM"

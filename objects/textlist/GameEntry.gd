@@ -2,12 +2,12 @@ extends Button
 
 signal selected(data)
 
-var game_data : RetroHubGameData setget set_game_data
-var height : float setget set_height
-var style : StyleBoxTexture setget set_style
-var font : DynamicFont setget set_font
-var font_color : Color setget set_font_color
-var font_color_selected : Color setget set_font_color_selected
+var game_data : RetroHubGameData: set = set_game_data
+var height : float: set = set_height
+var style : StyleBoxTexture: set = set_style
+var font : FontFile: set = set_font
+var font_color : Color: set = set_font_color
+var font_color_selected : Color: set = set_font_color_selected
 
 func set_game_data(_game_data: RetroHubGameData) -> void:
 	game_data = _game_data
@@ -15,27 +15,27 @@ func set_game_data(_game_data: RetroHubGameData) -> void:
 
 func set_height(_height: float) -> void:
 	height = _height
-	rect_min_size.y = height
+	custom_minimum_size.y = height
 
 func set_style(_style: StyleBoxTexture) -> void:
 	style = _style
-	add_stylebox_override("focus", style)
+	add_theme_stylebox_override("focus", style)
 
-func set_font(_font: DynamicFont) -> void:
+func set_font(_font: FontFile) -> void:
 	font = _font
-	add_font_override("font", font)
+	add_theme_font_override("font", font)
 
 func set_font_color(_font_color: Color) -> void:
 	font_color = _font_color
-	add_color_override("font_color", font_color)
+	add_theme_color_override("font_color", font_color)
 
 func set_font_color_selected(_font_color_selected: Color) -> void:
 	font_color_selected = _font_color_selected
-	add_color_override("font_color_focus", font_color_selected)
+	add_theme_color_override("font_color_focus", font_color_selected)
 
 func _ready():
 	#warning-ignore:return_value_discarded
-	RetroHubConfig.connect("game_data_updated", self, "_on_game_data_updated")
+	RetroHubConfig.game_data_updated.connect(_on_game_data_updated)
 
 func _on_game_data_updated(_game_data: RetroHubGameData):
 	if game_data == _game_data:

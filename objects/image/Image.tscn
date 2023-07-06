@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://bq5bp2h5mos8e"]
 
-[ext_resource path="res://objects/image/Image.gd" type="Script" id=2]
-[ext_resource path="res://resources/theme.tres" type="Theme" id=3]
+[ext_resource type="Script" path="res://objects/image/Image.gd" id="2"]
+[ext_resource type="Theme" uid="uid://c66do4r5s0t3m" path="res://resources/theme.tres" id="3"]
 
 [node name="Image" type="TextureRect"]
+texture_filter = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-theme = ExtResource( 3 )
-expand = true
-stretch_mode = 1
-script = ExtResource( 2 )
+theme = ExtResource("3")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("2")

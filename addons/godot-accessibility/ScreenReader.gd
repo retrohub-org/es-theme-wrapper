@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node
 
 signal swipe_left
@@ -11,17 +11,17 @@ signal swipe_down
 
 var Accessible = preload("Accessible.gd")
 
-export var enabled = true
+@export var enabled = true
 
-export var control_lifetime = false
+@export var control_lifetime = false
 
-export var min_swipe_distance = 5
+@export var min_swipe_distance = 5
 
-export var tap_execute_interval = 125
+@export var tap_execute_interval = 125
 
-export var explore_by_touch_interval = 200
+@export var explore_by_touch_interval = 200
 
-export var enable_focus_mode = false
+@export var enable_focus_mode = false
 
 var should_stop_on_focus = true
 
@@ -62,11 +62,11 @@ func find_focusable_control(node):
 
 
 func _enter_tree():
-	pause_mode = Node.PAUSE_MODE_PROCESS
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _ready():
 	if control_lifetime:
-		RetroHubConfig.connect("config_ready", self, "_on_config_ready")
+		RetroHubConfig.connect("config_ready", Callable(self, "_on_config_ready"))
 	else:
 		init()
 
@@ -82,29 +82,29 @@ func init():
 	if enabled:
 		augment_tree(get_tree().root)
 	#get_tree().connect("node_added", self, "augment_node")
-	connect("swipe_right", self, "swipe_right")
-	connect("swipe_left", self, "swipe_left")
-	connect("swipe_up", self, "swipe_up")
-	connect("swipe_down", self, "swipe_down")
+	connect("swipe_right", Callable(self, "swipe_right"))
+	connect("swipe_left", Callable(self, "swipe_left"))
+	connect("swipe_up", Callable(self, "swipe_up"))
+	connect("swipe_down", Callable(self, "swipe_down"))
 
 
 func _press_and_release(action, fake_via_keyboard = false):
 	if fake_via_keyboard:
-		for event in InputMap.get_action_list(action):
+		for event in InputMap.action_get_events(action):
 			if event is InputEventKey:
-				event.pressed = true
+				event.button_pressed = true
 				Input.action_press(action)
 				get_tree().input_event(event)
-				event.pressed = false
+				event.button_pressed = false
 				Input.action_release(action)
 				get_tree().input_event(event)
 				return
 	var event = InputEventAction.new()
 	event.action = action
-	event.pressed = true
+	event.button_pressed = true
 	Input.action_press(action)
 	get_tree().input_event(event)
-	event.pressed = false
+	event.button_pressed = false
 	Input.action_release(action)
 	get_tree().input_event(event)
 
@@ -150,7 +150,7 @@ func swipe_left():
 func swipe_up():
 	var focus = find_focusable_control(get_tree().root)
 	if focus:
-		focus = focus.get_focus_owner()
+		focus = focus.get_viewport().gui_get_focus_owner()
 		if focus:
 			if focus is Range:
 				_press_and_release("ui_right")
@@ -159,7 +159,7 @@ func swipe_up():
 func swipe_down():
 	var focus = find_focusable_control(get_tree().root)
 	if focus:
-		focus = focus.get_focus_owner()
+		focus = focus.get_viewport().gui_get_focus_owner()
 		if focus:
 			if focus is Range:
 				_press_and_release("ui_left")
@@ -188,7 +188,7 @@ func _input(event):
 		return
 	var focus = find_focusable_control(get_tree().root)
 	if focus:
-		focus = focus.get_focus_owner()
+		focus = focus.get_viewport().gui_get_focus_owner()
 		if focus is Tree and Input.is_action_just_pressed("ui_accept"):
 			var accessible
 			for n in focus.get_children():
@@ -197,7 +197,7 @@ func _input(event):
 					break
 			if accessible and accessible.button_index != null:
 				accessible._tree_input(event)
-				get_tree().set_input_as_handled()
+				get_viewport().set_input_as_handled()
 	if enable_focus_mode:
 		if (
 			event is InputEventKey
@@ -205,7 +205,7 @@ func _input(event):
 			and Input.is_key_pressed(KEY_SHIFT)
 			and not event.echo
 		):
-			get_tree().set_input_as_handled()
+			get_viewport().set_input_as_handled()
 			if focus_mode:
 				focus_mode = false
 				TTS.speak("UI mode", true)
@@ -238,17 +238,17 @@ func _input(event):
 					_ui_focus_prev()
 				elif Input.is_action_just_pressed("ui_focus_next"):
 					_ui_focus_next()
-				get_tree().set_input_as_handled()
+				get_viewport().set_input_as_handled()
 				in_focus_mode_handler = false
 				return
 	if event is InputEventScreenTouch:
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 		if touch_index and event.index != touch_index:
 			return
 		if event.pressed:
 			touch_index = event.index
 			touch_position = event.position
-			touch_start_time = OS.get_ticks_msec()
+			touch_start_time = Time.get_ticks_msec()
 			touch_stop_time = null
 		elif touch_position:
 			touch_index = null
@@ -268,19 +268,19 @@ func _input(event):
 						emit_signal("swipe_up")
 			touch_position = null
 			touch_start_time = null
-			touch_stop_time = OS.get_ticks_msec()
+			touch_stop_time = Time.get_ticks_msec()
 			explore_by_touch = false
 	elif event is InputEventScreenDrag:
 		if touch_index and event.index != touch_index:
 			return
 		if (
 			not explore_by_touch
-			and OS.get_ticks_msec() - touch_start_time >= explore_by_touch_interval
+			and Time.get_ticks_msec() - touch_start_time >= explore_by_touch_interval
 		):
 			explore_by_touch = true
 	if event is InputEventMouseButton:
 		if event.device == -1 and not explore_by_touch:
-			get_tree().set_input_as_handled()
+			get_viewport().set_input_as_handled()
 
 
 func _process(delta):
@@ -290,7 +290,7 @@ func _process(delta):
 		return
 	if (
 		touch_stop_time
-		and OS.get_ticks_msec() - touch_stop_time >= tap_execute_interval
+		and Time.get_ticks_msec() - touch_stop_time >= tap_execute_interval
 		and tap_count != 0
 	):
 		touch_stop_time = null

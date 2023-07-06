@@ -133,7 +133,7 @@ func refresh():
 	# All it takes is to signal icons to refresh paths
 	emit_signal("input_type_changed", _last_input_type)
 
-func parse_path(path: String, input_type = _last_input_type) -> Texture:
+func parse_path(path: String, input_type = _last_input_type) -> Texture2D:
 	if typeof(input_type) == TYPE_NIL:
 		return null
 	var root_paths := _expand_path(path, input_type)
@@ -150,7 +150,7 @@ func parse_path_to_tts(path: String, input_type: int = _last_input_type) -> Stri
 	var tts = _convert_path_to_asset_file(path, input_type)
 	return _convert_asset_file_to_tts(tts.get_basename().get_file())
 
-func parse_event(event: InputEvent) -> Texture:
+func parse_event(event: InputEvent) -> Texture2D:
 	var path = _convert_event_to_path(event)
 	if path.is_empty():
 		return null
@@ -267,8 +267,8 @@ func _convert_event_to_path(event: InputEvent):
 	elif event is InputEventJoypadMotion:
 		return _convert_joypad_motion_to_path(event.axis)
 
-func _convert_key_to_path(scancode: int):
-	match scancode:
+func _convert_key_to_path(keycode: int):
+	match keycode:
 		KEY_ESCAPE:
 			return "key/esc"
 		KEY_TAB:
