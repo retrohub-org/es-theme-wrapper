@@ -107,6 +107,7 @@ func move_ui(dir: int, game_view: Node = null):
 			child.on_hide()
 	var tween := create_tween()
 	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+	tween.set_parallel(true)
 	tween.tween_property(
 		$GameView, "position", target_position_game_view, 0.5
 	)

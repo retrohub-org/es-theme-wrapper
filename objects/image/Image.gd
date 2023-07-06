@@ -86,7 +86,7 @@ func handle_max_size():
 		var tex_size : Vector2
 		if get_child_count() > 0: # Miximage
 			tex_size = es_max_size
-		else:
+		elif texture:
 			tex_size = texture.get_size()
 			if tex_size == Vector2.ZERO:
 				tex_size = es_max_size

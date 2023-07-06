@@ -93,6 +93,7 @@ offset_left = 10.0
 offset_top = 377.0
 offset_right = -961.0
 offset_bottom = -196.0
+es_txt = "Rating: "
 
 [node name="md_lbl_releasedate" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
@@ -103,6 +104,7 @@ offset_left = 10.0
 offset_top = 414.0
 offset_right = -961.0
 offset_bottom = -159.0
+es_txt = "Released: "
 
 [node name="md_lbl_developer" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
@@ -113,6 +115,7 @@ offset_left = 10.0
 offset_top = 451.0
 offset_right = -923.0
 offset_bottom = -122.0
+es_txt = "Developer: "
 
 [node name="md_lbl_publisher" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
@@ -123,6 +126,7 @@ offset_left = 10.0
 offset_top = 488.0
 offset_right = -923.0
 offset_bottom = -85.0
+es_txt = "Publisher: "
 
 [node name="md_lbl_genre" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
@@ -133,6 +137,7 @@ offset_left = 256.0
 offset_top = 381.0
 offset_right = -677.0
 offset_bottom = -192.0
+es_txt = "Genre: "
 
 [node name="md_lbl_players" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
@@ -143,6 +148,7 @@ offset_left = 256.0
 offset_top = 416.0
 offset_right = -677.0
 offset_bottom = -157.0
+es_txt = "Players: "
 
 [node name="md_lbl_lastplayed" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
@@ -153,6 +159,7 @@ offset_left = 256.0
 offset_top = 451.0
 offset_right = -671.0
 offset_bottom = -122.0
+es_txt = "Last played: "
 
 [node name="md_lbl_playcount" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
@@ -163,6 +170,7 @@ offset_left = 256.0
 offset_top = 488.0
 offset_right = -658.0
 offset_bottom = -85.0
+es_txt = "Times played: "
 
 [node name="md_image" parent="Children/40" instance=ExtResource("14")]
 layout_mode = 0
@@ -196,6 +204,7 @@ offset_left = 96.0
 offset_top = 451.0
 offset_right = -837.0
 offset_bottom = -122.0
+es_txt = "unknown"
 
 [node name="md_publisher" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
@@ -206,6 +215,7 @@ offset_left = 92.0
 offset_top = 488.0
 offset_right = -841.0
 offset_bottom = -85.0
+es_txt = "unknown"
 
 [node name="md_genre" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
@@ -216,6 +226,7 @@ offset_left = 311.0
 offset_top = 381.0
 offset_right = -622.0
 offset_bottom = -192.0
+es_txt = "unknown"
 
 [node name="md_players" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
@@ -226,6 +237,7 @@ offset_left = 321.0
 offset_top = 416.0
 offset_right = -612.0
 offset_bottom = -157.0
+es_txt = "unknown"
 
 [node name="md_lastplayed" parent="Children/40" instance=ExtResource("16")]
 layout_mode = 0
@@ -244,6 +256,7 @@ offset_left = 366.0
 offset_top = 488.0
 offset_right = -567.0
 offset_bottom = -85.0
+es_txt = "0"
 
 [node name="md_description" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
@@ -254,6 +267,7 @@ offset_left = 10.0
 offset_top = 528.0
 offset_right = -623.0
 offset_bottom = 15.0
+es_txt = "Long description Long description Long description Long description Long description Long description"
 
 [node name="50" type="Control" parent="Children"]
 anchors_preset = 0
@@ -295,6 +309,9 @@ path = "joypad/select"
 
 [node name="Options" parent="HelpSystem" instance=ExtResource("15")]
 layout_mode = 2
+es_txt = "OPTIONS"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="MenuIcon" type="TextureRect" parent="HelpSystem"]
 custom_minimum_size = Vector2(40, 40)
@@ -306,6 +323,9 @@ path = "joypad/start"
 
 [node name="Menu" parent="HelpSystem" instance=ExtResource("15")]
 layout_mode = 2
+es_txt = "MENU"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="FavoritesIcon" type="TextureRect" parent="HelpSystem"]
 custom_minimum_size = Vector2(40, 40)
@@ -317,6 +337,9 @@ path = "joypad/y"
 
 [node name="Favorites" parent="HelpSystem" instance=ExtResource("15")]
 layout_mode = 2
+es_txt = "FAVORITES"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="MediaIcon" type="TextureRect" parent="HelpSystem"]
 custom_minimum_size = Vector2(40, 40)
@@ -328,6 +351,9 @@ path = "joypad/x"
 
 [node name="Media" parent="HelpSystem" instance=ExtResource("15")]
 layout_mode = 2
+es_txt = "VIEW MEDIA"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="BackIcon" type="TextureRect" parent="HelpSystem"]
 custom_minimum_size = Vector2(40, 40)
@@ -339,6 +365,9 @@ path = "joypad/b"
 
 [node name="Back" parent="HelpSystem" instance=ExtResource("15")]
 layout_mode = 2
+es_txt = "BACK"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="LaunchIcon" type="TextureRect" parent="HelpSystem"]
 custom_minimum_size = Vector2(40, 40)
@@ -350,6 +379,9 @@ path = "joypad/a"
 
 [node name="Launch" parent="HelpSystem" instance=ExtResource("15")]
 layout_mode = 2
+es_txt = "LAUNCH"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="SystemIcon" type="TextureRect" parent="HelpSystem"]
 custom_minimum_size = Vector2(40, 40)
@@ -361,3 +393,6 @@ path = "joypad/dpad"
 
 [node name="System" parent="HelpSystem" instance=ExtResource("15")]
 layout_mode = 2
+es_txt = "SYSTEM"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"

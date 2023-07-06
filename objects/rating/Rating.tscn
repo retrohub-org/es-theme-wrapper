@@ -15,17 +15,19 @@ theme = ExtResource("2")
 script = ExtResource("1")
 
 [node name="Tex_Unfilled" type="TextureRect" parent="."]
+texture_filter = 1
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource("5")
 expand_mode = 1
-stretch_mode = 2
+stretch_mode = 1
 
 [node name="Tex_Filled" type="TextureRect" parent="."]
+texture_filter = 1
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource("4")
 expand_mode = 1
-stretch_mode = 2
+stretch_mode = 1

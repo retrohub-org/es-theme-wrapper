@@ -109,6 +109,9 @@ path = "joypad/select"
 
 [node name="Options" parent="HelpSystem" instance=ExtResource("5")]
 layout_mode = 2
+es_txt = "OPTIONS"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="MenuIcon" type="TextureRect" parent="HelpSystem"]
 custom_minimum_size = Vector2(40, 40)
@@ -121,6 +124,9 @@ path = "joypad/start"
 
 [node name="Menu" parent="HelpSystem" instance=ExtResource("5")]
 layout_mode = 2
+es_txt = "MENU"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="FavoritesIcon" type="TextureRect" parent="HelpSystem"]
 custom_minimum_size = Vector2(40, 40)
@@ -133,6 +139,9 @@ path = "joypad/y"
 
 [node name="Favorites" parent="HelpSystem" instance=ExtResource("5")]
 layout_mode = 2
+es_txt = "FAVORITES"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="MediaIcon" type="TextureRect" parent="HelpSystem"]
 custom_minimum_size = Vector2(40, 40)
@@ -145,6 +154,9 @@ path = "joypad/x"
 
 [node name="Media" parent="HelpSystem" instance=ExtResource("5")]
 layout_mode = 2
+es_txt = "VIEW MEDIA"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="BackIcon" type="TextureRect" parent="HelpSystem"]
 custom_minimum_size = Vector2(40, 40)
@@ -157,6 +169,9 @@ path = "joypad/b"
 
 [node name="Back" parent="HelpSystem" instance=ExtResource("5")]
 layout_mode = 2
+es_txt = "BACK"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="LaunchIcon" type="TextureRect" parent="HelpSystem"]
 custom_minimum_size = Vector2(40, 40)
@@ -169,6 +184,9 @@ path = "joypad/a"
 
 [node name="Launch" parent="HelpSystem" instance=ExtResource("5")]
 layout_mode = 2
+es_txt = "LAUNCH"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="SystemIcon" type="TextureRect" parent="HelpSystem"]
 custom_minimum_size = Vector2(40, 40)
@@ -181,3 +199,6 @@ path = "joypad/dpad"
 
 [node name="System" parent="HelpSystem" instance=ExtResource("5")]
 layout_mode = 2
+es_txt = "SYSTEM"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"

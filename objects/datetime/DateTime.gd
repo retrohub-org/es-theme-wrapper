@@ -75,10 +75,10 @@ func apply_theme():
 		return
 
 	position = es_position
+	label_settings = LabelSettings.new()
+	label_settings.line_spacing = es_line_spacing
+	label_settings.font_size = es_font_size
 	if not es_font_path.is_empty():
-		label_settings = LabelSettings.new()
-		label_settings.line_spacing = es_line_spacing
-		label_settings.font_size = es_font_size
 		var f := FontFile.new()
 		f.load_dynamic_font(es_font_path)
 		label_settings.font = f

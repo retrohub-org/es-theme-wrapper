@@ -143,14 +143,14 @@ func apply_theme():
 		return
 
 	position = es_position
+	$Label.label_settings = LabelSettings.new()
 	if not es_font_path.is_empty():
-		$Label.label_settings = LabelSettings.new()
-		$Label.label_settings.line_spacing = es_line_spacing
-		$Label.label_settings.font_size = es_font_size
-		$Label.label_settings.font_color = es_color
 		var f := FontFile.new()
 		f.load_dynamic_font(es_font_path)
 		$Label.label_settings.font = f
+	$Label.label_settings.line_spacing = es_line_spacing
+	$Label.label_settings.font_size = es_font_size
+	$Label.label_settings.font_color = es_color
 	if es_txt.length():
 		text = (es_txt)
 	match es_alignment:

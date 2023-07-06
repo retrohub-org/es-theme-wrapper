@@ -16,13 +16,13 @@ func center_nodes() -> void:
 		if node is Control:
 			node.position = -node.size / 2
 
-func set_pos(position: Vector2) -> void:
-	position = position
-	target_pos = position
+func set_pos(_position: Vector2) -> void:
+	position = _position
+	target_pos = _position
 
-func set_rot(rotation: float) -> void:
-	rotation = rotation
-	target_rot = rotation
+func set_rot(_rotation: float) -> void:
+	rotation = _rotation
+	target_rot = _rotation
 
 func set_selected(_selected: bool) -> void:
 	selected = _selected
@@ -38,6 +38,7 @@ func move(delta_pos: Vector2, delta_rot: float, _selected: bool):
 	tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_QUART)
+	tween.set_parallel(true)
 	tween.tween_property(
 		self, "position",
 		target_pos, 0.5
@@ -55,4 +56,3 @@ func move(delta_pos: Vector2, delta_rot: float, _selected: bool):
 		Vector2(selected_scale, selected_scale) if selected else Vector2(1, 1),
 		0.5
 	)
-	#tween.start()

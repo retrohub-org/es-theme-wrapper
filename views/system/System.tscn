@@ -16,6 +16,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1")
 script = ExtResource("2")
 
@@ -27,15 +29,12 @@ color = Color(0, 0, 0, 1)
 
 [node name="Carousel" parent="." instance=ExtResource("4")]
 layout_mode = 1
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="HelpSystem" parent="." instance=ExtResource("3")]
 layout_mode = 1
-offset_left = 0.288
-offset_top = 559.9
-offset_right = -906.712
-offset_bottom = -0.0999756
+offset_top = 608.0
+offset_right = -964.0
+offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -50,6 +49,9 @@ path = "joypad/select"
 
 [node name="SS" parent="HelpSystem" instance=ExtResource("5")]
 layout_mode = 2
+es_txt = "SCREENSAVER"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="MenuIcon" type="TextureRect" parent="HelpSystem"]
 custom_minimum_size = Vector2(40, 40)
@@ -62,6 +64,9 @@ path = "joypad/start"
 
 [node name="Menu" parent="HelpSystem" instance=ExtResource("5")]
 layout_mode = 2
+es_txt = "MENU"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="SelectIcon" type="TextureRect" parent="HelpSystem"]
 custom_minimum_size = Vector2(40, 40)
@@ -74,6 +79,9 @@ path = "rh_accept"
 
 [node name="Select" parent="HelpSystem" instance=ExtResource("5")]
 layout_mode = 2
+es_txt = "SELECT"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="ChooseIcon" type="TextureRect" parent="HelpSystem"]
 custom_minimum_size = Vector2(40, 40)
@@ -86,3 +94,6 @@ path = "joypad/dpad"
 
 [node name="Choose" parent="HelpSystem" instance=ExtResource("5")]
 layout_mode = 2
+es_txt = "CHOOSE"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
