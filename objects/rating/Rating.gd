@@ -1,7 +1,11 @@
 extends Control
 
 var tex_mult : int
-var rating : float: set = set_rating
+
+var rating : float:
+	set(value):
+		rating = value
+		$Tex_Filled.size.x = tex_mult * clamp(snapped(rating, 0.1), 0.0, 1.0)
 
 var PropertyWrapper = preload("res://PropertyWrapper.gd").new()
 
@@ -10,7 +14,7 @@ var es_position := Vector2(0, 0)
 @export var size_set := false
 @export var es_size := Vector2 (0, 0)
 @export var es_pos_origin := Vector2(0, 0)
-var es_rotation := 0
+var es_rotation := 0.0
 var es_rot_pivot := Vector2(0, 0)
 var es_filled_path := ""
 var es_unfilled_path := ""
@@ -53,27 +57,22 @@ func apply_theme():
 		size = Vector2(floor(es_size.y) * 5, floor(es_size.y))
 	elif es_size.x > 0:
 		size = Vector2(floor(es_size.x) * 5, floor(es_size.x))
-	es_pos_origin.x *= es_size.x
-	es_pos_origin.y *= es_size.y
+	es_pos_origin.x *= size.x
+	es_pos_origin.y *= size.y
 	position -= es_pos_origin
-	es_rot_pivot.x *= es_size.x
-	es_rot_pivot.y *= es_size.y
+	es_rot_pivot.x *= size.x
+	es_rot_pivot.y *= size.y
 	pivot_offset = es_rot_pivot
 	rotation = es_rotation
 	if not es_filled_path.is_empty() and not es_unfilled_path.is_empty():
 		for data in [[es_filled_path, $Tex_Filled], [es_unfilled_path, $Tex_Unfilled]]:
 			var img := Image.load_from_file(data[0])
 			var tex := ImageTexture.create_from_image(img)
-			tex.set_size_override(Vector2i(es_size.y, es_size.y))
+			tex.set_size_override(Vector2i(size.y, size.y))
 			data[1].texture = tex
-		tex_mult = int(es_size.x)
+		tex_mult = int(size.x)
 	self_modulate = es_color
 	visible = es_is_visible
-
-
-func set_rating(_rating: float) -> void:
-	rating = _rating
-	$Tex_Filled.size.x = tex_mult * clamp(snapped(rating, 0.1), 0.0, 1.0)
 
 func _ready():
 	tex_mult = $Tex_Filled.size.x

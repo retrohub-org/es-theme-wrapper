@@ -1,15 +1,14 @@
 extends Label
 
-var date : String: set = set_date
-
-func set_date(_date : String) -> void:
-	date = _date
-	if date == null:
-		text = "unknown"
-	elif date == "null":
-		text = "never"
-	else:
-		text = date
+var date : String:
+	set(value):
+		date = value
+		if date == null:
+			text = "unknown"
+		elif date == "null":
+			text = "never"
+		else:
+			text = date
 
 var PropertyWrapper = preload("res://PropertyWrapper.gd").new()
 
@@ -18,7 +17,7 @@ var es_position := Vector2(0, 0)
 @export var size_set := false
 @export var es_size := Vector2 (0, 0)
 @export var es_pos_origin := Vector2(0, 0)
-var es_rotation := 0
+var es_rotation := 0.0
 var es_rot_pivot := Vector2(0, 0)
 var es_txt := ""
 var es_color := Color(1, 1, 1, 1)
@@ -56,7 +55,7 @@ func parse_theme_xml(Wrapper, data: Dictionary, root_path: String):
 				es_font_path = PropertyWrapper.parse_path(Wrapper, data[key], root_path)
 			"fontSize":
 				es_font_size = PropertyWrapper.parse_float(Wrapper, data[key]) * PropertyWrapper.screen_height
-			"es_alignment":
+			"alignment":
 				es_alignment = PropertyWrapper.parse_string(Wrapper, data[key])
 			"forceUppercase":
 				es_force_uppercase = PropertyWrapper.parse_bool(Wrapper, data[key])
@@ -77,18 +76,12 @@ func apply_theme():
 
 	position = es_position
 	if not es_font_path.is_empty():
-		var dynamic_font := FontVariation.new()
-		dynamic_font.set_base_font(load(es_font_path))
-		# TODO: Figure out line spacing as there's no 1:1 translation for Godot
-		var spacing = (es_line_spacing-1.6) * es_font_size / 2
-		dynamic_font.spacing_top = spacing / 2
-		dynamic_font.spacing_bottom = spacing / 2
-		#dynamic_font.font_size = es_font_size
-		#set("custom_fonts/font", dynamic_font)
-		add_theme_font_override("font", dynamic_font)
-		# We have to wait a frame, I suppose font_data sets something in the meantime
-		# If we don't wait, it requests stupidly large sizes
-		await get_tree().process_frame
+		label_settings = LabelSettings.new()
+		label_settings.line_spacing = es_line_spacing
+		label_settings.font_size = es_font_size
+		var f := FontFile.new()
+		f.load_dynamic_font(es_font_path)
+		label_settings.font = f
 	match es_alignment:
 		"left":
 			horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -105,18 +98,18 @@ func apply_theme():
 	else:
 		autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		if es_size.y == 0:
-			es_size.x = es_size.x
-			es_size.y = 0
+			size.x = es_size.x
+			size.y = 0
 		else:
 			clip_text = true
-			if es_size.y < es_font_size:
-				es_size.y = es_font_size
 			size = es_size
-	es_pos_origin.x *= es_size.x
-	es_pos_origin.y *= es_size.y
+			if es_size.y < es_font_size:
+				size.y = es_font_size
+	es_pos_origin.x *= size.x
+	es_pos_origin.y *= size.y
 	position -= es_pos_origin
-	es_rot_pivot.x *= es_size.x
-	es_rot_pivot.y *= es_size.y
+	es_rot_pivot.x *= size.x
+	es_rot_pivot.y *= size.y
 	pivot_offset = es_rot_pivot
 	rotation = es_rotation
 	add_theme_color_override("font_color", es_color)

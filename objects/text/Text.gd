@@ -7,7 +7,7 @@ var es_position := Vector2(0, 0)
 @export var size_set := false
 @export var es_size := Vector2 (0, 0)
 @export var es_pos_origin := Vector2(0, 0)
-var es_rotation := 0
+var es_rotation := 0.0
 var es_rot_pivot := Vector2(0, 0)
 @export var es_txt := ""
 @export var es_color := Color(1, 1, 1, 1)
@@ -20,7 +20,12 @@ var es_line_spacing := 1.5
 var es_is_visible := true
 @export var es_z_index := 10
 
-var text : String: get = get_text, set = set_text
+var text : String:
+	get:
+		return $Label.text
+	set(value):
+		$Label.text = value
+		set_is_clipping()
 
 var clip_pre_delay : float
 var clip_speed : float = 0.0
@@ -32,13 +37,6 @@ var _clip_val : float
 var _is_clipping : bool
 var _clip_is_scrolling : bool
 var _gamelist_visible : bool
-
-func set_text(_text: String):
-	$Label.text = _text
-	set_is_clipping()
-
-func get_text() -> String:
-	return $Label.text
 
 func set_is_clipping():
 	_is_clipping = $Label.size.x > size.x or $Label.size.y > size.y
@@ -146,19 +144,15 @@ func apply_theme():
 
 	position = es_position
 	if not es_font_path.is_empty():
-		var dynamic_font := FontVariation.new()
-		dynamic_font.set_base_font(load(es_font_path))
-		# TODO: Figure out line spacing as there's no 1:1 translation for Godot
-		var spacing = (es_line_spacing-1.6) * es_font_size / 2
-		dynamic_font.spacing_top = spacing / 2
-		dynamic_font.spacing_bottom = spacing / 2
-		#dynamic_font.font_size = es_font_size
-		#set("custom_fonts/font", dynamic_font)
-		$Label.add_theme_font_override("font", dynamic_font)
-		# We have to wait a frame, I suppose font_data sets something in the meantime
-		# If we don't wait, it requests stupidly large sizes
+		$Label.label_settings = LabelSettings.new()
+		$Label.label_settings.line_spacing = es_line_spacing
+		$Label.label_settings.font_size = es_font_size
+		$Label.label_settings.font_color = es_color
+		var f := FontFile.new()
+		f.load_dynamic_font(es_font_path)
+		$Label.label_settings.font = f
 	if es_txt.length():
-		set_text(es_txt)
+		text = (es_txt)
 	match es_alignment:
 		"left":
 			$Label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -176,19 +170,18 @@ func apply_theme():
 	else:
 		$Label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		if es_size.y == 0:
-			es_size.x = es_size.x
-			es_size.y = text_size.y
+			size.x = es_size.x
+			size.y = text_size.y
 		else:
-			if es_size.y < es_font_size:
-				es_size.y = es_font_size
 			size = es_size
-	es_pos_origin.x *= es_size.x
-	es_pos_origin.y *= es_size.y
+			if es_size.y < es_font_size:
+				size.y = es_font_size
+	es_pos_origin.x *= size.x
+	es_pos_origin.y *= size.y
 	position -= es_pos_origin
-	es_rot_pivot.x *= es_size.x
-	es_rot_pivot.y *= es_size.y
+	es_rot_pivot.x *= size.x
+	es_rot_pivot.y *= size.y
 	pivot_offset = es_rot_pivot
 	rotation = es_rotation
-	$Label.add_theme_color_override("font_color", es_color)
 	visible = es_is_visible
 

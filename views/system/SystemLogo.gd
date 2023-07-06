@@ -9,6 +9,8 @@ var selected_scale : float = 1
 var target_pos : Vector2
 var target_rot : float
 
+var tween : Tween = null
+
 func center_nodes() -> void:
 	for node in get_children():
 		if node is Control:
@@ -31,7 +33,9 @@ func move(delta_pos: Vector2, delta_rot: float, _selected: bool):
 	target_pos += delta_pos
 	target_rot += delta_rot
 	selected = _selected
-	var tween := get_tree().create_tween()
+	if tween != null:
+		tween.stop()
+	tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_QUART)
 	tween.tween_property(

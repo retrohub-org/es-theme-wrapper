@@ -1,21 +1,21 @@
 [gd_scene load_steps=17 format=3 uid="uid://uvyfp7tar3hn"]
 
 [ext_resource type="PackedScene" uid="uid://ouft5mtkt2hx" path="res://objects/textlist/TextList.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://objects/textlist/GameEntry.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dao420sjm6pwh" path="res://objects/textlist/GameEntry.tscn" id="2"]
 [ext_resource type="Script" path="res://views/detailed/Detailed.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://go2skq8yfgeh" path="res://objects/helpsystem/HelpSystem.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://d284wkmo0vqfk" path="res://addons/controller_icons/assets/xbox360/a.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://bva4iswwvta5d" path="res://addons/controller_icons/assets/xbox360/y.png" id="6"]
 [ext_resource type="Script" path="res://addons/controller_icons/objects/TextureRect.gd" id="7"]
-[ext_resource type="PackedScene" path="res://objects/rating/Rating.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://5anxf028akd2" path="res://objects/rating/Rating.tscn" id="8"]
 [ext_resource type="Texture2D" uid="uid://cdjnpcxgnxrxb" path="res://addons/controller_icons/assets/xbox360/back.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://jcc3t88rfxh0" path="res://addons/controller_icons/assets/xbox360/x.png" id="10"]
 [ext_resource type="Texture2D" uid="uid://coxp4sapp4g8n" path="res://addons/controller_icons/assets/xbox360/start.png" id="11"]
 [ext_resource type="Texture2D" uid="uid://cuds8v7pvi4tj" path="res://addons/controller_icons/assets/xbox360/dpad.png" id="12"]
 [ext_resource type="Texture2D" uid="uid://bufx8lu1tny4o" path="res://addons/controller_icons/assets/xbox360/b.png" id="13"]
 [ext_resource type="PackedScene" uid="uid://bq5bp2h5mos8e" path="res://objects/image/Image.tscn" id="14"]
-[ext_resource type="PackedScene" path="res://objects/text/Text.tscn" id="15"]
-[ext_resource type="PackedScene" path="res://objects/datetime/DateTime.tscn" id="16"]
+[ext_resource type="PackedScene" uid="uid://bdk4s7ck8poct" path="res://objects/text/Text.tscn" id="15"]
+[ext_resource type="PackedScene" uid="uid://cr6n17di70i2i" path="res://objects/datetime/DateTime.tscn" id="16"]
 
 [node name="Detailed" type="Control"]
 layout_mode = 3
@@ -46,9 +46,9 @@ mouse_filter = 2
 
 [node name="background" parent="Children/0" instance=ExtResource("14")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-expand_mode = 1
 
 [node name="20" type="Control" parent="Children"]
 anchors_preset = 0
@@ -86,6 +86,7 @@ mouse_filter = 2
 
 [node name="md_lbl_rating" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 10.0
@@ -95,6 +96,7 @@ offset_bottom = -196.0
 
 [node name="md_lbl_releasedate" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 10.0
@@ -104,6 +106,7 @@ offset_bottom = -159.0
 
 [node name="md_lbl_developer" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 10.0
@@ -113,6 +116,7 @@ offset_bottom = -122.0
 
 [node name="md_lbl_publisher" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 10.0
@@ -122,6 +126,7 @@ offset_bottom = -85.0
 
 [node name="md_lbl_genre" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 256.0
@@ -131,6 +136,7 @@ offset_bottom = -192.0
 
 [node name="md_lbl_players" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 256.0
@@ -140,6 +146,7 @@ offset_bottom = -157.0
 
 [node name="md_lbl_lastplayed" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 256.0
@@ -149,6 +156,7 @@ offset_bottom = -122.0
 
 [node name="md_lbl_playcount" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 256.0
@@ -158,16 +166,15 @@ offset_bottom = -85.0
 
 [node name="md_image" parent="Children/40" instance=ExtResource("14")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 104.0
 offset_top = 117.0
 offset_right = 506.0
 offset_bottom = 345.0
-expand_mode = 1
 
 [node name="md_rating" parent="Children/40" instance=ExtResource("8")]
-anchors_preset = 0
 offset_left = 67.0
 offset_top = 375.0
 offset_right = 227.0
@@ -182,6 +189,7 @@ offset_bottom = 441.0
 
 [node name="md_developer" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 96.0
@@ -191,6 +199,7 @@ offset_bottom = -122.0
 
 [node name="md_publisher" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 92.0
@@ -200,6 +209,7 @@ offset_bottom = -85.0
 
 [node name="md_genre" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 311.0
@@ -209,6 +219,7 @@ offset_bottom = -192.0
 
 [node name="md_players" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 321.0
@@ -226,6 +237,7 @@ text = "never"
 
 [node name="md_playcount" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 366.0
@@ -235,6 +247,7 @@ offset_bottom = -85.0
 
 [node name="md_description" parent="Children/40" instance=ExtResource("15")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 10.0
@@ -250,16 +263,17 @@ mouse_filter = 2
 
 [node name="logoText" parent="Children/50" instance=ExtResource("15")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.067
 offset_bottom = -0.200001
 
 [node name="logo" parent="Children/50" instance=ExtResource("14")]
 layout_mode = 0
+anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.147
 offset_bottom = -0.199997
-expand_mode = 1
 
 [node name="HelpSystem" parent="." instance=ExtResource("4")]
 layout_mode = 0

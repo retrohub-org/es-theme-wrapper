@@ -1,16 +1,21 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://d2yvfok0bs87a"]
 
-[ext_resource path="res://objects/image/MixImage.gd" type="Script" id=5]
-[ext_resource path="res://resources/drop_shadow.tres" type="Material" id=6]
+[ext_resource type="Script" path="res://objects/image/MixImage.gd" id="5"]
+[ext_resource type="Material" uid="uid://def4smahrn11i" path="res://resources/drop_shadow.tres" id="6"]
 
 [node name="MediaMixImage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 1.0
 offset_bottom = 1.0
-script = ExtResource( 5 )
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5")
 
 [node name="Screenshot" type="TextureRect" parent="."]
+layout_mode = 0
 anchor_left = 0.055
 anchor_top = 0.058
 anchor_right = 0.734
@@ -19,11 +24,12 @@ offset_left = -0.320004
 offset_top = 0.199997
 offset_right = 0.383972
 offset_bottom = 0.199951
-expand = true
-stretch_mode = 6
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Logo" type="TextureRect" parent="."]
-material = ExtResource( 6 )
+material = ExtResource("6")
+layout_mode = 0
 anchor_left = 0.425
 anchor_right = 0.776
 anchor_bottom = 0.262
@@ -31,11 +37,12 @@ offset_left = -0.200012
 offset_top = 1.0
 offset_right = 0.375977
 offset_bottom = 0.799988
-expand = true
-stretch_mode = 6
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Box" type="TextureRect" parent="."]
-material = ExtResource( 6 )
+material = ExtResource("6")
+layout_mode = 0
 anchor_left = -0.004
 anchor_top = 0.484
 anchor_right = 0.191
@@ -44,12 +51,13 @@ offset_left = 0.1
 offset_top = -0.268005
 offset_right = 0.224991
 offset_bottom = 5.38599
-pivot_offset = Vector2( 100, 181 )
-expand = true
+pivot_offset = Vector2(100, 181)
+expand_mode = 1
 stretch_mode = 5
 
 [node name="Support" type="TextureRect" parent="."]
-material = ExtResource( 6 )
+material = ExtResource("6")
+layout_mode = 0
 anchor_left = 0.182
 anchor_top = 0.728
 anchor_right = 0.355
@@ -58,5 +66,5 @@ offset_left = 2.63199
 offset_top = -1.80002
 offset_right = 3.47998
 offset_bottom = -2.20001
-expand = true
-stretch_mode = 6
+expand_mode = 1
+stretch_mode = 5

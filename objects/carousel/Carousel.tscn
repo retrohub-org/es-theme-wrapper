@@ -1,31 +1,37 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://cdn15tmr608vl"]
 
-[ext_resource path="res://objects/carousel/Carousel.gd" type="Script" id=1]
-[ext_resource path="res://resources/theme_text.tres" type="Theme" id=2]
+[ext_resource type="Script" path="res://objects/carousel/Carousel.gd" id="1"]
+[ext_resource type="Theme" uid="uid://dl7muiumstkhh" path="res://resources/theme_text.tres" id="2"]
 
 [node name="Carousel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 focus_mode = 2
-theme = ExtResource( 2 )
-script = ExtResource( 1 )
+theme = ExtResource("2")
+script = ExtResource("1")
 
 [node name="Children" type="Control" parent="."]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Pivot" type="Control" parent="."]
-offset_top = 231.123
-offset_right = 1024.0
-offset_bottom = 371.123
+anchors_preset = 0
+offset_top = 231.0
+offset_right = 1152.0
+offset_bottom = 371.0
 
 [node name="ColorBar" type="ColorRect" parent="Pivot"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 1, 1, 1, 0.847059 )
+color = Color(1, 1, 1, 0.847059)
 
 [node name="Children" type="Control" parent="Pivot"]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-
-[node name="Tween" type="Tween" parent="."]

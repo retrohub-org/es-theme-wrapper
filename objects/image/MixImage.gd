@@ -11,12 +11,12 @@ func parse_media_data(data: RetroHubGameMediaData) -> void:
 			# Box is horizontal: rotate to accomodate image better
 			$Box.pivot_offset = Vector2(box_size.y, box_size.x) / 2
 			$Box.size = Vector2(box_size.y, box_size.x)
-			$Box.rotation = 90
+			$Box.rotation_degrees = 90
 		else:
 			# Box is vertical; nothing needed to change
 			$Box.pivot_offset = box_size / 2
 			$Box.size = box_size
-			$Box.rotation = 0
+			$Box.rotation_degrees = 0
 		$Support.texture = data.support_render
 	else:
 		$Screenshot.texture = null

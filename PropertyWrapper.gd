@@ -1,7 +1,7 @@
 extends Object
 
-var screen_width = 1024
-var screen_height = 576
+var screen_width = 1152
+var screen_height = 648
 
 func parse_normalized_pair(Wrapper, data: String, to_absolute: bool = true) -> Vector2:
 	data = parse_string(Wrapper, data)
@@ -44,11 +44,12 @@ func parse_bool(Wrapper, data: String) -> bool:
 
 func parse_color(Wrapper, data: String) -> Color:
 	data = parse_string(Wrapper, data)
-	if data.length() == 8:
-		var color_str = data.substr(6) +  data.substr(0, 6)
-		return Color(color_str)
-	else:
-		return Color(data)
+	return Color(data)
+	#if data.length() == 8:
+	#	var color_str = data.substr(6) + data.substr(0, 6)
+	#	return Color(color_str)
+	#else:
+	#	return Color(data)
 
 func parse_float(Wrapper, data: String) -> float:
 	data = parse_string(Wrapper, data)

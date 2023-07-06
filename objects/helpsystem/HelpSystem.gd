@@ -40,14 +40,8 @@ func apply_theme():
 			child.max_width = max(size.y, es_font_size)
 
 	position = es_position
-	if not es_font_path.is_empty():
-		var dynamic_font := FontVariation.new()
-		dynamic_font.set_base_font(load(es_font_path))
-		# TODO: Figure out line spacing as there's no 1:1 translation for Godot
-		#dynamic_font.size = es_font_size
-		add_theme_font_override("font", dynamic_font)
 	
-	size = Vector2(1024, 1.25 * es_font_size)
+	size = Vector2(PropertyWrapper.screen_width, 1.25 * es_font_size)
 	es_pos_origin.x *= size.x
 	es_pos_origin.y *= size.y
 	position -= es_pos_origin

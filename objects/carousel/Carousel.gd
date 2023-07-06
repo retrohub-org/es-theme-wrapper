@@ -16,14 +16,14 @@ var PropertyWrapper = preload("res://PropertyWrapper.gd").new()
 var parsed := false
 var es_position := Vector2(0, 0.38375 * PropertyWrapper.screen_height)
 @export var size_set := false
-@export var es_size := Vector2(1 * 1024, 0.2325 * PropertyWrapper.screen_height)
+@export var es_size := Vector2(1 * PropertyWrapper.screen_width, 0.2325 * PropertyWrapper.screen_height)
 @export var es_pos_origin := Vector2(0, 0)
 var es_type := "horizontal"
-var es_color := Color("d8ffffff")
-var es_logo_size := Vector2(0.25 * 1024, 0.155 * PropertyWrapper.screen_height)
+var es_color := Color("ffffffd8")
+var es_logo_size := Vector2(0.25 * PropertyWrapper.screen_width, 0.155 * PropertyWrapper.screen_height)
 var es_logo_scale := 1.2
 var es_logo_rotation := 7.5
-var es_logo_rot_pivot := Vector2(-5 * 1024, 0.5 * PropertyWrapper.screen_height)
+var es_logo_rot_pivot := Vector2(-5 * PropertyWrapper.screen_width, 0.5 * PropertyWrapper.screen_height)
 var es_logo_align := "center"
 var es_max_logo_count := 3
 @export var es_z_index := 10
@@ -64,8 +64,8 @@ func apply_theme():
 
 	$Pivot.position = es_position
 	$Pivot.size = es_size
-	es_pos_origin.x *= es_size.x
-	es_pos_origin.y *= es_size.y
+	es_pos_origin.x *= size.x
+	es_pos_origin.y *= size.y
 	$Pivot.position -= es_pos_origin
 	n_logo_bar.color = es_color
 
@@ -111,12 +111,12 @@ func get_extra_for_idx(idx: int) -> Node:
 	return n_extra_children.get_child(get_abs_idx(idx) % systems.size())
 
 func position_children():
-	var bar_width = $Pivot/ColorBar.size.x / 1024
-	move_stride = Vector2(((1024 - (es_logo_size.x * es_max_logo_count)) / (es_max_logo_count)) + es_logo_size.x, 0);
+	var bar_width = $Pivot/ColorBar.size.x / PropertyWrapper.screen_width
+	move_stride = Vector2(((PropertyWrapper.screen_width - (es_logo_size.x * es_max_logo_count)) / (es_max_logo_count)) + es_logo_size.x, 0);
 	move_stride.x *= bar_width
 	for rel_idx in range(-2, system_count - 2):
 		var idx = get_abs_idx(rel_idx)
-		var pos = Vector2((1024 * bar_width / 2) + move_stride.x * (rel_idx), $Pivot/ColorBar.size.y / 2)
+		var pos = Vector2((PropertyWrapper.screen_width * bar_width / 2) + move_stride.x * (rel_idx), $Pivot/ColorBar.size.y / 2)
 		var node = n_logo_children.get_child(idx)
 		node.set_pos(pos)
 		node.center_nodes()
@@ -137,7 +137,7 @@ func add_systems(cached_objects: Dictionary, cached_system_data: Dictionary):
 			var system_info = nodes["systemInfo"]
 			system_info.es_txt = "%d games (%d favorites)" % [system_data.num_games, 0]
 			# Seems like "systemInfo"'s position is relative to center
-			system_info.es_size.x = 1024
+			system_info.es_size.x = PropertyWrapper.screen_width
 			system_info.es_alignment = "center"
 		if nodes.has("logo") and nodes["logo"].es_tex != null:
 			var logo = nodes["logo"]
@@ -218,7 +218,7 @@ func move_ui(steps: int):
 		child.move(-steps * move_stride, 0, i == _curr_idx)
 	
 	# Handle extra children as well
-	var move_extra_delta = Vector2(1024, 0)
+	var move_extra_delta = Vector2(PropertyWrapper.screen_width, 0)
 	if not next_extra.visible or abs(next_extra.position.x) > move_extra_delta.x:
 		next_extra.set_pos(move_extra_delta * steps)
 	curr_extra.move(-steps * move_extra_delta, true)

@@ -109,7 +109,7 @@ func handle_default_objects():
 
 # Godot is annoying when it comes to Z-indexing for UI. So we gotta do some tricks here.
 func handle_z_index(obj):
-	var z_index = obj.z_index
+	var z_index = obj.es_z_index
 	if not cached_z_indexes.has(str(z_index)):
 		var idx = get_idx_for_z_index(z_index)
 		var node = create_z_index_node()
@@ -130,7 +130,7 @@ func create_z_index_node():
 func get_idx_for_z_index(z_index: int) -> int:
 	var idx = 0
 	for child in $Children.get_children():
-		if int(child.name) > z_index:
+		if child.name.to_int() > z_index:
 			return idx
 		idx += 1
 	return idx

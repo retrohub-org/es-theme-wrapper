@@ -4,7 +4,13 @@ signal game_entry_selected(data)
 
 @export var game_entry_scene: PackedScene
 
-var games := []: set = set_games
+var games := []:
+	set(value):
+		reset()
+		games = value
+		for game in games:
+			add_game(game)
+		connect_neighbors()
 
 var PropertyWrapper = preload("res://PropertyWrapper.gd").new()
 
@@ -30,23 +36,16 @@ var es_line_spacing := 1.5
 @export var es_z_index := 10
 
 var style_focused := StyleBoxTexture.new()
-var font : FontVariation
-
-func set_games(_games: Array) -> void:
-	reset()
-	games = _games
-	for game in games:
-		add_game(game)
-	connect_neighbors()
-	#get_focus()
+var font : FontFile
 
 func add_game(data: RetroHubGameData):
-	var child = game_entry_scene.instantiate()
+	var child := game_entry_scene.instantiate()
 	$VBoxContainer.add_child(child)
-	#child.aligment = es_alignment
+	child.alignment = es_alignment
 	child.height = es_selector_height
 	child.style = style_focused
 	child.font = font
+	child.font_size = es_font_size
 	child.font_color = es_primary_color
 	child.font_color_selected = es_selected_color
 	child.game_data = data
@@ -135,8 +134,8 @@ func apply_theme():
 		"right":
 			es_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	size = es_size
-	es_pos_origin.x *= es_size.x
-	es_pos_origin.y *= es_size.y
+	es_pos_origin.x *= size.x
+	es_pos_origin.y *= size.y
 	position -= es_pos_origin
 	create_game_entry_style()
 
@@ -144,10 +143,8 @@ func create_game_entry_style():
 	if es_selector_image_path.begins_with("res://"):
 		style_focused.texture = load(es_selector_image_path)
 	else:
-		var img = Image.new()
-		img.load(es_selector_image_path)
-		var tex = ImageTexture.new()
-		tex.create_from_image(img) #,3
+		var img = Image.load_from_file(es_selector_image_path)
+		var tex = ImageTexture.create_from_image(img)
 		style_focused.texture = tex
 	if es_selector_image_tile:
 		style_focused.axis_stretch_horizontal = StyleBoxTexture.AXIS_STRETCH_MODE_TILE
@@ -156,13 +153,5 @@ func create_game_entry_style():
 	# TODO: es_selector_height & es_selector_offset_y
 
 	if not es_font_path.is_empty():
-		font = FontVariation.new()
-		font.set_base_font(load(es_font_path))
-		# TODO: Figure out line spacing as there's no 1:1 translation for Godot
-		var _spacing = (es_line_spacing-1.6) * es_font_size / 2
-		#font.extra_spacing_top = spacing / 2
-		#font.extra_spacing_bottom = spacing / 2
-		#font.size = int(es_font_size)
-		# We have to wait a frame, I suppose font_data sets something in the meantime
-		# If we don't wait, it requests stupidly large sizes
-		#yield(get_tree(), "process_frame")
+		font = FontFile.new()
+		font.load_dynamic_font(es_font_path)

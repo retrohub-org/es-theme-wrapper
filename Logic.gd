@@ -105,9 +105,8 @@ func move_ui(dir: int, game_view: Node = null):
 		else:
 			set_node_enabled(child, false)
 			child.on_hide()
-	var tween := get_tree().create_tween()
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_QUART)
+	var tween := create_tween()
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 	tween.tween_property(
 		$GameView, "position", target_position_game_view, 0.5
 	)

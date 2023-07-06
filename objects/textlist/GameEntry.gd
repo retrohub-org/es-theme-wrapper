@@ -2,36 +2,40 @@ extends Button
 
 signal selected(data)
 
-var game_data : RetroHubGameData: set = set_game_data
-var height : float: set = set_height
-var style : StyleBoxTexture: set = set_style
-var font : FontFile: set = set_font
-var font_color : Color: set = set_font_color
-var font_color_selected : Color: set = set_font_color_selected
+var game_data : RetroHubGameData:
+	set(value):
+		game_data = value
+		text = game_data.name
 
-func set_game_data(_game_data: RetroHubGameData) -> void:
-	game_data = _game_data
-	text = game_data.name
+var height : float:
+	set(value):
+		height = value
+		custom_minimum_size.y = height
 
-func set_height(_height: float) -> void:
-	height = _height
-	custom_minimum_size.y = height
+var style : StyleBoxTexture:
+	set(value):
+		style = value
+		add_theme_stylebox_override("focus", style)
 
-func set_style(_style: StyleBoxTexture) -> void:
-	style = _style
-	add_theme_stylebox_override("focus", style)
+var font : FontFile:
+	set(value):
+		font = value
+		add_theme_font_override("font", font)
 
-func set_font(_font: FontFile) -> void:
-	font = _font
-	add_theme_font_override("font", font)
+var font_size : int:
+	set(value):
+		font_size = value
+		add_theme_font_size_override("font_size", font_size)
 
-func set_font_color(_font_color: Color) -> void:
-	font_color = _font_color
-	add_theme_color_override("font_color", font_color)
+var font_color : Color:
+	set(value):
+		font_color = value
+		add_theme_color_override("font_color", font_color)
 
-func set_font_color_selected(_font_color_selected: Color) -> void:
-	font_color_selected = _font_color_selected
-	add_theme_color_override("font_color_focus", font_color_selected)
+var font_color_selected : Color:
+	set(value):
+		font_color_selected = value
+		add_theme_color_override("font_focus_color", font_color_selected)
 
 func _ready():
 	#warning-ignore:return_value_discarded
@@ -39,7 +43,7 @@ func _ready():
 
 func _on_game_data_updated(_game_data: RetroHubGameData):
 	if game_data == _game_data:
-		set_game_data(game_data)
+		game_data = _game_data
 
 func _on_GameEntry_pressed():
 	RetroHub.launch_game()
