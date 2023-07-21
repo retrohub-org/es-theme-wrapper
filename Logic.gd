@@ -1,7 +1,7 @@
-tool
+@tool
 extends Node
 
-export(String, DIR, GLOBAL) var path
+@export_global_dir var path : String
 
 var Wrapper = load("res://Wrapper.gd").new()
 
@@ -19,8 +19,8 @@ enum Mode {
 
 var curr_mode = Mode.SYSTEM
 
-onready var target_position_system : Vector2 = $System.rect_position
-onready var target_position_game_view : Vector2 = $GameView.rect_position
+@onready var target_position_system : Vector2 = $System.position
+@onready var target_position_game_view : Vector2 = $GameView.position
 
 # _ready function, called everytime the theme is loaded
 func _ready():
@@ -28,39 +28,39 @@ func _ready():
 		return
 	# App related signals
 	#warning-ignore:return_value_discarded
-	RetroHub.connect("app_initializing", self, "_on_app_initializing")
+	RetroHub.app_initializing.connect(_on_app_initializing)
 	#warning-ignore:return_value_discarded
-	RetroHub.connect("app_closing", self, "_on_app_closing")
+	RetroHub.app_closing.connect(_on_app_closing)
 	#warning-ignore:return_value_discarded
-	RetroHub.connect("app_received_focus", self, "_on_app_received_focus")
+	RetroHub.app_received_focus.connect(_on_app_received_focus)
 	#warning-ignore:return_value_discarded
-	RetroHub.connect("app_lost_focus", self, "_on_app_lost_focus")
+	RetroHub.app_lost_focus.connect(_on_app_lost_focus)
 	#warning-ignore:return_value_discarded
-	RetroHub.connect("app_returning", self, "_on_app_returning")
+	RetroHub.app_returning.connect(_on_app_returning)
 
 	# Content related signals
 	#warning-ignore:return_value_discarded
-	RetroHub.connect("system_receive_start", self, "_on_system_receive_start")
+	RetroHub.system_receive_start.connect(_on_system_receive_start)
 	#warning-ignore:return_value_discarded
-	RetroHub.connect("system_received", self, "_on_system_received")
+	RetroHub.system_received.connect(_on_system_received)
 	#warning-ignore:return_value_discarded
-	RetroHub.connect("system_receive_end", self, "_on_system_receive_end")
+	RetroHub.system_receive_end.connect(_on_system_receive_end)
 
 
 	#warning-ignore:return_value_discarded
-	RetroHub.connect("game_receive_start", self, "_on_game_receive_start")
+	RetroHub.game_receive_start.connect(_on_game_receive_start)
 	#warning-ignore:return_value_discarded
-	RetroHub.connect("game_received", self, "_on_game_received")
+	RetroHub.game_received.connect(_on_game_received)
 	#warning-ignore:return_value_discarded
-	RetroHub.connect("game_receive_end", self, "_on_game_receive_end")
+	RetroHub.game_receive_end.connect(_on_game_receive_end)
 
 	# Config related signals
 	#warning-ignore:return_value_discarded
-	RetroHubConfig.connect("config_updated", self, "_on_config_updated")
+	RetroHubConfig.config_updated.connect(_on_config_updated)
 	#warning-ignore:return_value_discarded
-	RetroHubConfig.connect("theme_config_ready", self, "_on_theme_config_ready")
+	RetroHubConfig.theme_config_ready.connect(_on_theme_config_ready)
 	#warning-ignore:return_value_discarded
-	RetroHubConfig.connect("theme_config_updated", self, "_on_theme_config_updated")
+	RetroHubConfig.theme_config_updated.connect(_on_theme_config_updated)
 
 	if not RetroHub.is_main_app():
 		Wrapper.load_es_theme_file(path + "/theme.xml")
@@ -78,13 +78,13 @@ func set_node_enabled(node: Node, enabled: bool):
 # use this function for input (not _input/_process) for proper behavior
 func _unhandled_input(event):
 	if event.is_action_pressed("rh_accept") and curr_mode == Mode.SYSTEM:
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 		var system_data : RetroHubSystemData = $System.get_selected_system_data()
 		var game_view = gameview_map[system_data]
 		curr_mode = Mode.GAME_VIEW
 		move_ui(1, game_view)
 	if event.is_action_pressed("rh_back") and curr_mode == Mode.GAME_VIEW:
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 		curr_mode = Mode.SYSTEM
 		move_ui(-1)
 		RetroHub.set_curr_game_data(null)
@@ -105,17 +105,15 @@ func move_ui(dir: int, game_view: Node = null):
 		else:
 			set_node_enabled(child, false)
 			child.on_hide()
-	$Tween.interpolate_property(
-		$GameView, "rect_position",
-		null, target_position_game_view,
-		0.5, Tween.TRANS_QUART, Tween.EASE_OUT
+	var tween := create_tween()
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+	tween.set_parallel(true)
+	tween.tween_property(
+		$GameView, "position", target_position_game_view, 0.5
 	)
-	$Tween.interpolate_property(
-		$System, "rect_position",
-		null, target_position_system,
-		0.5, Tween.TRANS_QUART, Tween.EASE_OUT
+	tween.tween_property(
+		$System, "position", target_position_system, 0.5
 	)
-	$Tween.start()
 
 ## Called when RetroHub is initializing your theme.
 ## This can either happen when RetroHub is launching, or
@@ -207,9 +205,9 @@ func _on_game_receive_end():
 		for system_name in games:
 			var game_view
 			if games_metadata[system_name]:
-				game_view = load("res://views/detailed/Detailed.tscn").instance()
+				game_view = load("res://views/detailed/Detailed.tscn").instantiate()
 			else:
-				game_view = load("res://views/basic/Basic.tscn").instance()
+				game_view = load("res://views/basic/Basic.tscn").instantiate()
 			$GameView.add_child(game_view)
 
 			if systems.has(system_name):
@@ -233,7 +231,7 @@ func _on_config_updated(key: String, _old, _new):
 func _on_theme_config_ready():
 	# Load theme XML info
 	path = RetroHubConfig.get_theme_config("path", "")
-	if not path.empty():
+	if not path.is_empty():
 		Wrapper.load_es_theme_file(path + "/theme.xml")
 	else:
 		print("No path selected")

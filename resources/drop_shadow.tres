@@ -1,13 +1,13 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://def4smahrn11i"]
 
-[sub_resource type="Shader" id=1]
-code = "// source: https://github.com/godotengine/godot-demo-projects/blob/master/2d/sprite_shaders/shaders/dropshadow.shader
+[sub_resource type="Shader" id="1"]
+code = "// source: https://github.com/godotengine/godot-demo-projects/blob/master/2d/sprite_shaders/shaders/dropshadow.gdshader
 
 shader_type canvas_item;
 render_mode blend_mix;
 
 uniform float radius = 5.0;
-uniform vec4 modulate: hint_color;
+uniform vec4 modulate: source_color;
 
 void fragment() {
 	vec2 ps = TEXTURE_PIXEL_SIZE;
@@ -30,6 +30,6 @@ void fragment() {
 "
 
 [resource]
-shader = SubResource( 1 )
-shader_param/radius = 10.0
-shader_param/modulate = Color( 0, 0, 0, 1 )
+shader = SubResource("1")
+shader_parameter/radius = 10.0
+shader_parameter/modulate = Color(0, 0, 0, 1)

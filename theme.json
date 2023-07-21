@@ -4,9 +4,7 @@
 	"icon": "res://icon.png",
 	"version": "0.1.0-beta",
 	"url": "https://github.com/retrohub-org/es-theme-wrapper",
-	"screenshots": [
-
-	],
+	"screenshots": [],
 	"entry_scene": "res://Theme.tscn",
 	"authors": "RetroHub",
 	"id": "es-theme-wrapper",

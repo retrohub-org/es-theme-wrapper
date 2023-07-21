@@ -2,13 +2,13 @@ extends Node
 
 var image_media
 
-onready var n_media_video = $Detailed/Media/MediaVideo
-onready var n_media_image = $Detailed/Media/MediaImage
+@onready var n_media_video = $Detailed/Media/MediaVideo
+@onready var n_media_image = $Detailed/Media/MediaImage
 
 var has_video := false
 
 func _ready():
-	$Detailed/Media/MediaVideo/Delay.connect("timeout", self, "_on_VideoDelay_timeout")
+	$Detailed/Media/MediaVideo/Delay.timeout.connect(_on_VideoDelay_timeout)
 
 func set_games(games: Array) -> void:
 	$Detailed.set_games(games)

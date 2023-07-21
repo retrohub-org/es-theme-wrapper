@@ -1,9 +1,9 @@
-extends VideoPlayer
+extends VideoStreamPlayer
 
 var video_len : int = 0
 
 func stop():
-	.stop()
+	super.stop()
 	$Delay.stop()
 
 func _process(delta):

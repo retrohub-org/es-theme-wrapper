@@ -1,7 +1,5 @@
 extends Control
 
-onready var tween = $Tween
-
 var cached_z_indexes := {}
 
 var should_hide := true
@@ -11,8 +9,8 @@ func _ready():
 	for child in $Children.get_children():
 		cached_z_indexes[child.name] = child
 
-func add_child(node: Node, _legible_unique_name: bool = false) -> void:
-	var z_index = node.get("z_index")
+func add_child(node: Node, _force_readable_name: bool = false, _internal: InternalMode = 0) -> void:
+	var z_index = node.get("es_z_index")
 	if z_index == null:
 		z_index = 10
 
@@ -36,29 +34,28 @@ func create_z_index_node():
 func get_idx_for_z_index(z_index: int) -> int:
 	var idx = 0
 	for child in $Children.get_children():
-		if int(child.name) > z_index:
+		if child.name.to_int() > z_index:
 			return idx
 		idx += 1
 	return idx
 
-func _on_Tween_tween_completed(_object, _key):
+func _on_Tween_tween_completed():
 	if should_hide:
 		visible = false
 
-func _on_Tween_tween_started(_object, _key):
-	visible = true
-
-func set_pos(position: Vector2) -> void:
-	rect_position = position
-	target_pos = position
+func set_pos(pos: Vector2) -> void:
+	position = pos
+	target_pos = pos
 
 func move(delta: Vector2, _should_hide: bool):
-	should_hide = _should_hide 
+	should_hide = _should_hide
 	target_pos += delta
-	#tween.stop_all()
-	tween.interpolate_property(
-		self, "rect_position",
-		null, target_pos, 0.5,
-		Tween.TRANS_QUART, Tween.EASE_OUT
+	var tween := get_tree().create_tween()
+	visible = true
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_QUART)
+	tween.tween_property(
+		self, "position",
+		target_pos, 0.5
 	)
-	tween.start()
+	tween.tween_callback(_on_Tween_tween_completed)

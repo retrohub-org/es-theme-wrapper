@@ -3,10 +3,10 @@ extends Control
 var cached_objects := {}
 var cached_system_data := {}
 
-onready var n_carousel := $Carousel
-onready var n_helpsystem := $HelpSystem
+@onready var n_carousel := $Carousel
+@onready var n_helpsystem := $HelpSystem
 
-onready var n_default_objects := [
+@onready var n_default_objects := [
 	n_carousel,
 	n_helpsystem
 ]
@@ -15,9 +15,7 @@ func grab_focus():
 	n_carousel.grab_focus()
 
 func _ready():
-	#RetroHub.connect("system_received", self, "add_system")
-	#warning-ignore:return_value_discarded
-	RetroHub.connect("system_receive_end", self, "pack")
+	RetroHub.system_receive_end.connect(pack)
 
 func parse_theme_xml(Wrapper, path: String, system_name: String) -> void:
 	path = Wrapper.ensure_path(path)
@@ -68,7 +66,7 @@ func parse_theme_xml_image(Wrapper, datas: Array, path: String, root: Dictionary
 		for name in Wrapper.get_attributes(data):
 			if name == "logo" or Wrapper.is_extra(data):
 				if not root.has(name):
-					var image = preload("res://objects/image/Image.tscn").instance()
+					var image = preload("res://objects/image/Image.tscn").instantiate()
 					image.name = name
 					root[name] = image
 				root[name].parse_theme_xml(Wrapper, data, path)
@@ -78,7 +76,7 @@ func parse_theme_xml_text(Wrapper, datas: Array, path: String, root: Dictionary)
 		for name in Wrapper.get_attributes(data):
 			if name == "logoText" or name == "systemInfo" or Wrapper.is_extra(data):
 				if not root.has(name):
-					root[name] = preload("res://objects/text/Text.tscn").instance()
+					root[name] = preload("res://objects/text/Text.tscn").instantiate()
 					root[name].name = name
 				root[name].parse_theme_xml(Wrapper, data, path)
 

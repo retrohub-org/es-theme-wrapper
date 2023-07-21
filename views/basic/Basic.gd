@@ -3,13 +3,13 @@ extends Node
 var cached_objects := {}
 var cached_z_indexes := {}
 
-onready var n_background := $"Children/0/background"
-onready var n_gamelist := $"Children/20/gamelist"
-onready var n_logoText := $"Children/50/logoText"
-onready var n_logo := $"Children/50/logo"
-onready var n_helpsystem := $HelpSystem
+@onready var n_background := $"Children/0/background"
+@onready var n_gamelist := $"Children/20/gamelist"
+@onready var n_logoText := $"Children/50/logoText"
+@onready var n_logo := $"Children/50/logo"
+@onready var n_helpsystem := $HelpSystem
 
-onready var n_default_objects := [
+@onready var n_default_objects := [
 	n_background,
 	n_gamelist,
 	n_logoText,
@@ -50,7 +50,7 @@ func handle_default_objects():
 
 # Godot is annoying when it comes to Z-indexing for UI. So we gotta do some tricks here.
 func handle_z_index(obj):
-	var z_index = obj.z_index
+	var z_index = obj.es_z_index
 	if not cached_z_indexes.has(str(z_index)):
 		var idx = get_idx_for_z_index(z_index)
 		var node = create_z_index_node()
@@ -71,7 +71,7 @@ func create_z_index_node():
 func get_idx_for_z_index(z_index: int) -> int:
 	var idx = 0
 	for child in $Children.get_children():
-		if int(child.name) > z_index:
+		if child.name.to_int() > z_index:
 			return idx
 		idx += 1
 	return idx
@@ -107,7 +107,7 @@ func parse_theme_xml_image(Wrapper, datas: Array, path: String):
 				n_logo.parse_theme_xml(Wrapper, data, path)
 			else:
 				if not cached_objects.has(name):
-					cached_objects[name] = preload("res://objects/image/Image.tscn").instance()
+					cached_objects[name] = preload("res://objects/image/Image.tscn").instantiate()
 					cached_objects[name].name = name
 				cached_objects[name].parse_theme_xml(Wrapper, data, path)
 
@@ -124,7 +124,7 @@ func parse_theme_xml_text(Wrapper, datas: Array, path: String):
 				n_logoText.parse_theme_xml(Wrapper, data, path)
 			else:
 				if not cached_objects.has(name):
-					cached_objects[name] = preload("res://objects/text/Text.tscn").instance()
+					cached_objects[name] = preload("res://objects/text/Text.tscn").instantiate()
 					cached_objects[name].name = name
 				cached_objects[name].parse_theme_xml(Wrapper, data, path)
 

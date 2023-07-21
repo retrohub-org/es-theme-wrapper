@@ -1,106 +1,99 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=11 format=3 uid="uid://741n1a4ffwjn"]
 
-[ext_resource path="res://resources/theme.tres" type="Theme" id=1]
-[ext_resource path="res://views/system/System.gd" type="Script" id=2]
-[ext_resource path="res://objects/helpsystem/HelpSystem.tscn" type="PackedScene" id=3]
-[ext_resource path="res://objects/carousel/Carousel.tscn" type="PackedScene" id=4]
-[ext_resource path="res://objects/text/Text.tscn" type="PackedScene" id=5]
-[ext_resource path="res://addons/controller_icons/assets/xbox360/back.png" type="Texture" id=6]
-[ext_resource path="res://addons/controller_icons/objects/TextureRect.gd" type="Script" id=7]
-[ext_resource path="res://addons/controller_icons/assets/key/enter_alt.png" type="Texture" id=8]
-[ext_resource path="res://addons/controller_icons/assets/xbox360/dpad.png" type="Texture" id=9]
-[ext_resource path="res://addons/controller_icons/assets/xbox360/start.png" type="Texture" id=10]
+[ext_resource type="Theme" uid="uid://c66do4r5s0t3m" path="res://resources/theme.tres" id="1"]
+[ext_resource type="Script" path="res://views/system/System.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://go2skq8yfgeh" path="res://objects/helpsystem/HelpSystem.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://cdn15tmr608vl" path="res://objects/carousel/Carousel.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://bdk4s7ck8poct" path="res://objects/text/Text.tscn" id="5"]
+[ext_resource type="Texture2D" uid="uid://cdjnpcxgnxrxb" path="res://addons/controller_icons/assets/xbox360/back.png" id="6"]
+[ext_resource type="Script" path="res://addons/controller_icons/objects/TextureRect.gd" id="7"]
+[ext_resource type="Texture2D" uid="uid://bp58drjdgvxsi" path="res://addons/controller_icons/assets/key/enter_alt.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://cuds8v7pvi4tj" path="res://addons/controller_icons/assets/xbox360/dpad.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://coxp4sapp4g8n" path="res://addons/controller_icons/assets/xbox360/start.png" id="10"]
 
 [node name="System" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1")
+script = ExtResource("2")
 
 [node name="ClearColor" type="ColorRect" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+color = Color(0, 0, 0, 1)
 
-[node name="Carousel" parent="." instance=ExtResource( 4 )]
+[node name="Carousel" parent="." instance=ExtResource("4")]
+layout_mode = 1
 
-[node name="HelpSystem" parent="." instance=ExtResource( 3 )]
-margin_left = 12.288
-margin_top = 570.9
-margin_right = -894.712
-margin_bottom = 10.9
+[node name="HelpSystem" parent="." instance=ExtResource("3")]
+layout_mode = 1
+offset_top = 608.0
+offset_right = -964.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="SSIcon" type="TextureRect" parent="HelpSystem"]
-margin_right = 40.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 6 )
-expand = true
-script = ExtResource( 7 )
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("6")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("7")
 path = "joypad/select"
 
-[node name="SS" parent="HelpSystem" instance=ExtResource( 5 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 44.0
-margin_right = 44.0
-margin_bottom = 40.0
-txt = "SCREENSAVER"
-color = Color( 0.470588, 0.470588, 0.470588, 1 )
+[node name="SS" parent="HelpSystem" instance=ExtResource("5")]
+layout_mode = 2
+es_txt = "SCREENSAVER"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="MenuIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 48.0
-margin_right = 88.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 10 )
-expand = true
-script = ExtResource( 7 )
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("10")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("7")
 path = "joypad/start"
 
-[node name="Menu" parent="HelpSystem" instance=ExtResource( 5 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 92.0
-margin_right = 92.0
-margin_bottom = 40.0
-txt = "MENU"
-color = Color( 0.470588, 0.470588, 0.470588, 1 )
+[node name="Menu" parent="HelpSystem" instance=ExtResource("5")]
+layout_mode = 2
+es_txt = "MENU"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="SelectIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 96.0
-margin_right = 136.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 8 )
-expand = true
-script = ExtResource( 7 )
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("8")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("7")
 path = "rh_accept"
 
-[node name="Select" parent="HelpSystem" instance=ExtResource( 5 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 140.0
-margin_right = 140.0
-margin_bottom = 40.0
-txt = "SELECT"
-color = Color( 0.470588, 0.470588, 0.470588, 1 )
+[node name="Select" parent="HelpSystem" instance=ExtResource("5")]
+layout_mode = 2
+es_txt = "SELECT"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
 
 [node name="ChooseIcon" type="TextureRect" parent="HelpSystem"]
-margin_left = 144.0
-margin_right = 184.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 9 )
-expand = true
-script = ExtResource( 7 )
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("9")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("7")
 path = "joypad/dpad"
 
-[node name="Choose" parent="HelpSystem" instance=ExtResource( 5 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 188.0
-margin_right = 188.0
-margin_bottom = 40.0
-txt = "CHOOSE"
-color = Color( 0.470588, 0.470588, 0.470588, 1 )
+[node name="Choose" parent="HelpSystem" instance=ExtResource("5")]
+layout_mode = 2
+es_txt = "CHOOSE"
+es_color = Color(0.470588, 0.470588, 0.470588, 1)
+es_alignment = "center"
