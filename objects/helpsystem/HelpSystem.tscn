@@ -11,3 +11,4 @@ offset_right = -907.0
 offset_bottom = -560.0
 theme = ExtResource("2")
 script = ExtResource("1")
+es_position = Vector2(0, 608)

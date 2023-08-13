@@ -3,11 +3,11 @@ extends HBoxContainer
 var PropertyWrapper = preload("res://PropertyWrapper.gd").new()
 
 var parsed := false
-var es_position := Vector2(0, 0)
-@export var es_pos_origin := Vector2(0, 0)
+@export var es_position := Vector2(0, 0)
+var es_pos_origin := Vector2(0, 0)
 var es_text_color := Color(1, 1, 1, 1)
 var es_font_path := ""
-var es_font_size := 27
+var es_font_size : float = 0.045 * min(PropertyWrapper.screen_width, PropertyWrapper.screen_height)
 
 func parse_theme_xml(Wrapper, data: Dictionary, root_path: String):
 	parsed = true
